@@ -1,0 +1,16 @@
+# node_modules/ IS committed. Pre-bundled with sharp variants for all target
+# platforms (darwin-arm64, darwin-x64, win32-x64) and a curated react-icons
+# subset (see scripts/bundle-deps.sh). Maintainers refresh by running that
+# script after any package.json change, then `git add node_modules`.
+
+# Local bootstrap stamp / scratch — recreated on demand, never committed.
+node_modules/.cache/
+
+# Workspace output (per-task scratch dirs created by html2pptx workflow)
+workspace/
+
+# Common temporary files
+*.log
+.DS_Store
+__pycache__/
+*.py[cod]

@@ -1,0 +1,12 @@
+# node_modules/ IS committed. Pre-bundled — see scripts/bundle-deps.sh.
+# Maintainers: run that script after any package.json change, then commit.
+
+# Local scratch — recreated on demand, never committed.
+node_modules/.cache/
+
+# Workspace output
+workspace/
+
+# Common temporary files
+*.log
+.DS_Store
