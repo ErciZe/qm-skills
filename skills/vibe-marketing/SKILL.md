@@ -1,5 +1,6 @@
 ---
 name: vibe-marketing
+displayNameZh: 氛围营销
 description: >-
   Apply 'Vibe Coding' principles to marketing: describe outcomes, iterate via AI, and prioritize speed and human edge over perfection.
 ---

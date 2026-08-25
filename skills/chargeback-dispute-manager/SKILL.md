@@ -1,5 +1,6 @@
 ---
 name: chargeback-dispute-manager
+displayNameZh: 拒付争议管理
 description: >-
   Prevent and manage ecommerce chargebacks using fraud scoring, compelling evidence automation, and card network compliance standards.
 ---

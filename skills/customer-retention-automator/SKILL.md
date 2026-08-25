@@ -1,5 +1,6 @@
 ---
 name: customer-retention-automator
+displayNameZh: 客户留存自动化
 description: >-
   Design and automate lifecycle campaigns to reduce churn using behavioral triggers, tiered incentives, and predictive timing.
 ---

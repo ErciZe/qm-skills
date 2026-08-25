@@ -1,5 +1,6 @@
 ---
 name: seo-keyword-research
+displayNameZh: SEO 关键词研究
 description: >-
   Discover high-value keywords, classify search intent, and build topic clusters to drive organic traffic and AI visibility (GEO).
 ---

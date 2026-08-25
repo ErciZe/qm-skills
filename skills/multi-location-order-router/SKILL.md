@@ -1,5 +1,6 @@
 ---
 name: multi-location-order-router
+displayNameZh: 多地点订单路由
 description: >-
   Design and implement a robust order lifecycle engine that manages multi-warehouse routing, split shipments, and backorder queues across complex fulfillment networks
 category: business-operations

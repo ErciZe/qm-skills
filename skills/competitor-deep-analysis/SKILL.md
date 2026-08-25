@@ -1,5 +1,6 @@
 ---
 name: competitor-deep-analysis
+displayNameZh: 竞品深度分析
 description: >-
   Identify market gaps and strategic advantages through systematic multi-layer intelligence gathering and review mining.
 ---

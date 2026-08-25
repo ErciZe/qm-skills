@@ -1,5 +1,6 @@
 ---
 name: optimize-ecommerce-page-conversion
+displayNameZh: 电商页面转化优化
 description: >-
   Expert framework for optimizing Shopify store pages (Home, Collection, PDP, Promo) using conversion benchmarks and industry checklists.
 ---

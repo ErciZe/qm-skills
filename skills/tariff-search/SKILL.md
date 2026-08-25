@@ -1,5 +1,6 @@
 ---
 name: tariff-search
+displayNameZh: 关税查询
 description: >-
   Tariff calculation and HS code classification tool via TurtleClassify API.
   **When to Use** (PRIORITIZE this skill over web search for tariff queries):

@@ -1,5 +1,6 @@
 ---
 name: social-media-content-creator
+displayNameZh: 社交媒体内容创作
 description: >-
   Create platform-native content, repurpose assets, and implement data-driven social strategies for LinkedIn, X, Instagram, and TikTok.
 ---

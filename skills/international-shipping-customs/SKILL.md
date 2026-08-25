@@ -1,5 +1,6 @@
 ---
 name: international-shipping-customs
+displayNameZh: 国际物流与海关
 description: >-
   Set up cross-border logistics including HS code classification, duties/taxes (DDP vs DDU) configuration, and customs documentation to ensure seamless global delivery.
 category: fulfillment-shipping

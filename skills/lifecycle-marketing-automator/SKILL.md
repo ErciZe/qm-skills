@@ -1,5 +1,6 @@
 ---
 name: lifecycle-marketing-automator
+displayNameZh: 生命周期营销自动化
 description: >-
   Map customer journey stages from first visit to loyal advocate with personalized messaging, triggered workflows, and segment-based campaign automation.
 category: marketing-growth

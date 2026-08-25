@@ -1,5 +1,6 @@
 ---
 name: content-breakdown
+displayNameZh: 内容拆解
 description: >-
   Deep content breakdown expert (enhanced version). Supports Xiaohongshu/Bilibili/Douyin.
   For Bilibili videos, includes "danmaku peak analysis" and "keyframe visual verification" capabilities.

@@ -1,5 +1,6 @@
 ---
 name: social-commerce-sync
+displayNameZh: 社交电商同步
 description: >-
   Synchronize product catalogs across Meta (Facebook/Instagram), TikTok, and Pinterest. Implement real-time inventory updates, automated feed generation, and in-app checkout configurations to enable seamless social selling.
 category: marketing-growth

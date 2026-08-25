@@ -1,5 +1,6 @@
 ---
 name: product-attribute-analyzer
+displayNameZh: 产品属性分析器
 description: >-
   Profiles product attributes across top sellers using 3-D tagging (structural/fit, material/process, design elements), calculates sales-weighted market share from real sales data, and outputs quantitative analysis plus pie-chart visualizations per dimension. Use when defining manufacturing specs, identifying mainstream product configurations, or spotting design trends in an Amazon category.
 workflow: |

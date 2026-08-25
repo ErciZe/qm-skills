@@ -1,5 +1,6 @@
 ---
 name: customer-voice-analyzer
+displayNameZh: 客户声音分析
 description: >-
   Mines customer reviews into 6 actionable dimensions — personas, scenarios, pros, cons, unmet needs, and buying motives. Use when analyzing Amazon product reviews to identify product flaws, extract high-converting marketing hooks, or find iteration opportunities.
 workflow: |

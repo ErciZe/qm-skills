@@ -1,5 +1,6 @@
 ---
 name: multi-currency-checkout
+displayNameZh: 多币种结账
 description: >-
   Configure multi-currency support to allow international customers to browse and pay in their local currency with automated exchange rates and localized rounding
 category: payments-checkout

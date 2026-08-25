@@ -1,5 +1,6 @@
 ---
 name: cart-abandonment-recovery
+displayNameZh: 购物车弃购挽回
 description: >-
   Trigger: Set up automated email and SMS sequences to win back shoppers who abandon their items during checkout.
 category: marketing-growth

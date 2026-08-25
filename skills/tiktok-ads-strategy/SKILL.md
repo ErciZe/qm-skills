@@ -1,5 +1,6 @@
 ---
 name: tiktok-ads-strategy
+displayNameZh: TikTok 广告策略
 description: >-
   Master TikTok ad campaigns through creative-first testing, Spark Ads optimization, and algorithm-driven bidding strategies.
 ---

@@ -1,5 +1,6 @@
 ---
 name: seo-competitor-analysis
+displayNameZh: SEO 竞品分析
 description: >-
   执行深度 SEO 竞争对手分析，包括关键词研究、外链检查和内容策略映射。当用户想要分析网站竞争对手或通过研究竞争对手来提升自身 SEO 排名时使用。
 ---

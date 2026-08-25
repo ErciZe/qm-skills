@@ -1,5 +1,6 @@
 ---
 name: ecommerce-marketing
+displayNameZh: 电商营销
 description: >-
   E-commerce marketing orchestrator that routes user requests to 19 specialized marketing skills.
   Use when user mentions marketing strategy, product promotion, social media campaign, increase sales,

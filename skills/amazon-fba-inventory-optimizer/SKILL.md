@@ -1,5 +1,6 @@
 ---
 name: amazon-fba-inventory-optimizer
+displayNameZh: 亚马逊 FBA 库存优化
 description: >-
   Manage Amazon FBA inventory health, IPI score, restock limits, and storage fees. 
   Trigger this skill for questions about improving IPI scores, managing FBA storage/capacity limits, 

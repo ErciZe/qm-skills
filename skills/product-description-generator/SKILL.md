@@ -1,5 +1,6 @@
 ---
 name: product-description-generator
+displayNameZh: 产品描述生成
 description: >-
   Generate SEO-optimized product descriptions for e-commerce platforms (Amazon, Shopify, eBay, Etsy). Create compelling, conversion-focused copy with keywords, features, benefits, and calls-to-action. Use when creating product listings, optimizing existing descriptions, or generating bulk product copy.
 ---

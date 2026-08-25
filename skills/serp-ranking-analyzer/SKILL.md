@@ -1,5 +1,6 @@
 ---
 name: serp-ranking-analyzer
+displayNameZh: 搜索结果排名分析
 description: >-
   Conduct deep SERP analysis to identify ranking factors, intent signals, and feature opportunities for competitive search queries.
 ---

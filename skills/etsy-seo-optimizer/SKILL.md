@@ -1,5 +1,6 @@
 ---
 name: etsy-seo-optimizer
+displayNameZh: Etsy SEO 优化
 description: >-
   Optimizes Etsy listing SEO using eRank data and Etsy search algorithm best practices. Covers keyword research, title/tag construction, and continuous performance monitoring. Use when optimizing Etsy search visibility, conducting keyword research, interpreting eRank metrics, or improving listing rankings.
 workflow: |

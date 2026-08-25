@@ -1,5 +1,6 @@
 ---
 name: freemium-upgrade-optimizer
+displayNameZh: 免费增值升级优化
 description: >-
   Optimize SaaS paywall conversion by timing triggers, refining value propositions, and implementing high-converting pricing structures.
 ---

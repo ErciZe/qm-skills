@@ -1,5 +1,6 @@
 ---
 name: seasonal-campaign-automator
+displayNameZh: 季节性营销活动自动化
 description: >-
   Orchestrate and automate high-velocity seasonal marketing events (BFCM, Holidays, Prime Day). Implement discount scheduling, tiered access, and cross-channel coordination to maximize seasonal revenue peaks.
 category: marketing-growth

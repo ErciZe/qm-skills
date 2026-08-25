@@ -1,5 +1,6 @@
 ---
 name: multichannel-inventory-sync
+displayNameZh: 多渠道库存同步
 description: >-
   Establish a single source of truth for inventory and orders across Shopify, Amazon, eBay, and social commerce channels to prevent overselling
 category: business-operations

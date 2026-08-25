@@ -1,5 +1,6 @@
 ---
 name: image-prompt-guide
+displayNameZh: 图像提示词指南
 description: >-
   Prompt engineering and tool routing for AI image generation and editing.
   Use for: creative generation, product photo editing, e-commerce platform image sets,

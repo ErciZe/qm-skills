@@ -1,5 +1,6 @@
 ---
 name: dynamic-pricing-engine
+displayNameZh: 动态定价引擎
 description: >-
   Trigger: Automatically adjust prices based on demand signals, competitor prices, and inventory levels to maximize revenue.
 category: pricing-promotions

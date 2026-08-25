@@ -1,5 +1,6 @@
 ---
 name: seo-page-audit
+displayNameZh: SEO 页面审计
 description: >-
   Audit a single web page's SEO performance, providing a 0-100 score and prioritized technical and content recommendations.
 ---

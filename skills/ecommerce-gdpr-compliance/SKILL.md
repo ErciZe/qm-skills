@@ -1,5 +1,6 @@
 ---
 name: ecommerce-gdpr-compliance
+displayNameZh: 电商 GDPR 合规
 description: >-
   Implement GDPR compliance for ecommerce including cookie consent, Subject Access Requests (SAR), right to erasure, and data processing agreements.
 ---

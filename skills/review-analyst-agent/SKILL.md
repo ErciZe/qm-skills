@@ -1,5 +1,6 @@
 ---
 name: review-analyst-agent
+displayNameZh: 评论分析助手
 description: >-
   Use this skill to analyze product reviews, find common issues, and prioritize improvements.
   Triggers: "analyze reviews", "review analysis", "customer feedback", "what are people saying",

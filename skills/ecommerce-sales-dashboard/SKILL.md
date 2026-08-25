@@ -1,5 +1,6 @@
 ---
 name: ecommerce-sales-dashboard
+displayNameZh: 电商销售仪表盘
 description: >-
   Design and implement comprehensive sales dashboards to track revenue, AOV, conversion rates, and channel performance. Establish a single source of truth for daily, weekly, and monthly executive reporting.
 category: data-analytics

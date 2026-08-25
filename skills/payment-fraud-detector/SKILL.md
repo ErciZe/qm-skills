@@ -1,5 +1,6 @@
 ---
 name: payment-fraud-detector
+displayNameZh: 支付欺诈检测
 description: >-
   Implement multi-layered fraud prevention using risk scoring, 3D Secure, velocity checks, and manual review queues to minimize chargebacks and protect revenue.
 category: security-compliance

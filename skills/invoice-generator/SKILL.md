@@ -1,5 +1,6 @@
 ---
 name: invoice-generator
+displayNameZh: 发票生成
 description: >-
   Automate the generation of tax-compliant, branded PDF invoices for B2B and B2C orders, ensuring sequential numbering and legal data retention.
 category: payments-checkout

@@ -1,5 +1,6 @@
 ---
 name: product-marketing-brief
+displayNameZh: 产品营销简报
 description: >-
   Synthesize product features and customer insights into a comprehensive marketing brief to guide messaging and sales positioning.
 ---
