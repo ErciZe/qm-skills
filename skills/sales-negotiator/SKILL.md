@@ -1,6 +1,6 @@
 ---
 name: sales-negotiator
-displayNameZh: 销售谈判
+displayName: 销售谈判
 description: >-
   Expert sales negotiation strategist for B2B deal-making. Use when planning negotiation strategy, handling discount requests, closing deals, navigating procurement, or structuring win-win agreements. Covers anchoring, framing, BATNA development, multi-party negotiations, and contract terms. Use for enterprise deals, pricing discussions, and high-stakes negotiations.
 ---

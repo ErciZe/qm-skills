@@ -1,6 +1,6 @@
 ---
 name: amazon-brand-protection
-displayNameZh: 亚马逊品牌保护
+displayName: 亚马逊品牌保护
 description: >-
   Protect Amazon brands from listing hijackers, counterfeiters, and policy violations. 
   Use this skill when users report hijackers on their listing, counterfeit products, or need to enroll in Amazon Brand Registry. 

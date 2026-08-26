@@ -1,6 +1,6 @@
 ---
 name: inventory-demand-forecaster
-displayNameZh: 库存需求预测
+displayName: 库存需求预测
 description: >-
   Trigger: Predict future inventory needs and calculate reorder points using historical data and safety stock buffers to prevent stockouts.
 category: business-operations

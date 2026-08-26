@@ -1,6 +1,6 @@
 ---
 name: marketing-roas-analyzer
-displayNameZh: 营销投入产出比分析
+displayName: 营销投入产出比分析
 description: >-
   Track and analyze marketing spend across all channels with ROAS calculation, incrementality testing, and budget reallocation based on true profitability.
 category: data-analytics

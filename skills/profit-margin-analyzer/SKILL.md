@@ -1,6 +1,6 @@
 ---
 name: profit-margin-analyzer
-displayNameZh: 利润率分析
+displayName: 利润率分析
 description: >-
   Analyze gross and net profit margins across products, channels, and segments. Implement cost attribution models to calculate contribution margin and identify profitability drivers.
 category: data-analytics

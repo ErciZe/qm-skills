@@ -1,6 +1,6 @@
 ---
 name: return-policy-designer
-displayNameZh: 退货政策设计
+displayName: 退货政策设计
 description: >-
   Architect and enforce dynamic return and refund policies. Configure rule-based logic for return windows, restocking fees, and category-specific exclusions to balance customer experience with operational protection.
 category: business-operations

@@ -1,6 +1,6 @@
 ---
 name: self-improvement
-displayNameZh: 自我提升
+displayName: 自我提升
 description: >-
   Captures learnings, errors, corrections, and self-reflections into daily diary for continuous improvement. Use when: (1) A command or operation fails unexpectedly, (2) User corrects you, (3) User requests a capability that doesn't exist, (4) An external API or tool fails, (5) Knowledge is outdated or incorrect, (6) A better approach is discovered, (7) You complete significant work and want to evaluate quality. Also review diary before major tasks.
 ---

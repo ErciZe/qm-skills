@@ -1,6 +1,6 @@
 ---
 name: warehouse-fulfillment-workflow
-displayNameZh: 仓储履约工作流
+displayName: 仓储履约工作流
 description: >-
   Optimize warehouse operations with digital pick lists, packing station workflows, and carrier-agnostic label generation to increase fulfillment speed and accuracy
 category: fulfillment-shipping

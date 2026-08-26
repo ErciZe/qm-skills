@@ -1,6 +1,6 @@
 ---
 name: amazon-listing-expert
-displayNameZh: 亚马逊商品详情页专家
+displayName: 亚马逊商品详情页专家
 description: >-
   Creates and optimizes Amazon product listings following proven high-conversion templates: "4+2" bullet points, "X+1" image layout, and "1+8+1+8+1" A+ content structure. Use when building or improving Amazon listings, writing bullet points, planning product images, or designing A+ / EBC content.
 workflow: |

@@ -1,6 +1,6 @@
 ---
 name: etsy-pod-automation
-displayNameZh: Etsy 按需打印自动化
+displayName: Etsy 按需打印自动化
 description: >-
   Automates operating a Print-on-Demand dropshipping store on Etsy via Printify.
   Covers the full lifecycle: trend research, AI design generation, product creation

@@ -1,6 +1,6 @@
 ---
 name: returns-exchange-automator
-displayNameZh: 退换货自动化
+displayName: 退换货自动化
 description: >-
   Design and automate end-to-end return and exchange workflows. Implement self-service RMA portals, dynamic routing for inspections, and automated refund/credit issuance while mitigating return fraud.
 category: fulfillment-shipping

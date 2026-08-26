@@ -1,6 +1,6 @@
 ---
 name: remotion-best-practices
-displayNameZh: Remotion 视频生成
+displayName: Remotion 视频生成
 description: >-
   Best practices for Remotion - Video creation in React
 metadata:

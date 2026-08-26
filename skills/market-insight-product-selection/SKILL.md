@@ -1,6 +1,6 @@
 ---
 name: market-insight-product-selection
-displayNameZh: 市场洞察与选品
+displayName: 市场洞察与选品
 description: >-
   Adaptive product-selection methodology built on multi-source signals and "voice of customer" (VoC): validate demand, momentum, competitive intensity, and user pain points from reviews/comments to produce a confident shortlist or a focused go/no-go.
   **When to use**:

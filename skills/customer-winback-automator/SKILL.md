@@ -1,6 +1,6 @@
 ---
 name: customer-winback-automator
-displayNameZh: 客户召回自动化
+displayName: 客户召回自动化
 description: >-
   Identify and re-engage lapsed customers through automated multi-stage reactivation sequences. Implement tiered discounting based on historical LTV and establish sunsetting protocols for unengaged contacts.
 category: marketing-growth

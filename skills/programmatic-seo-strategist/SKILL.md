@@ -1,6 +1,6 @@
 ---
 name: programmatic-seo-strategist
-displayNameZh: 程序化 SEO 策略
+displayName: 程序化 SEO 策略
 description: >-
   Design and implement scalable programmatic SEO strategies using proprietary data and templated landing pages to capture long-tail traffic.
 ---

@@ -1,6 +1,6 @@
 ---
 name: customer-rfm-analyzer
-displayNameZh: 客户 RFM 分析
+displayName: 客户 RFM 分析
 description: >-
   Analyze customer purchase patterns using RFM scoring, cohort retention grids, and lifecycle segmentation to drive repeat revenue.
 ---

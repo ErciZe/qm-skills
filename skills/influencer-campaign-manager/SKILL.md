@@ -1,6 +1,6 @@
 ---
 name: influencer-campaign-manager
-displayNameZh: 达人营销活动管理
+displayName: 达人营销活动管理
 description: >-
   Scale creator collaborations and measure multi-channel ROI when moving from manual outreach to high-volume performance-driven influencer programs.
 category: marketing-growth

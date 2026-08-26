@@ -1,6 +1,6 @@
 ---
 name: tiktok-shop-setup
-displayNameZh: TikTok Shop 搭建
+displayName: TikTok Shop 搭建
 description: >-
   Architect and launch a native TikTok Shop integration. Configure catalog synchronization, order management, and affiliate creator programs to enable in-app commerce, live shopping, and viral growth.
 category: marketing-growth

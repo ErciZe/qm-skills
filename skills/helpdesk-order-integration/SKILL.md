@@ -1,6 +1,6 @@
 ---
 name: helpdesk-order-integration
-displayNameZh: 客服工单与订单集成
+displayName: 客服工单与订单集成
 description: >-
   Connect your customer support helpdesk to your ecommerce platform to surface real-time order data and automate VIP routing for faster issue resolution.
 category: customer-crm

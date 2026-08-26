@@ -1,6 +1,6 @@
 ---
 name: instagram-marketing
-displayNameZh: Instagram 营销
+displayName: Instagram 营销
 description: >-
   Generate Instagram marketing content from product URLs. Extract product information and create engaging Instagram posts with image suggestions, captions, and hashtags optimized for engagement. Use when user provides a product URL from e-commerce sites like Amazon, Shopify, Taobao, etc. and wants Instagram marketing content such as Image/text post ideas, engaging captions with CTAs, hashtag strategy, or Story/reels content suggestions.
 region_scope: INTL

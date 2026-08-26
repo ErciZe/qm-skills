@@ -1,6 +1,6 @@
 ---
 name: creating-financial-models
-displayNameZh: 财务模型构建
+displayName: 财务模型构建
 description: >-
   This skill provides an advanced financial modeling suite with DCF analysis, sensitivity testing, Monte Carlo simulations, and scenario planning for investment decisions
 ---

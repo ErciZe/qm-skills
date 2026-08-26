@@ -1,6 +1,6 @@
 ---
 name: xlsx
-displayNameZh: Excel 电子表格
+displayName: Excel 电子表格
 description: >-
   Comprehensive spreadsheet creation, editing, and analysis. Use when working with spreadsheets (.xlsx, .xlsm, .xls, .csv, .tsv, etc) for: (1) Creating new spreadsheets, (2) Modify existing spreadsheets while preserving formulas, (3) Data analysis and visualization in spreadsheets, or any other spreadsheet tasks
 enabled: true

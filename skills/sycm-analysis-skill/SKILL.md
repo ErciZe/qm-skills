@@ -1,6 +1,6 @@
 ---
 name: sycm-analysis-skill
-displayNameZh: 生意参谋数据分析
+displayName: 生意参谋数据分析
 description: >-
   Taobao Sycm (Business Advisor) data analysis tool. Uses browser sessions to call Sycm and retrieve store weekly report data.
 ---

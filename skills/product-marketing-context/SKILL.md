@@ -1,6 +1,6 @@
 ---
 name: product-marketing-context
-displayNameZh: 产品营销背景
+displayName: 产品营销背景
 description: >-
   When the user wants to create or update their product marketing context document. Also use when the user mentions 'product context,' 'marketing context,' 'set up context,' 'positioning,' or wants to avoid repeating foundational information across marketing tasks. Creates `./product-marketing-context.md` that other marketing skills reference.
 ---

@@ -1,6 +1,6 @@
 ---
 name: product-launch-planner
-displayNameZh: 产品发布规划
+displayName: 产品发布规划
 description: >-
   Orchestrate multi-phase product launches using pre-launch waitlists, tiered early access, and coordinated multi-channel marketing to maximize day-one velocity and long-term momentum.
 category: marketing-growth

@@ -1,6 +1,6 @@
 ---
 name: pdf
-displayNameZh: PDF 文档
+displayName: PDF 文档
 description: >-
   "PDF creation, editing, and analysis with support for text extraction, tables, images, forms, merging/splitting, and rendering. Use when working with PDF documents (.pdf files) for: (1) Creating new PDF documents, (2) Extracting content from PDFs, (3) Editing or modifying existing PDFs, (4) Filling in PDF forms, (5) Merging, splitting, or transforming PDFs, (6) Analyzing PDF content, or any other PDF tasks"
 ---

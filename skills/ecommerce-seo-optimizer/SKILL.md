@@ -1,6 +1,6 @@
 ---
 name: ecommerce-seo-optimizer
-displayNameZh: 电商 SEO 优化
+displayName: 电商 SEO 优化
 description: >-
   Optimize product pages for organic search using meta tag frameworks, JSON-LD structured data, and technical crawl management.
 ---

@@ -1,6 +1,6 @@
 ---
 name: amazon-ppc-campaign-manager
-displayNameZh: 亚马逊 PPC 广告活动管理
+displayName: 亚马逊 PPC 广告活动管理
 description: >-
   Plan, structure, and optimize Amazon Sponsored Products, Sponsored Brands, and Sponsored Display ad campaigns. 
   Use this skill whenever the user asks about setting up their first PPC campaign, structuring ads for product launches, 

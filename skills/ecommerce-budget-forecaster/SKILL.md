@@ -1,6 +1,6 @@
 ---
 name: ecommerce-budget-forecaster
-displayNameZh: 电商预算预测
+displayName: 电商预算预测
 description: >-
   Build rolling operating budgets for revenue, marketing, and inventory with seasonal adjustments, variance analysis, and performance benchmarks.
 ---

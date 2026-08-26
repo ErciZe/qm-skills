@@ -1,6 +1,6 @@
 ---
 name: org-structure-research
-displayNameZh: 组织架构调研
+displayName: 组织架构调研
 description: >-
   Systematically research a company's organizational structure, build org charts,
   and create employee profiles per business line. Use when the user asks to
