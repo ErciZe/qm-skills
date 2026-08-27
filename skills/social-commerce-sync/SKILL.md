@@ -2,7 +2,7 @@
 name: social-commerce-sync
 displayName: 社交电商同步
 description: >-
-  Synchronize product catalogs across Meta (Facebook/Instagram), TikTok, and Pinterest. Implement real-time inventory updates, automated feed generation, and in-app checkout configurations to enable seamless social selling.
+  在 Meta（Facebook/Instagram）、TikTok 和 Pinterest 之间同步商品目录。实施实时库存更新、自动生成商品信息流和应用内结账配置，实现无缝社交销售。
 category: marketing-growth
 risk: safe
 source: curated

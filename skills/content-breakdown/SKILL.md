@@ -2,10 +2,10 @@
 name: content-breakdown
 displayName: 内容拆解
 description: >-
-  Deep content breakdown expert (enhanced version). Supports Xiaohongshu/Bilibili/Douyin.
-  For Bilibili videos, includes "danmaku peak analysis" and "keyframe visual verification" capabilities.
-  Five-dimensional analysis: Content structure + Audience feedback + Title packaging + Peak moment analysis + Topic follow-up suggestions.
-  Trigger phrases: breakdown, analyze viral content, content review, deep analysis, analyze this video/post.
+  深度内容拆解专家（增强版），支持小红书/Bilibili/抖音。
+  针对 Bilibili 视频，包含“弹幕峰值分析”和“关键帧视觉验证”能力。
+  五维分析：内容结构 + 受众反馈 + 标题包装 + 高峰时刻分析 + 选题跟进建议。
+  触发短语包括：breakdown（拆解）、analyze viral content（分析爆款内容）、content review（内容复盘）、deep analysis（深度分析）、analyze this video/post（分析此视频/帖子）。
 user-invocable: true
 ---
 

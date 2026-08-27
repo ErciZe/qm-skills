@@ -2,7 +2,7 @@
 name: marketing-psychology
 displayName: 营销心理学
 description: >-
-  When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental models,' 'cognitive bias,' 'persuasion,' 'behavioral science,' 'why people buy,' 'decision-making,' or 'consumer behavior.' This skill provides 70+ mental models organized for marketing application.
+  当用户希望将心理学原理、心智模型或行为科学应用于营销时使用。用户提到“心理学”“心智模型”“认知偏差”“说服”“行为科学”“人们为什么购买”“决策”或“消费者行为”等也应使用。此技能提供 70 多种按营销应用整理的心智模型。
 ---
 
 # Marketing Psychology & Mental Models

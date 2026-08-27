@@ -2,7 +2,7 @@
 name: ecommerce-sales-dashboard
 displayName: 电商销售仪表盘
 description: >-
-  Design and implement comprehensive sales dashboards to track revenue, AOV, conversion rates, and channel performance. Establish a single source of truth for daily, weekly, and monthly executive reporting.
+  设计并实施全面的销售仪表盘，用于跟踪收入、平均订单价值（AOV）、转化率和渠道表现。建立统一可信的数据源，支持管理层进行日报、周报和月报。
 category: data-analytics
 risk: safe
 source: curated

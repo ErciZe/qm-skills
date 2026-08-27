@@ -2,7 +2,7 @@
 name: tiktok-ads-strategy
 displayName: TikTok 广告策略
 description: >-
-  Master TikTok ad campaigns through creative-first testing, Spark Ads optimization, and algorithm-driven bidding strategies.
+  通过创意优先测试、Spark Ads 优化和算法驱动的竞价策略，掌握 TikTok 广告活动。
 ---
 
 # TikTok Ads Strategy

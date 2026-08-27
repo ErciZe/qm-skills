@@ -2,7 +2,7 @@
 name: social-media-content-creator
 displayName: 社交媒体内容创作
 description: >-
-  Create platform-native content, repurpose assets, and implement data-driven social strategies for LinkedIn, X, Instagram, and TikTok.
+  为 LinkedIn、X、Instagram 和 TikTok 创建适配各平台的原生内容、复用素材，并实施数据驱动的社交媒体策略。
 ---
 
 # Social Media Content Creator

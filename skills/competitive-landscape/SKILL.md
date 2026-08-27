@@ -2,7 +2,7 @@
 name: competitive-landscape
 displayName: 竞争格局分析
 description: >-
-  This skill should be used when the user asks to "analyze competitors", "assess competitive landscape", "identify differentiation", "evaluate market positioning", "apply Porter's Five Forces", or requests competitive strategy analysis.
+  当用户要求“分析竞争对手”“评估竞争格局”“识别差异化”“评估市场定位”“应用波特五力”，或请求竞争策略分析时使用此技能。
 ---
 
 # Competitive Landscape Analysis

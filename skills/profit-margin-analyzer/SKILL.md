@@ -2,7 +2,7 @@
 name: profit-margin-analyzer
 displayName: 利润率分析
 description: >-
-  Analyze gross and net profit margins across products, channels, and segments. Implement cost attribution models to calculate contribution margin and identify profitability drivers.
+  分析不同产品、渠道和细分市场的毛利率与净利率。实施成本归因模型，计算贡献毛利并识别盈利驱动因素。
 category: data-analytics
 risk: safe
 source: curated

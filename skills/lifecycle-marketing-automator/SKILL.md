@@ -2,7 +2,7 @@
 name: lifecycle-marketing-automator
 displayName: 生命周期营销自动化
 description: >-
-  Map customer journey stages from first visit to loyal advocate with personalized messaging, triggered workflows, and segment-based campaign automation.
+  通过个性化消息、触发式工作流和基于细分的营销活动自动化，梳理从首次访问到忠实倡导者的客户旅程阶段。
 category: marketing-growth
 risk: safe
 source: curated

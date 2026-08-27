@@ -2,7 +2,7 @@
 name: marketing-ideas
 displayName: 营销创意
 description: >-
-  When the user needs marketing ideas, inspiration, or strategies for their SaaS or software product. Also use when the user asks for 'marketing ideas,' 'growth ideas,' 'how to market,' 'marketing strategies,' 'marketing tactics,' 'ways to promote,' or 'ideas to grow.' This skill provides 140 proven marketing approaches organized by category.
+  当用户需要 SaaS 或软件产品的营销创意、灵感或策略时使用。用户询问“营销创意”“增长创意”“如何营销”“营销策略”“营销战术”“推广方式”或“增长点”等也应使用。此技能提供按类别整理的 140 种经过验证的营销方法。
 ---
 
 # Marketing Ideas for SaaS

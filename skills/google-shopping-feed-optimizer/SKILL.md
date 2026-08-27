@@ -2,7 +2,7 @@
 name: google-shopping-feed-optimizer
 displayName: Google Shopping 商品源优化
 description: >-
-  Trigger: Set up and optimize a product feed for Google Merchant Center to show products in Google Shopping ads.
+  适用于：为 Google Merchant Center 设置并优化商品源，以便在 Google Shopping 广告中展示商品。
 category: marketing-growth
 risk: safe
 source: curated

@@ -2,7 +2,7 @@
 name: dynamic-pricing-engine
 displayName: 动态定价引擎
 description: >-
-  Trigger: Automatically adjust prices based on demand signals, competitor prices, and inventory levels to maximize revenue.
+  触发条件：根据需求信号、竞争对手价格和库存水平自动调整价格，以实现收入最大化。
 category: pricing-promotions
 risk: critical
 source: curated

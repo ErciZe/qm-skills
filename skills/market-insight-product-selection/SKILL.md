@@ -2,14 +2,14 @@
 name: market-insight-product-selection
 displayName: 市场洞察与选品
 description: >-
-  Adaptive product-selection methodology built on multi-source signals and "voice of customer" (VoC): validate demand, momentum, competitive intensity, and user pain points from reviews/comments to produce a confident shortlist or a focused go/no-go.
-  **When to use**:
-    - User is asking about trends/popularity (Tiktok/Amazon/etc.), or what's selling well in a market (US/UK/etc.)
-    - User asks for **single-category / single-product** trend analysis
-    - User wants market analysis, market research, or competitive landscape insights
-    - User is researching consumer preferences, demand patterns, or market dynamics
-    - User needs help deciding what products to sell, source, or invest in
-    - User is exploring product opportunities, winning products, or profitable niches
+  基于多源信号和“客户之声”（VoC）的自适应选品方法：从评论/反馈中验证需求、市场势头、竞争强度和用户痛点，生成有把握的候选清单，或明确聚焦的继续/停止决策。
+  **使用时机**：
+    - 用户询问趋势/热度（TikTok/Amazon 等），或某个市场（美国/英国等）的热销情况
+    - 用户要求进行**单一品类/单一产品**趋势分析
+    - 用户需要市场分析、市场调研或竞争格局洞察
+    - 用户正在研究消费者偏好、需求模式或市场动态
+    - 用户需要帮助决定要销售、采购或投资哪些产品
+    - 用户正在探索产品机会、爆款产品或高盈利细分市场
 workflow: |
   Complete this in up to four steps (skip optional steps unless user explicitly requests):
     1. Data Analysis & Selection Recommendation (MANDATORY: multi-source data → conclusion + logic + evidence)

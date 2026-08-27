@@ -2,7 +2,7 @@
 name: freemium-upgrade-optimizer
 displayName: 免费增值升级优化
 description: >-
-  Optimize SaaS paywall conversion by timing triggers, refining value propositions, and implementing high-converting pricing structures.
+  通过优化触发时机、完善价值主张并实施高转化率定价结构，优化 SaaS 付费墙转化。
 ---
 
 ## When to Use

@@ -2,7 +2,7 @@
 name: customer-retention-automator
 displayName: 客户留存自动化
 description: >-
-  Design and automate lifecycle campaigns to reduce churn using behavioral triggers, tiered incentives, and predictive timing.
+  使用行为触发器、分层激励和预测性时机设计并自动化生命周期营销活动，以降低流失率。
 ---
 
 # Build Automated Customer Retention Campaigns

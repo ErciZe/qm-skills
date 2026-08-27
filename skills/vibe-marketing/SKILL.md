@@ -2,7 +2,7 @@
 name: vibe-marketing
 displayName: 氛围营销
 description: >-
-  Apply 'Vibe Coding' principles to marketing: describe outcomes, iterate via AI, and prioritize speed and human edge over perfection.
+  将“氛围编程”（Vibe Coding）原则应用于营销：描述目标结果，通过 AI 迭代，并将速度与人的独特优势置于完美之上。
 ---
 
 # Vibe Marketing

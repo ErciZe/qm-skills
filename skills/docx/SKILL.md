@@ -2,7 +2,7 @@
 name: docx
 displayName: Word 文档
 description: >-
-  Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. Use when working with professional documents (.docx files) for: (1) Creating new documents, (2) Modifying or editing content, (3) Working with tracked changes, (4) Adding comments, or any other document tasks
+  全面支持修订跟踪、批注、格式保留和文本提取的文档创建、编辑与分析。处理专业文档（.docx 文件）时使用，包括：(1) 创建新文档；(2) 修改或编辑内容；(3) 处理修订跟踪；(4) 添加批注；以及其他文档任务。
 ---
 
 # DOCX creation, editing, and analysis

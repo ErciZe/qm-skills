@@ -2,7 +2,7 @@
 name: self-improvement
 displayName: 自我提升
 description: >-
-  Captures learnings, errors, corrections, and self-reflections into daily diary for continuous improvement. Use when: (1) A command or operation fails unexpectedly, (2) User corrects you, (3) User requests a capability that doesn't exist, (4) An external API or tool fails, (5) Knowledge is outdated or incorrect, (6) A better approach is discovered, (7) You complete significant work and want to evaluate quality. Also review diary before major tasks.
+  将学习成果、错误、修正和自我反思记录到每日日记中，以持续改进。适用于：(1) 命令或操作意外失败；(2) 用户纠正你；(3) 用户请求尚不存在的能力；(4) 外部 API 或工具失败；(5) 知识已过时或不正确；(6) 发现更好的方法；(7) 完成重要工作并希望评估质量。执行重大任务前也应查看日记。
 ---
 
 # Self-Improvement Skill

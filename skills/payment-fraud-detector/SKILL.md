@@ -2,7 +2,7 @@
 name: payment-fraud-detector
 displayName: 支付欺诈检测
 description: >-
-  Implement multi-layered fraud prevention using risk scoring, 3D Secure, velocity checks, and manual review queues to minimize chargebacks and protect revenue.
+  实施多层次欺诈防护，利用风险评分、3D Secure、频率检查和人工审核队列，最大限度减少拒付并保护收入。
 category: security-compliance
 risk: critical
 source: curated

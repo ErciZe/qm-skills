@@ -2,7 +2,7 @@
 name: warehouse-fulfillment-workflow
 displayName: 仓储履约工作流
 description: >-
-  Optimize warehouse operations with digital pick lists, packing station workflows, and carrier-agnostic label generation to increase fulfillment speed and accuracy
+  通过数字化拣货单、打包工作站工作流以及不依赖特定承运商的面单生成，优化仓库运营，提高履约速度和准确性。
 category: fulfillment-shipping
 risk: critical
 source: curated

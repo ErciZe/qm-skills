@@ -2,10 +2,8 @@
 name: copywriting
 displayName: 文案撰写
 description: >-
-  Use this skill when writing, rewriting, or improving marketing copy
-  for any page (homepage, landing page, pricing, feature, product, or about page).
-  This skill produces clear, compelling, and testable copy while enforcing
-  alignment, honesty, and conversion best practices.
+  当为任何页面（首页、落地页、定价页、功能页、产品页或关于我们页）撰写、改写或优化营销文案时使用此技能。
+  该技能产出清晰、有说服力且可测试的文案，同时遵循一致性、诚实性和转化最佳实践。
 ---
 
 # Copywriting

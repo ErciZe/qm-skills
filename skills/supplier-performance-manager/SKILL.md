@@ -2,7 +2,7 @@
 name: supplier-performance-manager
 displayName: 供应商绩效管理
 description: >-
-  Systematically monitor and optimize supplier relationships. Implement purchase order workflows, performance scorecards, and lead-time tracking to ensure supply chain reliability and cost-efficiency.
+  系统化监控并优化供应商关系。实施采购订单工作流、绩效评分卡和交付周期跟踪，确保供应链可靠性与成本效率。
 category: business-operations
 risk: critical
 source: curated

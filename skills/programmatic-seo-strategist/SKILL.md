@@ -2,7 +2,7 @@
 name: programmatic-seo-strategist
 displayName: 程序化 SEO 策略
 description: >-
-  Design and implement scalable programmatic SEO strategies using proprietary data and templated landing pages to capture long-tail traffic.
+  使用专有数据和模板化落地页，设计并实施可扩展的程序化 SEO 策略，以获取长尾流量。
 ---
 
 ## When to Use

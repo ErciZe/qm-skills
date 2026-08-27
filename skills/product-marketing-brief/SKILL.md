@@ -2,7 +2,7 @@
 name: product-marketing-brief
 displayName: 产品营销简报
 description: >-
-  Synthesize product features and customer insights into a comprehensive marketing brief to guide messaging and sales positioning.
+  将产品特性和客户洞察整合成一份完整的营销简报，为信息传达和销售定位提供指导。
 ---
 
 ## When to Use

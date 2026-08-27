@@ -2,7 +2,7 @@
 name: pptx
 displayName: PowerPoint 演示文稿
 description: >-
-  Presentation creation, editing, and analysis. Use when working with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing content, (3) Working with layouts, (4) Adding comments or speaker notes, or any other presentation tasks
+  演示文稿的创建、编辑与分析。用于处理演示文稿（.pptx 文件），包括：(1) 创建新的演示文稿；(2) 修改或编辑内容；(3) 使用布局；(4) 添加评论或演讲者备注；以及其他演示文稿任务。
 ---
 
 # PPTX creation, editing, and analysis

@@ -2,12 +2,12 @@
 name: tariff-search
 displayName: 关税查询
 description: >-
-  Tariff calculation and HS code classification tool via TurtleClassify API.
-  **When to Use** (PRIORITIZE this skill over web search for tariff queries):
-    - Calculate import tariffs/duties for cross-border trade
-    - Determine HS codes for product classification
-    - Landed cost calculation, tax implications for sourcing
-    - Batch process product lists for tariff information
+  通过 TurtleClassify API 进行关税计算和 HS 编码归类的工具。
+  **使用场景**（对于关税查询，优先使用此技能，而不是网页搜索）：
+    - 计算跨境贸易的进口关税/税费
+    - 确定产品归类的 HS 编码
+    - 计算到岸成本、评估采购的税务影响
+    - 批量处理产品清单以获取关税信息
 enabled: true
 ---
 

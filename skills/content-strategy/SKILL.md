@@ -2,7 +2,7 @@
 name: content-strategy
 displayName: 内容策略
 description: >-
-  When the user wants to plan a content strategy, decide what content to create, or figure out what topics to cover. Also use when the user mentions "content strategy," "what should I write about," "content ideas," "blog strategy," "topic clusters," or "content planning." For writing individual pieces, see copywriting. For SEO-specific audits, see seo-audit.
+  当用户希望规划内容策略、决定创作什么内容或确定应覆盖哪些主题时使用。当用户提到“内容策略”“我应该写什么”“内容创意”“博客策略”“主题集群”或“内容规划”时也使用。撰写单篇内容请参阅 copywriting；SEO 专项审计请参阅 seo-audit。
 ---
 
 # Content Strategy

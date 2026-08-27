@@ -2,7 +2,7 @@
 name: dropshipping-supplier-integrator
 displayName: 无货源供应商整合
 description: >-
-  Automate the lifecycle of dropship orders from multi-supplier routing and inventory synchronization to margin tracking and fulfillment reconciliation.
+  自动化管理无货源订单全生命周期，涵盖多供应商路由、库存同步、利润跟踪和履约对账。
 category: fulfillment-shipping
 risk: critical
 source: curated

@@ -2,7 +2,7 @@
 name: review-summarizer
 displayName: 评论摘要生成器
 description: >-
-  Scrape, analyze, and summarize product reviews from multiple platforms (Amazon, Google, Yelp, TripAdvisor). Extract key insights, sentiment analysis, pros/cons, and recommendations. Use when researching products for arbitrage, creating affiliate content, or making purchasing decisions.
+  从多个平台（Amazon、Google、Yelp、TripAdvisor）抓取、分析并总结产品评论。提取关键洞察、情感分析、优缺点和建议。适用于为套利研究产品、创建联盟营销内容或做出购买决策时。
 region_scope: INTL
 ---
 

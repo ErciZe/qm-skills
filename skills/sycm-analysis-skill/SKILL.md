@@ -2,7 +2,7 @@
 name: sycm-analysis-skill
 displayName: 生意参谋数据分析
 description: >-
-  Taobao Sycm (Business Advisor) data analysis tool. Uses browser sessions to call Sycm and retrieve store weekly report data.
+  淘宝生意参谋数据分析工具。利用浏览器会话调用生意参谋并获取店铺周报数据。
 ---
 
 # Taobao Sycm (Business Advisor) Data Analysis SKILL

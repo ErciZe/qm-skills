@@ -2,7 +2,7 @@
 name: marketing-roas-analyzer
 displayName: 营销投入产出比分析
 description: >-
-  Track and analyze marketing spend across all channels with ROAS calculation, incrementality testing, and budget reallocation based on true profitability.
+  通过 ROAS 计算、增量测试以及基于真实盈利能力的预算重新分配，跟踪并分析所有渠道的营销支出。
 category: data-analytics
 risk: safe
 source: curated

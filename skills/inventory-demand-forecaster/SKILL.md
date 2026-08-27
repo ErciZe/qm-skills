@@ -2,7 +2,7 @@
 name: inventory-demand-forecaster
 displayName: 库存需求预测
 description: >-
-  Trigger: Predict future inventory needs and calculate reorder points using historical data and safety stock buffers to prevent stockouts.
+  适用于：使用历史数据和安全库存缓冲预测未来库存需求并计算再订货点，以避免缺货。
 category: business-operations
 risk: safe
 source: curated

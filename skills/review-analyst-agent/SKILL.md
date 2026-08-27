@@ -2,11 +2,10 @@
 name: review-analyst-agent
 displayName: 评论分析助手
 description: >-
-  Use this skill to analyze product reviews, find common issues, and prioritize improvements.
-  Triggers: "analyze reviews", "review analysis", "customer feedback", "what are people saying",
-  "product reviews", "review sentiment", "find complaints", "customer complaints",
-  "improvement recommendations", "voice of customer", "VOC analysis", "feedback analysis"
-  Outputs: Prioritized issues, sentiment analysis, improvement recommendations.
+  使用此技能分析产品评论、发现常见问题并确定改进优先级。
+  触发词：“分析评论”“评论分析”“客户反馈”“大家在说什么”“产品评论”“评论情感”“查找投诉”“客户投诉”、
+  “改进建议”“客户之声”“VOC 分析”“反馈分析”。
+  输出：按优先级排列的问题、情感分析和改进建议。
 ---
 
 # Review Analyst Agent

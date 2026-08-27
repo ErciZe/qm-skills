@@ -2,8 +2,8 @@
 name: amz-product-optimizer
 displayName: 亚马逊商品优化
 description: >-
-  Amazon product optimization end-to-end automation - A one-stop solution from hot keyword analysis to product detail image generation.
-  Trigger phrases: "optimize product", "generate product images", "get hot keywords", "cat food optimization", "dog bed listing"
+  亚马逊商品优化端到端自动化——从热搜关键词分析到商品详情图片生成的一站式解决方案。
+  触发短语包括：“optimize product”（优化商品）、“generate product images”（生成商品图片）、“get hot keywords”（获取热搜关键词）、“cat food optimization”（猫粮优化）和“dog bed listing”（狗床商品详情页）。
 ---
 
 # Amazon Product Optimizer (AMZ Product Optimizer)

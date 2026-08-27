@@ -2,7 +2,7 @@
 name: multi-location-order-router
 displayName: 多地点订单路由
 description: >-
-  Design and implement a robust order lifecycle engine that manages multi-warehouse routing, split shipments, and backorder queues across complex fulfillment networks
+  设计并实现可靠的订单生命周期引擎，在复杂的履约网络中管理多仓路由、拆分发货和缺货订单队列。
 category: business-operations
 risk: critical
 source: curated

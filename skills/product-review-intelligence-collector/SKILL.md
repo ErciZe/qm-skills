@@ -2,7 +2,7 @@
 name: product-review-intelligence-collector
 displayName: 产品评论情报收集
 description: >-
-  Automated product review collection and intelligence gathering from major e-commerce platforms (Amazon, TikTok, Walmart, etc.). Use this skill when the user wants to collect, analyze, and synthesize customer feedback for market research, competitor benchmarking, or identifying product improvement opportunities. It focuses on extraction strategies, data cleaning, and multi-dimensional analysis (pros/cons, scenarios, unmet needs).
+  从主要电商平台（Amazon、TikTok、Walmart 等）自动收集产品评论并提取情报。当用户希望收集、分析和综合客户反馈，用于市场调研、竞品对标或发现产品改进机会时使用。重点涵盖信息提取策略、数据清洗和多维分析（优点/缺点、使用场景、未满足需求）。
 category: market-research
 risk: safe
 source: curated

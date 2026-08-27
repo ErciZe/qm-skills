@@ -2,16 +2,11 @@
 name: etsy-pod-automation
 displayName: Etsy 按需打印自动化
 description: >-
-  Automates operating a Print-on-Demand dropshipping store on Etsy via Printify.
-  Covers the full lifecycle: trend research, AI design generation, product creation
-  via Printify API, SEO-optimized listing with 13 tags, publishing to Etsy,
-  social media promotion (Twitter/Instagram/Pinterest), performance monitoring,
-  and continuous optimization. Use this skill whenever the user mentions Etsy store
-  operations, POD products, Printify, creating Etsy listings, Etsy SEO, Etsy tags,
-  product design for mugs/posters/stickers, Etsy search visibility, Etsy store
-  analytics, or any e-commerce dropshipping workflow on Etsy. Also use when the user
-  asks to create products, check store performance, run trend scans, post to social
-  media for their Etsy shop, fix SEO issues, or automate any part of their POD business.
+  通过 Printify 自动化运营 Etsy 按需打印（POD）代发货店铺。
+  覆盖完整生命周期：趋势研究、AI 设计生成、通过 Printify API 创建产品、使用 13 个标签优化 SEO 的商品刊登、发布到 Etsy、
+  社交媒体推广（Twitter/Instagram/Pinterest）、绩效监控和持续优化。每当用户提及 Etsy 店铺运营、POD 产品、Printify、创建 Etsy 商品刊登、Etsy SEO、Etsy 标签、
+  马克杯/海报/贴纸的产品设计、Etsy 搜索曝光、Etsy 店铺分析，或任何 Etsy 电商代发货工作流时，都应使用此技能。用户要求创建产品、检查店铺表现、运行趋势扫描、
+  为 Etsy 店铺发布社交媒体内容、修复 SEO 问题或自动化 POD 业务的任何环节时，也应使用此技能。
 region_scope: INTL
 ---
 

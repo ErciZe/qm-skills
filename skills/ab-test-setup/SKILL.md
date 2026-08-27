@@ -2,7 +2,7 @@
 name: ab-test-setup
 displayName: A/B 测试设置
 description: >-
-  When the user wants to plan, design, or implement an A/B test or experiment. Also use when the user mentions "A/B test," "split test," "experiment," "test this change," "variant copy," "multivariate test," or "hypothesis." For tracking implementation, see analytics-tracking.
+  当用户希望规划、设计或实施 A/B 测试或实验时使用。当用户提到“A/B 测试”“分流测试”“实验”“测试此变更”“变体文案”“多变量测试”或“假设”时也使用。关于跟踪实施，请参阅 analytics-tracking。
 ---
 
 # A/B Test Setup

@@ -2,7 +2,7 @@
 name: xiaohongshu-content-creator
 displayName: 小红书内容创作
 description: >-
-  Optimize Xiaohongshu (XHS) content for the CES algorithm with SEO-driven titles, emotional engagement, and AI compliance.
+  通过 SEO 驱动的标题、情感互动和 AI 合规性，针对 CES 算法优化小红书（XHS）内容。
 ---
 
 # Xiaohongshu Content Creator

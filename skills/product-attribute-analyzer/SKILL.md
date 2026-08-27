@@ -2,7 +2,7 @@
 name: product-attribute-analyzer
 displayName: 产品属性分析器
 description: >-
-  Profiles product attributes across top sellers using 3-D tagging (structural/fit, material/process, design elements), calculates sales-weighted market share from real sales data, and outputs quantitative analysis plus pie-chart visualizations per dimension. Use when defining manufacturing specs, identifying mainstream product configurations, or spotting design trends in an Amazon category.
+  根据三维标注（结构/适配、材料/工艺、设计元素）分析头部卖家的产品属性，基于真实销售数据计算销售加权市场份额，并输出定量分析和各维度饼图可视化。用于制定制造规格、识别主流产品配置或发现 Amazon 类目中的设计趋势。
 workflow: |
   Complete this in five steps:
     1. Data Collection (sales + listing data from Amazon/Helium 10 or equivalent — required for quantitative analysis)

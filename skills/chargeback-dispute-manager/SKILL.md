@@ -2,7 +2,7 @@
 name: chargeback-dispute-manager
 displayName: 拒付争议管理
 description: >-
-  Prevent and manage ecommerce chargebacks using fraud scoring, compelling evidence automation, and card network compliance standards.
+  使用欺诈评分、有说服力的证据自动化和卡组织合规标准，预防并管理电商拒付。
 ---
 
 # Manage Chargeback Disputes and Prevention

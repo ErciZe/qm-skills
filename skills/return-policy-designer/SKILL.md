@@ -2,7 +2,7 @@
 name: return-policy-designer
 displayName: 退货政策设计
 description: >-
-  Architect and enforce dynamic return and refund policies. Configure rule-based logic for return windows, restocking fees, and category-specific exclusions to balance customer experience with operational protection.
+  设计并执行动态退货和退款政策。配置退货期限、补货费及按品类划分的排除规则，在平衡客户体验的同时保护运营利益。
 category: business-operations
 risk: critical
 source: curated

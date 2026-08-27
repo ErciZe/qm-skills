@@ -2,7 +2,7 @@
 name: helpdesk-order-integration
 displayName: 客服工单与订单集成
 description: >-
-  Connect your customer support helpdesk to your ecommerce platform to surface real-time order data and automate VIP routing for faster issue resolution.
+  将客户支持工单系统连接到电商平台，实时呈现订单数据，并自动进行 VIP 路由，以更快解决问题。
 category: customer-crm
 risk: safe
 source: curated

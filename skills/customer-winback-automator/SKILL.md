@@ -2,7 +2,7 @@
 name: customer-winback-automator
 displayName: 客户召回自动化
 description: >-
-  Identify and re-engage lapsed customers through automated multi-stage reactivation sequences. Implement tiered discounting based on historical LTV and establish sunsetting protocols for unengaged contacts.
+  通过自动化的多阶段重新激活序列识别并重新吸引流失客户。根据历史 LTV 实施分层折扣，并为不活跃联系人建立退出机制。
 category: marketing-growth
 risk: safe
 source: curated

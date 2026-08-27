@@ -2,10 +2,7 @@
 name: org-structure-research
 displayName: 组织架构调研
 description: >-
-  Systematically research a company's organizational structure, build org charts,
-  and create employee profiles per business line. Use when the user asks to
-  "调研组织架构", "org chart", "组织架构图", "员工画像", "业务线/部门结构", or
-  "research [company] team structure and key people".
+  系统化调研公司的组织架构，构建组织结构图，并按业务线创建员工画像。当用户要求“调研组织架构”“组织结构图”“组织架构图”“员工画像”“业务线/部门结构”或“调研[公司]的团队结构和关键人员”时使用。
 triggers:
   - org structure
   - organizational structure

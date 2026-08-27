@@ -2,7 +2,7 @@
 name: multi-currency-checkout
 displayName: 多币种结账
 description: >-
-  Configure multi-currency support to allow international customers to browse and pay in their local currency with automated exchange rates and localized rounding
+  配置多币种支持，使国际客户能够以本地货币浏览并付款，同时自动应用汇率和本地化舍入规则。
 category: payments-checkout
 risk: critical
 source: curated

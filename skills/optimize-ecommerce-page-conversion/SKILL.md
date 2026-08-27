@@ -2,7 +2,7 @@
 name: optimize-ecommerce-page-conversion
 displayName: 电商页面转化优化
 description: >-
-  Expert framework for optimizing Shopify store pages (Home, Collection, PDP, Promo) using conversion benchmarks and industry checklists.
+  使用转化率基准和行业检查清单，优化 Shopify 店铺页面（首页、集合页、产品详情页、促销页）的转化。
 ---
 
 # Optimize Ecommerce Page Conversion

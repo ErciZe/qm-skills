@@ -2,7 +2,7 @@
 name: sales-tax-vat-automator
 displayName: 销售税与增值税自动化
 description: >-
-  Automate global sales tax, VAT, and GST compliance across multiple jurisdictions. Implement real-time tax calculation, nexus tracking, and automated filing workflows to ensure audit-ready financial operations.
+  自动化处理多个司法辖区的全球销售税、增值税和商品及服务税（GST）合规。实施实时税额计算、税收关联（nexus）跟踪和自动申报工作流，确保财务运营随时可供审计。
 category: payments-checkout
 risk: safe
 source: curated

@@ -2,7 +2,7 @@
 name: remotion-best-practices
 displayName: Remotion 视频生成
 description: >-
-  Best practices for Remotion - Video creation in React
+  Remotion 的最佳实践——使用 React 创建视频。
 metadata:
   tags: remotion, video, react, animation, composition
 ---

@@ -2,7 +2,7 @@
 name: seo-keyword-research
 displayName: SEO 关键词研究
 description: >-
-  Discover high-value keywords, classify search intent, and build topic clusters to drive organic traffic and AI visibility (GEO).
+  发现高价值关键词，分类搜索意图，并构建主题集群，以驱动自然流量和 AI 可见度（GEO）。
 ---
 
 # SEO Keyword Research

@@ -2,7 +2,7 @@
 name: launch-strategy
 displayName: 发布策略
 description: >-
-  When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'feature release,' 'announcement,' 'go-to-market,' 'beta launch,' 'early access,' 'waitlist,' or 'product update.' This skill covers phased launches, channel strategy, and ongoing launch momentum.
+  当用户希望规划产品发布、功能公告或版本发布策略时使用。用户提到“发布”“Product Hunt”“功能发布”“公告”“上市策略”“Beta 发布”“抢先体验”“候补名单”或“产品更新”时也应使用。此技能涵盖分阶段发布、渠道策略和持续推动发布热度。
 ---
 
 # Launch Strategy

@@ -2,12 +2,10 @@
 name: image-prompt-guide
 displayName: 图像提示词指南
 description: >-
-  Prompt engineering and tool routing for AI image generation and editing.
-  Use for: creative generation, product photo editing, e-commerce platform image sets,
-  and specialized scenes (white background / transparent background, watermark/element cleanup, HD upscale, image resize, scene swap,
-  model showcase, selling point, logo design, tech pack, process flowchart, etc.).
-  Do NOT use for: full product development workflows (use ai-product-designer),
-  or non-AI operations like crop/compress/format-convert (use native tools).
+  AI 图像生成与编辑的提示词工程和工具路由。
+  适用于：创意生成、产品照片编辑、电商平台图片套图，以及专门场景（白底/透明底、水印或元素清理、高清放大、图片尺寸调整、场景替换、
+  模特展示、卖点图、Logo 设计、技术资料包、流程图等）。
+  不适用于：完整产品开发工作流（请使用 ai-product-designer），或裁剪/压缩/格式转换等非 AI 操作（请使用原生工具）。
 ---
 
 # Image Generation Guide

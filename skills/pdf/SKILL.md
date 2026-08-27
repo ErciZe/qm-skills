@@ -2,7 +2,7 @@
 name: pdf
 displayName: PDF 文档
 description: >-
-  "PDF creation, editing, and analysis with support for text extraction, tables, images, forms, merging/splitting, and rendering. Use when working with PDF documents (.pdf files) for: (1) Creating new PDF documents, (2) Extracting content from PDFs, (3) Editing or modifying existing PDFs, (4) Filling in PDF forms, (5) Merging, splitting, or transforming PDFs, (6) Analyzing PDF content, or any other PDF tasks"
+  “支持文本提取、表格、图像、表单、合并/拆分和渲染的 PDF 创建、编辑与分析。用于处理 PDF 文档（.pdf 文件），包括：(1) 创建新的 PDF 文档；(2) 从 PDF 提取内容；(3) 编辑或修改现有 PDF；(4) 填写 PDF 表单；(5) 合并、拆分或转换 PDF；(6) 分析 PDF 内容；以及其他 PDF 任务”
 ---
 
 # PDF Processing Guide

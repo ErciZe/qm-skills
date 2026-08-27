@@ -2,7 +2,7 @@
 name: serp-ranking-analyzer
 displayName: 搜索结果排名分析
 description: >-
-  Conduct deep SERP analysis to identify ranking factors, intent signals, and feature opportunities for competitive search queries.
+  深入分析搜索结果页（SERP），识别竞争性搜索查询中的排名因素、意图信号和特色展示机会。
 ---
 
 ## When to Use

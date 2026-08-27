@@ -2,7 +2,7 @@
 name: ecommerce-seo-optimizer
 displayName: 电商 SEO 优化
 description: >-
-  Optimize product pages for organic search using meta tag frameworks, JSON-LD structured data, and technical crawl management.
+  使用元标签框架、JSON-LD 结构化数据和技术爬取管理，优化产品页面的自然搜索表现。
 ---
 
 # Optimize Ecommerce Product Page SEO

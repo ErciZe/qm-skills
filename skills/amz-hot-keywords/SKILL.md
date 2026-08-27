@@ -2,7 +2,8 @@
 name: amz-hot-keywords
 displayName: 亚马逊热搜关键词
 description: >-
-  Amazon hot keyword scraper - scrapes ABA (Amazon Brand Analytics) weekly search term rankings from AMZ123. Extracts keyword, current week rank, last week rank, and trend (up/down/flat). Use this skill whenever the user asks to check Amazon hot search keywords, search term rankings, keyword trends, keyword popularity, or mentions AMZ123. Trigger phrases include: 'hot keywords', 'search term rank', 'keyword trend', 'Amazon keyword', 'ABA data', 'search volume rank', 'search popularity', 'trending keywords on Amazon', as well as Chinese equivalents like '热搜词', '搜索热度', '关键词排名', '关键词趋势'.
+  亚马逊热搜关键词抓取工具——从 AMZ123 抓取 ABA（亚马逊品牌分析）每周搜索词排名。提取关键词、本周排名、上周排名及趋势（上升/下降/持平）。
+  当用户询问亚马逊热搜词、搜索词排名、关键词趋势、关键词热度或提及 AMZ123 时使用。触发短语包括：'hot keywords'、'search term rank'、'keyword trend'、'Amazon keyword'、'ABA data'、'search volume rank'、'search popularity'、'trending keywords on Amazon'，以及中文短语“热搜词”“搜索热度”“关键词排名”“关键词趋势”。
 ---
 
 # Amazon Hot Keywords Scraper

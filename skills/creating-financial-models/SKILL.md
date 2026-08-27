@@ -2,7 +2,7 @@
 name: creating-financial-models
 displayName: 财务模型构建
 description: >-
-  This skill provides an advanced financial modeling suite with DCF analysis, sensitivity testing, Monte Carlo simulations, and scenario planning for investment decisions
+  此技能提供一套高级财务建模工具，包含 DCF 分析、敏感性测试、蒙特卡洛模拟和情景规划，用于投资决策。
 ---
 
 # Financial Modeling Suite

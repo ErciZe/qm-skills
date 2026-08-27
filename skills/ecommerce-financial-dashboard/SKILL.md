@@ -2,7 +2,7 @@
 name: ecommerce-financial-dashboard
 displayName: 电商财务仪表盘
 description: >-
-  Build integrated P&L, balance sheet, and cash flow dashboards with ecommerce-specific waterfalls and channel-level drill-downs.
+  构建整合的损益表（P&L）、资产负债表和现金流仪表盘，支持电商专属瀑布图及渠道级下钻分析。
 ---
 
 # Build Ecommerce Financial Reporting Dashboard

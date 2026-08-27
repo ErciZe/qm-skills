@@ -2,7 +2,7 @@
 name: invoice-generator
 displayName: 发票生成
 description: >-
-  Automate the generation of tax-compliant, branded PDF invoices for B2B and B2C orders, ensuring sequential numbering and legal data retention.
+  自动为 B2B 和 B2C 订单生成符合税务要求且带品牌标识的 PDF 发票，确保编号连续并依法留存数据。
 category: payments-checkout
 risk: safe
 source: curated

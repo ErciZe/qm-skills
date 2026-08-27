@@ -2,7 +2,7 @@
 name: influencer-campaign-manager
 displayName: 达人营销活动管理
 description: >-
-  Scale creator collaborations and measure multi-channel ROI when moving from manual outreach to high-volume performance-driven influencer programs.
+  当从人工触达转向高规模、以效果为导向的达人营销项目时，扩大创作者合作并衡量跨渠道投资回报。
 category: marketing-growth
 risk: safe
 source: curated

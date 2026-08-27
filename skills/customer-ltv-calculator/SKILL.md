@@ -2,7 +2,7 @@
 name: customer-ltv-calculator
 displayName: 客户生命周期价值计算
 description: >-
-  Trigger: Calculate customer lifetime value (CLV) and use it to drive retention strategies, VIP programs, and win-back flows.
+  触发条件：计算客户生命周期价值（CLV），并据此制定留存策略、VIP 计划和召回流程。
 category: customer-crm
 risk: safe
 source: curated

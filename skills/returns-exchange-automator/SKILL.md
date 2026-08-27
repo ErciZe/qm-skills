@@ -2,7 +2,7 @@
 name: returns-exchange-automator
 displayName: 退换货自动化
 description: >-
-  Design and automate end-to-end return and exchange workflows. Implement self-service RMA portals, dynamic routing for inspections, and automated refund/credit issuance while mitigating return fraud.
+  设计并自动化端到端退货与换货流程。实现自助式 RMA 门户、检查任务的动态路由，以及自动退款或发放账户额度，同时降低退货欺诈风险。
 category: fulfillment-shipping
 risk: critical
 source: curated

@@ -2,7 +2,7 @@
 name: bestseller-pattern-decoder
 displayName: 畅销模式解码器
 description: >-
-  Deconstructs the success patterns of Amazon Best Sellers — pricing sweet spots, image composition, title keyword structures, and A+ content narrative logic. Use when analyzing top 1% performers in any Amazon category to build a high-conversion listing blueprint.
+  拆解亚马逊畅销商品的成功模式——定价甜蜜点、图片构成、标题关键词结构和 A+ 内容叙事逻辑。当分析任何亚马逊类目中排名前 1% 的商品，以构建高转化商品详情页蓝图时使用。
 workflow: |
   Complete this in four steps:
     1. Identifying the "Model" Sellers (filter for Best Seller / Amazon's Choice badges)

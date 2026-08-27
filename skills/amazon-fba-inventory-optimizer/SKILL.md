@@ -2,10 +2,8 @@
 name: amazon-fba-inventory-optimizer
 displayName: 亚马逊 FBA 库存优化
 description: >-
-  Manage Amazon FBA inventory health, IPI score, restock limits, and storage fees. 
-  Trigger this skill for questions about improving IPI scores, managing FBA storage/capacity limits, 
-  avoiding long-term storage fees or aged inventory surcharges, calculating restock quantities, 
-  balancing in-stock rates vs. excess inventory, and peak season inventory planning.
+  管理亚马逊 FBA 库存健康度、IPI 分数、补货限制和仓储费。当用户询问如何提升 IPI 分数、管理 FBA 仓储/容量限制、
+  避免长期仓储费或库龄库存附加费、计算补货数量、平衡在库率与过剩库存，或规划旺季库存时触发。
 ---
 
 # Amazon FBA Inventory Optimizer

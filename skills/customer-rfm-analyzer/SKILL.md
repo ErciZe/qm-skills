@@ -2,7 +2,7 @@
 name: customer-rfm-analyzer
 displayName: 客户 RFM 分析
 description: >-
-  Analyze customer purchase patterns using RFM scoring, cohort retention grids, and lifecycle segmentation to drive repeat revenue.
+  使用 RFM 评分、同期群留存矩阵和生命周期分群分析客户购买模式，以推动复购收入。
 ---
 
 # Analyze Customer Behavior and RFM Segments

@@ -2,7 +2,7 @@
 name: cart-abandonment-recovery
 displayName: 购物车弃购挽回
 description: >-
-  Trigger: Set up automated email and SMS sequences to win back shoppers who abandon their items during checkout.
+  触发条件：为结账过程中放弃购物车的顾客设置自动化电子邮件和短信序列，以召回这些顾客。
 category: marketing-growth
 risk: safe
 source: curated

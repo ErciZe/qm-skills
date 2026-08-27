@@ -2,7 +2,7 @@
 name: seo-page-audit
 displayName: SEO 页面审计
 description: >-
-  Audit a single web page's SEO performance, providing a 0-100 score and prioritized technical and content recommendations.
+  审查单个网页的 SEO 表现，提供 0-100 分评分及按优先级排序的技术和内容建议。
 ---
 
 # SEO Page Audit

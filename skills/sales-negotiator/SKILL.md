@@ -2,7 +2,7 @@
 name: sales-negotiator
 displayName: 销售谈判
 description: >-
-  Expert sales negotiation strategist for B2B deal-making. Use when planning negotiation strategy, handling discount requests, closing deals, navigating procurement, or structuring win-win agreements. Covers anchoring, framing, BATNA development, multi-party negotiations, and contract terms. Use for enterprise deals, pricing discussions, and high-stakes negotiations.
+  面向 B2B 成交的专业销售谈判策略。适用于制定谈判策略、处理折扣请求、促成交易、应对采购流程或构建双赢协议。涵盖锚定、框架、BATNA（最佳替代方案）制定、多方谈判和合同条款。适用于企业级交易、定价讨论和重大谈判。
 ---
 
 # Sales Negotiator

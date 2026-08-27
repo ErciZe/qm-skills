@@ -2,7 +2,7 @@
 name: market-viability-logic-auditor
 displayName: 市场可行性逻辑审查
 description: >-
-  Evaluates cross-platform product/market feasibility using a risk-first framework — screens for exclusion filters, validates market thresholds, and audits profitability. Use when making go/no-go decisions on product ideas, assessing product viability, risk, and market entry feasibility across e-commerce channels (Amazon, Shopify, Etsy, TikTok Shop, independent DTC, etc.).
+  使用风险优先框架评估跨平台产品/市场可行性——筛查排除条件、验证市场阈值并审查盈利能力。当需要对产品创意作出继续/停止决策，评估产品可行性、风险和跨电商渠道（Amazon、Shopify、Etsy、TikTok Shop、独立 DTC 等）的市场进入可行性时使用。
 workflow: |
   Complete this in five steps:
     0. Query Triage (if query is vague, recommend 3 niche categories)

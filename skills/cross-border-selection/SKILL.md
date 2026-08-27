@@ -2,7 +2,7 @@
 name: cross-border-selection
 displayName: 跨境选品
 description: >-
-  Cross-border e-commerce product selection workflow - Scrape product data from platforms like Amazon and save as local files. Use cases: (1) User requests Amazon product data scraping (2) User requests product selection analysis (3) "Help me select products", "Scrape competitor data", "Analyze best-selling products"
+  跨境电商选品工作流——从亚马逊等平台抓取商品数据并保存为本地文件。使用场景：(1) 用户请求抓取亚马逊商品数据；(2) 用户请求选品分析；(3) “帮我选品”“抓取竞品数据”“分析畅销商品”。
 ---
 
 # Cross-Border E-commerce Product Selection

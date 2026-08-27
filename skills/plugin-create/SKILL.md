@@ -1,7 +1,7 @@
 ---
 name: plugin-create
 displayName: 插件创建
-description: Use when the user wants to create a new Plugin, scaffold a plugin project, or generate a plugin ZIP package. Triggers on "create plugin", "new plugin", "plugin scaffold", "generate plugin zip", "创建插件", "新建plugin", "生成插件包".
+description: 当用户想创建新的插件、搭建插件项目脚手架或生成插件 ZIP 包时使用。触发词包括“create plugin”“new plugin”“plugin scaffold”“generate plugin zip”“创建插件”“新建 plugin”“生成插件包”。
 version: 1.0.3
 ---
 

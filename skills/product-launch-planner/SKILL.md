@@ -2,7 +2,7 @@
 name: product-launch-planner
 displayName: 产品发布规划
 description: >-
-  Orchestrate multi-phase product launches using pre-launch waitlists, tiered early access, and coordinated multi-channel marketing to maximize day-one velocity and long-term momentum.
+  通过预发布候补名单、分级抢先体验和协调多渠道营销，统筹多阶段产品发布，以最大化首日销售势头和长期增长动能。
 category: marketing-growth
 risk: safe
 source: curated

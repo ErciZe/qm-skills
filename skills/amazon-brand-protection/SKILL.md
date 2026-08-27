@@ -2,10 +2,8 @@
 name: amazon-brand-protection
 displayName: 亚马逊品牌保护
 description: >-
-  Protect Amazon brands from listing hijackers, counterfeiters, and policy violations. 
-  Use this skill when users report hijackers on their listing, counterfeit products, or need to enroll in Amazon Brand Registry. 
-  It also covers intellectual property protection, responding to false IP complaints or suspensions, 
-  and using tools like Transparency, Project Zero, and IP Alert.
+  保护亚马逊品牌免受商品详情页劫持、仿冒品和政策违规影响。当用户报告其商品详情页被劫持、遇到仿冒产品，或需要加入亚马逊品牌注册计划时使用。
+  也涵盖知识产权保护、回应虚假知识产权投诉或账户暂停，以及使用 Transparency、Project Zero 和 IP Alert 等工具。
 ---
 
 # Amazon Brand Protection

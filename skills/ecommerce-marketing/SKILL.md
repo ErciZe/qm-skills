@@ -2,13 +2,10 @@
 name: ecommerce-marketing
 displayName: 电商营销
 description: >-
-  E-commerce marketing orchestrator that routes user requests to 19 specialized marketing skills.
-  Use when user mentions marketing strategy, product promotion, social media campaign, increase sales,
-  launch product, conversion optimization, Instagram marketing, TikTok marketing, 小红书推广,
-  Facebook ads, Google ads, product description, landing page, SEO, content calendar, marketing ROI,
-  or any e-commerce marketing goal — even if they don't use the word "marketing" explicitly.
-  Also trigger for questions like "how do I get more customers", "nobody is buying my product",
-  "I need to grow my store", or "帮我推广产品".
+  电商营销编排器，将用户请求路由至 19 个专业营销技能。
+  当用户提及营销策略、产品推广、社交媒体活动、提升销量、产品发布、转化优化、Instagram 营销、TikTok 营销、小红书推广、
+  Facebook 广告、Google 广告、产品描述、落地页、SEO、内容日历、营销 ROI，或任何电商营销目标时使用——即使用户没有明确说出“营销”。
+  对于“如何获得更多客户”“没人购买我的产品”“我需要发展店铺”或“帮我推广产品”等问题也触发。
 ---
 
 # E-commerce Marketing Orchestrator

@@ -2,7 +2,7 @@
 name: competitor-deep-analysis
 displayName: 竞品深度分析
 description: >-
-  Identify market gaps and strategic advantages through systematic multi-layer intelligence gathering and review mining.
+  通过系统化的多层情报收集和评论挖掘，识别市场空白与战略优势。
 ---
 
 # Competitor Deep Analysis
