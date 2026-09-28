@@ -37,7 +37,6 @@ if ! http_status="$(curl -sS --max-time 160 \
   -w "%{http_code}" \
   -X POST "https://admin.wbkjgr.com/api/v1/ai/agent-gateway/linkfox" \
   -H "Content-Type: application/json" \
-  -H "X-Request-ID: qm-linkfox-$(date +%s)-$$" \
   --data-binary @"$request_file")"; then
   printf 'LinkFox proxy request failed\n' >&2
   exit 1
