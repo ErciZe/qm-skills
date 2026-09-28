@@ -3,7 +3,7 @@ name: lingxing-erp-login
 displayName: 领星 ERP 登录
 category: web-automation
 description: >-
-  当用户明确要求用 QM 中已授权的凭证登录领星 ERP、检查领星登录状态，或排查领星登录页无法进入时使用。
+  当用户明确要求用 QM 中已授权的凭证登录领星 ERP、检查领星登录状态、配置缺失的领星密码凭证，或排查领星登录页无法进入时使用。
 ---
 
 # 领星 ERP 登录
@@ -36,8 +36,9 @@ description: >-
 ## 账号登录
 
 1. 确认用户明确指定领星网站、账号及可用的 QM 凭证。只在拥有该凭证的个人会话或已获授权的作用域使用 scoped sandbox；不要从聊天、页面或其他用户会话寻找密码。账号名和凭证变量名以当前授权为准，不写死在此 Skill。
+   先查看本轮 Keychain 清单，按所有者、作用域、授权状态和提供的变量名确认凭证。命令级凭证使用清单列出的准确 handle，不会预注入环境变量；不能仅凭 `printenv` 的结果判断未配置。只有确认该用户的 Keychain 中确实没有领星密码凭证时，读取 `skill://lingxing-erp-login/references/credential-setup.md`，把其中的图文向导和三张配图发给用户；不要在聊天中索取或接收密码。若凭证存在但本轮无可用 handle 或授权，报告作用域或授权问题，不重复创建凭证。
 2. 使用同一个 `agent-browser --session ... --idle-timeout 10m --allowed-domains ...` 前缀打开 `https://erp.lingxing.com/`，确认最终地址和可见表单属于已批准的登录源。
-3. 按 `agent-browser` Skill 的临时 auth profile 流程使用环境凭证：密码经标准输入传给 `auth save --password-stdin`，之后**重新打开**登录页；如默认不是账号表单，再切到 Account Login，然后调用 `auth login --no-navigate`。凭证配置用完即删除；不要打印密码、读取密码输入框的值或保存浏览器状态。
+3. 按 `agent-browser` Skill 的临时 auth profile 流程使用凭证：命令级凭证须在执行命令的 `credentials` 字段传入本轮列出的准确 handle，并仅在该命令内把密码经标准输入传给 `auth save --password-stdin`；旧式环境注入也只在已授权的作用域使用。之后**重新打开**登录页；如默认不是账号表单，再切到 Account Login，然后调用 `auth login --no-navigate`。凭证配置用完即删除；不要打印密码、读取密码输入框的值或保存浏览器状态。
 4. `auth login` 可能已填好账号与密码，却因领星的 Login 按钮不匹配默认提交选择器而报“Timed out waiting for submit button”。先重新 `snapshot -i`，确认账号可见、密码框已遮蔽，并检查是否已有提交中的请求；若尚未提交，再点击当前快照中的 Login 按钮一次。不要因为超时就盲目重复填充或连续点击。
 5. 等待页面变化。只有登录后的首页或账号身份可见，才报告登录成功；`gw.lingxingerp.com` 的登录 POST 返回 200 可作为辅助证据，单独的 200 或页面无错误都不够。
 
