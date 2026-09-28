@@ -86,6 +86,7 @@ Options:
 **Rules**:
 - Only ask for confirmation when the Agent infers/supplements stages
 - One round of confirmation only — no second-guessing after user confirms or edits
+- **Merge, never chain**: this is the SAME single interaction described in `SKILL.md` → Step 3 (**One ask, not a chain**) — combine it with any other open item rather than adding a round; layout, icon style, and palette are inferred, never asked
 - Edited content = user-provided stages; Agent only adapts wording, never overrides intent
 
 ### Step 4 — Stage Description Output

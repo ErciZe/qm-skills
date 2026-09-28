@@ -2,311 +2,134 @@
 name: market-insight-product-selection
 displayName: 市场洞察与选品
 description: >-
-  基于多源信号和“客户之声”（VoC）的自适应选品方法：从评论/反馈中验证需求、市场势头、竞争强度和用户痛点，生成有把握的候选清单，或明确聚焦的继续/停止决策。
-  **使用时机**：
-    - 用户询问趋势/热度（TikTok/Amazon 等），或某个市场（美国/英国等）的热销情况
-    - 用户要求进行**单一品类/单一产品**趋势分析
-    - 用户需要市场分析、市场调研或竞争格局洞察
-    - 用户正在研究消费者偏好、需求模式或市场动态
-    - 用户需要帮助决定要销售、采购或投资哪些产品
-    - 用户正在探索产品机会、爆款产品或高盈利细分市场
+  以证据为依据评估产品机会，用于选择品类或细分市场、比较候选产品，或验证某个产品是否值得进入市场。当用户需要依据需求、市场势头、竞争、利润可行性、复购潜力、差异化机会及运营风险，对选品决策进行排序时使用。不适用于没有选品决策的通用行业概览、供应商采购或询价执行。
 workflow: |
-  Complete this in up to four steps (skip optional steps unless user explicitly requests):
-    1. Data Analysis & Selection Recommendation (MANDATORY: multi-source data → conclusion + logic + evidence)
-    2. Product Search (OPTIONAL: only if user asks for specific products after analysis)
-    3. Supplier Search & Inquiry (OPTIONAL: ONLY if user explicitly mentions supplier/manufacturer/factory/vendor)
-    4. Summary & Action Guide (MANDATORY: actionable next steps)
-  ⚠️ Steps 2-3 require EXPLICIT user request. "find products" or "trending products" does NOT imply supplier search.
+  Adapt the depth to the decision:
+    1. Define the market, customer, time horizon, and decision.
+    2. Collect proportionate evidence using capabilities that are actually available.
+    3. Separate observed metrics, calculations, proxies, and unknowns; compare candidates consistently.
+    4. Recommend the best-supported options with confidence, risks, and the next validation step.
 enabled: true
 ---
 
+# Product Opportunity Selection
 
-An adaptive, evidence-first workflow for turning messy "trend" signals into a decision-ready shortlist using multi-source triangulation + VoC.
+Turn fragmented market signals into a decision-ready shortlist. The skill supplies a decision framework, not a fixed tool workflow or presentation format.
 
-# How to Use (Adaptive)
+## Choose the analysis mode
 
-Use this skill to produce a **repeatable selection pipeline** from messy signals. If the user asks for "what to sell / trending products / hot selling products", follow this order:
+- **Category or niche selection**: discover and compare a focused set of opportunities in the user's market.
+- **Candidate comparison**: rank categories or products already supplied by the user.
+- **Specific product validation**: test one product or listing against close alternatives, customer evidence, economics, and execution risks.
 
-1. **Trend Radar** → build a *trend-driven candidate list* (10–30) with evidence
-2. **Top Picks** → rank and select Top 3–8 with an explicit decision rule
-3. **Deep Dive Packs** → deep analysis for each Top pick (as comprehensive as evidence allows)
-4. **Decision & Action Guide** → Go / Cautious / No-Go + next steps
+Do not force every request through a full pipeline. A narrow question should receive a narrow answer.
 
-## Core Principle: Evidence Density (Why Your "Reasons" Become Better)
+## Operating boundaries
 
-- **User intent overrides the skill**: if any guidance here conflicts with what the user explicitly asked for (platform/channel, market, timeframe, constraints, format), **follow the user request first**.  
-  - Example: user asks for **TikTok hot products** → the primary candidate pool and examples should be **TikTok products** (TikTok Shop / TikTok trends / creator velocity).  
-  - You may still use **other channels** (YouTube/Reddit/Amazon/etc.) for **supporting VoC / triangulation**, but don't replace the requested platform with "defaults".
-- **Evidence first**: don't write deep "reasons" until you have enough concrete evidence.
-- **Question-driven collection**: collect enough information based on the user's question (e.g., action cameras: specs/capabilities + pricing/positioning + competitors + VoC).
-- **Concrete product/model deep dive requires a pack**: whenever analysis touches a specific product/model/listing (user-provided OR discovered during category analysis), collect a **Product Deep Dive Evidence Pack** (below).
-- **If evidence is thin**: explicitly output **Data Gaps + Next Collection Step** instead of inventing confident reasons.
+- Preserve the user's platform, geography, customer, timeframe, constraints, and desired format. Infer missing details only when the assumption is low-risk, and state material assumptions.
+- Use only research, marketplace, connected-data, or analysis capabilities that are actually available in the current Agent. Never assume a named tool or Plugin exists, and never call a missing capability by name.
+- If an unavailable capability blocks a decision-critical fact, label the evidence gap and explain the smallest next step needed to obtain it. Do not fabricate listings, suppliers, metrics, or tool results.
+- Supplier discovery, procurement, and inquiry execution are separate follow-up tasks. They are not required to complete product opportunity analysis.
+- **Direct-answer boundary (HARD RULE):** An ordinary request to analyze, identify, compare, or recommend is a chat answer, not authorization to create an artifact. Answer in the current chat using prose, Markdown tables, and normal source links. Do not call file-writing, editing, or presentation tools; create or present a report; or start a research/verifier Agent. Only do so when the user explicitly requests a downloadable file or report, exhaustive/deep research, or independent verification.
+- This skill never requires product cards, special renderer payloads, generated images, charts, files, or source code. Use one only when the user explicitly requests that format and the current Agent can produce it reliably.
 
-## Routing Shortcut
+## Evidence model
 
-- **Category trend** → Demand & Scope → Radar → (optional) Deep Dive 3–8 products/models → Final
-- **Specific candidates** → Deep Dive → Brain → (optional) Scorecard → Final
+For rankings or claims about margin, reviews, repurchase, or scoring, read [references/evidence-and-scoring.md](references/evidence-and-scoring.md).
 
-## Dependencies
+Every decision-critical metric must be treated as one of:
 
-- `matplotlib`/`seaborn` for chart generation
+- **Observed**: the source directly reports the metric for the relevant market and period.
+- **Calculated**: derived from disclosed inputs with reproducible arithmetic.
+- **Proxy**: indirect evidence that supports a directional inference but not the exact metric.
+- **Unknown**: evidence is unavailable, stale, incompatible, or too weak.
 
----
+Never present a proxy as an observed fact. In particular:
 
-# Steps
+- Selling price or a generic markup does not establish margin.
+- Average rating does not establish positive-review rate unless the rating distribution and threshold are available.
+- Consumable characteristics, subscriptions, or repeat-purchase language can indicate repeat potential, but do not establish an actual repurchase rate.
 
-## 1) Demand & Scope (Optional; recommended for broad category questions)
+## Workflow
 
-**Purpose**: Conduct deep, multi-source data analysis with cross-validation. Generate actionable selection recommendations with clear conclusion, analysis logic, and data evidence.
+### 1. Frame the decision
 
-#### Data Collection
+Identify the choice the user needs to make and the smallest candidate set that can answer it. Capture the relevant market, channel, customer, horizon, price position, and business constraints when available.
 
-**Maximize data source calls** (≥3 sources):
-- **Web search**: General market intelligence, news, and social phenomena
-- **Sales platforms**: Amazon, Alibaba, Shopee, Shein (via `web_search` or specialized tools)
-- **Trend data**: Google Trends, Amazon search trends
-- **Social media**: YouTube, Reddit
+For broad discovery, form a focused candidate set rather than an arbitrary long list. For a specific-product request, analyze that product and only the closest decision-relevant alternatives.
 
-**Deep dive with `web_fetch` tool**: When search results return promising URLs, use the `web_fetch` tool to extract detailed information from web pages (e.g., full article content, detailed product specs, in-depth reviews)
+For an open-ended discovery request, do not block on missing market, channel, or budget. State a provisional scope, provide a useful preliminary recommendation, and list the detail that would most improve it. Ask first only when the missing choice would materially reverse the answer and no useful provisional answer is possible.
 
-#### Deep Search Protocol
+### 2. Select decision criteria
 
-**Core flow**: Search → Extract entities → Search DEEPER → Check saturation → Continue until complete
+Choose only the dimensions that can change the decision:
 
-⚠️ Deep search is **NOT limited to 2-3 rounds**. Continue until saturation signals detected.
+- demand strength;
+- momentum and durability;
+- competitive intensity;
+- margin feasibility;
+- repeat-purchase potential;
+- differentiation opportunity;
+- operational, regulatory, or channel risk.
 
-##### Iterative Search Rounds
+Keep **market attractiveness** separate from **fit for this user**. A growing category can still be a poor entry choice if economics, capabilities, or risks do not fit.
 
-**Round 1 - Broad (3-6 queries)**: Break topic into dimensions (market size, consumer preferences, competition, technology, community feedback).
+### 3. Collect proportionate evidence
 
-**Round 2 - Deep (2-4 queries)**: From R1 findings, drill into specific brands, technologies, pain points, suppliers.
+Prioritize sources aligned with the requested marketplace, geography, and timeframe. Combine direct marketplace or market evidence with independent demand signals and voice-of-customer evidence when each is relevant. For a normal answer, target three to five decision-relevant sources rather than broad coverage.
 
-**Round 3+ - Until saturation**: New entities → explore | Unknowns → fill | Claims → verify | Contradictions → resolve
+For an ordinary question, begin with a few strong sources and keep the default investigation to at most eight external research tool calls total, counting each search and fetch operation separately even when issued in a batch. Expand only when the user requests exhaustive research or a decision-critical contradiction remains unresolved; explain why more collection is needed.
 
-##### Extract & Map (Entity Extraction)
+Do not continue researching merely because new entities appear. Stop when additional evidence is unlikely to change the ranking, confidence, or next action.
 
-After each `web_fetch`, extract entities and relationships to identify next investigation points.
+### 4. Normalize before comparing
 
-**Entity extraction prompt template**:
-```
-Extract from this content:
-1. Key entities: products, brands, companies, technologies, suppliers
-2. Relationships: [Product] uses [Component] supplied by [Vendor]
-3. Next investigation: what should be explored based on these findings
-```
+- Compare the same market, period, product level, and metric definition where possible.
+- Separate category evidence from SKU evidence; representative products may illustrate a category without proving category-wide performance.
+- Record which claims are observed, calculated, proxy-based, or unknown.
+- Treat recurring review themes as stronger than isolated anecdotes, and note sampling or platform bias.
+- Resolve material source conflicts when practical; otherwise show the conflict and lower confidence.
 
-**Example**: Found "Xiaomi Band 9 uses Goodix PPG sensor" → Next searches: "Goodix sensor specs", "Goodix competitors", "PPG sensor supply chain"
+### 5. Make the decision
 
-##### Contrarian Search & Source Quality
+Prefer `High / Medium / Low / Unknown` assessments unless comparable data supports a reproducible numerical score. Avoid decimal rankings and arbitrary weights. If the user supplies priorities, use them explicitly.
 
-**Contrarian search**: When finding positive claims, search for opposing views to avoid echo chamber.
-- Growth forecast → search "risks / challenges / bearish outlook"
-- Product advantage → search "drawbacks / complaints / competitor strengths"
+For each recommended candidate, provide:
 
-**Source quality** (prioritize high-quality sources for `web_fetch`):
-| Source Type | Priority |
-|---|---|
-| Industry reports / financial analysis | ⭐⭐⭐⭐⭐ |
-| Official announcements / Tech media | ⭐⭐⭐⭐ |
-| Community (Reddit/YouTube) | ⭐⭐⭐ |
-| SEO content / press releases | ⭐ |
+- why it ranks where it does;
+- the strongest supporting evidence;
+- the main risk or counter-signal;
+- which important claims rely on proxies;
+- confidence in the recommendation;
+- what evidence would change the decision.
 
-##### Stop Conditions (Saturation Detection)
+Do not convert “popular” directly into “good niche.” Popularity must be considered alongside competition, economics, differentiation, and execution risk.
 
-**✅ STOP when ANY condition met**:
-- **Saturation**: No new entities/data for 2 consecutive rounds
-- **Closure**: All initial unknowns filled and verified
-- **Verification complete**: Key claims verified by 2+ sources
+## Default output
 
-**❌ DO NOT stop when**: Important entities unexplored | Single-source claims | Unresolved contradictions
+Lead with the decision, then give the minimum evidence needed to audit it.
 
-##### Minimum Requirements
-
-| Metric | Minimum |
-|---|---|
-| web_search calls | 5+ |
-| web_fetch calls | 8+ |
-| Rounds | 2+ (until saturation) |
-| Source types | 3+ (industry/news/community) |
-
-**Comprehensive analysis: expect 15-30+ searches, 20-40+ web_fetch.**
-
-#### Analysis Requirements
-
-**Cross-source validation**: Connect insights from multiple sources to form structured judgments
-- Example: "Google Trends shows 2x search growth + Amazon data shows $60-80 trail shoes have high ratings but limited supply + Alibaba shows only X suppliers = blue ocean opportunity with 40% margin potential"
-- Example: "Search volume rising + Alibaba B2B has only X qualified suppliers = true blue ocean"
-
-**Trend trajectory judgment**:
-- State whether trend is emerging/explosive/mature/declining
-- Identify if it's short-term hype or sustainable demand
-- Note seasonality factors and 6-12 month outlook
-
-**Trigger event analysis**: Identify sudden growth drivers (e.g., viral YouTube video, celebrity endorsement, KOL review, social media trend)
-
-**Product categorization** (aggregate by sales/growth/reviews): The classification criteria are shown in the table below
-| Category | Criteria | Recommendation |
-|----------|----------|----------------|
-| **Safe bets** | High sales + low complaints | Direct sourcing/imitation recommended |
-| **High-potential** | High social buzz + low e-commerce supply | R&D opportunity |
-| **Red ocean** | High sales + high complaints | Requires differentiation, cautious entry |
-| **False trends** | Short-term spikes (holiday/event-driven) | Avoid long-term investment |
-
-**Hit product feature extraction**:
-- Analyze common traits of top-selling products
-- Price band distribution and gaps (identify blank price zones)
-- Must-have features vs. nice-to-have features
-- Most complained features
-
-**User pain point mining**: Extract insights from reviews using NLP analysis when data volume is sufficient
+| Candidate | Demand / momentum | Competition | Margin feasibility | Repeat potential | Main risk | Confidence |
+|---|---|---|---|---|---|---|
+| Candidate A | High — observed evidence | Medium | Proxy | Unknown | Key risk | Medium |
 
-**Competitive landscape analysis**:
-- Market concentration (top players' market share)
-- Brand vs. white-label ratio
-- Entry barriers and differentiation opportunities
-- Pricing strategy patterns across competitors
-
-**Supply chain feasibility assessment**:
-- Identify "easy-entry variants" based on supplier availability
-- MOQ and pricing structure analysis
-- Supplier concentration and risk assessment
-- Margin potential calculation (e.g., "B2B cost structure suggests 40% gross margin for white-label")
-
-**Social & cultural trends**:
-- Lifestyle shifts affecting demand
-- Sustainability/ethical consumption preferences
-- Regional/cultural preference variations
-- Macro trends influencing category evolution
-
-**Demand restatement**: Include 1-2 sentences restating your understanding of buyer needs
-
-#### Output Requirements
-
-**Text conclusions**: Include reasoning chains that connect data to insights.
+After the comparison table, include:
 
-**Visual evidence** (include whenever possible to enhance user understanding):
-- **Images from search results**: When tool results return images with reference IDs, display 3-6 representative images that best illustrate the analysis (e.g., trending styles, product examples, market snapshots)
-- **Trend visualization**: Show how trending styles/colors apply to products
-  - Example: "Q4 best-seller is multi-function contouring stick" → show product images
-  - Example: "Next season's trending color is lemon yellow" → show color palette + application across product categories
-- **Code-generated charts** (prioritize consolidation and significance):
-  - **Consolidate**: Draw related curves/metrics on a SINGLE chart for comparison (e.g., multiple trend lines on one plot)
-  - **Simplicity**: Do NOT generate charts for simple information; use tables or text instead
-  - **Types**: Trend charts (multi-line sales/search growth), Price distribution (histogram/box plot), Category comparison (multi-variable radar/bar), Word cloud (review keywords)
-  - Use `matplotlib`, `seaborn`, or `wordcloud` to create professional visualizations
-- **Hot-selling product display**:
-  - Hot-selling products returned by `web_search` or `product_supplier_search`
-  - You **MUST** display top hot-selling products using product card widgets
-  - Display at least 3-5 top-performing hot-selling products to help users quickly identify market opportunities
+1. **Recommendation**: the best-supported option and who it fits.
+2. **Evidence notes**: direct sources, calculations, and material proxies.
+3. **Unknowns and counter-signals**: facts that could reverse the choice.
+4. **Next validation**: the lowest-cost action most likely to change the decision.
 
-**Comparison Table with Decision Notes** (MANDATORY when ≥3 candidates):
+If evidence cannot support a useful ranking, say so directly and return a validation plan instead of manufacturing a winner.
 
-| Product/Category | Category | Key Metrics | Decision Note |
-|------------------|----------|-------------|---------------|
-| Smart Pet Feeder | High-potential | Social buzz rising, supply low | High-potential: precision feeding tech, note FDA certification |
-| Pet Water Bottle | Safe bets | High sales, low complaints | Traffic-driver: EU regulation demand, note material shortage |
-| Auto Litter Box | Red ocean | High sales, high complaints | Caution: needs differentiation, limit initial MOQ |
+## Final check
 
-- **Category**: Classify each product using the 4 types (Safe bets/High-potential/Red ocean/False trends)
-- **Decision Note**: `[positioning] + [evidence] + [risk/action]`
-
-**Value explanation**: Use tangible examples to help users understand product value (e.g., "This multi-function beauty tool replaces 3 separate devices, saving counter space and $50")
-
-**Case studies** (when available):
-- Provide "industry gold standard" examples as benchmarks
-- Real marketing/viral phenomena (social media trends, KOL reviews, successful brand strategies)
-- Actionable "story lines" or content directions users can reference and adapt
-
-**Source citations**:
-- Link to original web pages and data sources
-- Reference to source sales data tables with key metrics
-
-**Selection Recommendation** (provide structured recommendations with three components):
-- **Conclusion**: Specific products/categories grouped by strategy (Safe Bets, High-Potential, etc.)
-- **Analysis Logic**: Framework used (e.g., "Blue Ocean Model") + key indicators (supply gap, social buzz, search trend, complaint ratio)
-- **Data Evidence**: Verifiable sources (TikTok views, Amazon listings, Google Trends index, Alibaba supplier count)
-
----
-
-### Step 2: Product Search (Optional - SKIP unless user explicitly requests)
-
-⚠️ **Trigger condition**: User explicitly asks for specific product cards/listings after seeing analysis results.
-
-- **Input**: Selection recommendations from Step 1
-- **Action**: Search products using `product_supplier_search` (intent_type='product')
-- **Output Requirements**:
-  - ≥4 product cards per strategy dimension
-  - **MUST display clickable cards** (not just text)
-  - Comparison table for cross-evaluation
-
-### Step 3: Supplier Search & Inquiry (Optional - SKIP unless user explicitly requests)
-
-⚠️ **Trigger condition**: User explicitly mentions supplier/manufacturer/factory/vendor keywords. "Find products" or "trending products" does NOT trigger this step.
-
-- **Input**: User explicitly requests suppliers or inquiry
-- **Action**: Search suppliers using `product_supplier_search` (intent_type='supplier'), assess suppliers, draft inquiry emails
-- **Output**: Supplier recommendations + draft inquiry
-
-### Step 4: Summary & Action Guide (Mandatory)
-- **Input**: All analysis completed
-- **Action**: Synthesize findings into actionable recommendations
-- **Output**: Executive summary table, opportunities/risks, specific next steps
-
----
-
-# Output Format
-
-### Analysis Output Structure
-
-```
-1. Demand Understanding
-  - Restate user needs (1-2 sentences)
-
-2. Market Analysis & Selection Recommendation (Step 1)
-  - Text conclusions with reasoning chains
-  - Visual evidence (images, charts, hot-selling product cards)
-  - Comparison Table with Decision Notes (categorization + decision note per product)
-  - Selection recommendation (conclusion + analysis logic + data evidence)
-
-3. Product Cards (Step 2, only if user explicitly requests products)
-  - Structured by recommendation dimension
-  - ≥4 clickable cards per strategy dimension
-  - Comparison table for cross-evaluation
-
-4. Supplier Options (Step 3, only if user explicitly requests suppliers)
-
-5. Summary & Action Guide (Step 4)
-  - Opportunities & risks table
-  - Specific next steps
-  - Data limitations
-
-6. Next Task Suggestions (if applicable)
-```
-
-### Chart Design
-
-**Prefer charts when you have enough data**: if the dataset is sufficiently rich (≥5 data points or ≥3 categories), include charts to improve clarity. The more data you have, the more you should rely on charts (and less on pure long text).
-
-**⚠️ CRITICAL: If you need to generate ANY chart, you MUST read the chart design guide FIRST**:
-- **File path**: `./chart-design-guide.md` (relative to this SKILL.md)
-- **Why**: Charts generated WITHOUT reading this guide will have poor styling, wrong chart types, and deprecated API usage
-- **Contains**: Tool selection (Seaborn vs Matplotlib), code patterns, styling, chart type selection, Seaborn v0.12+ API updates
-
----
-
-# Checklist
-
-✅ **Strongly Recommended**:
-- [ ] For broad category questions: define segment + timeframe first (Demand & Scope), then build the candidate pool
-- [ ] For specific products: include concrete product inputs (image, price, link/ID, variant) and do a full deep dive (not a quick verdict)
-- [ ] Use multi-source evidence: YouTube + Reddit (VoC) + at least one trend/marketplace signal
-- [ ] Always output **Trend Candidate List → Top Picks → Deep Dive Packs → Final Recommendation**
-- [ ] For specific products: build a **Specific Product Evidence Pack** (listing + competitors + VoC + momentum) before writing "reasons"
-- [ ] Use scenario routing (Red/Blue/Ghost) to decide validation depth
-- [ ] In Red Ocean: base differentiation on recurring, fixable mixed-sentiment pain point patterns (benefit + complaint)
-- [ ] Include sources in the final output
-
-❌ **Avoid**:
-- Treating all products with the same depth (violates "adaptive")
-- Ignoring VoC (reviews/comments)
-- Listing data without a decision rule
+Before answering:
+
+- The conclusion answers the user's actual selection decision.
+- No unavailable tool, Plugin, product-card schema, or renderer capability is assumed.
+- No raw tool payload, internal identifier, malformed URL, or local path appears.
+- No file or separate Agent was created unless the user explicitly authorized it.
+- Exact-looking margin, positive-review, repurchase, sales, or growth claims are backed by matching observed or calculated evidence.
+- Proxies, estimates, assumptions, and unknowns are visibly labeled.
+- The response remains useful without an optional artifact or visualization.

@@ -92,7 +92,6 @@ For each key person (or a sampled set per department):
 
 ```yaml
 name: "Full Name"
-displayNameZh: 组织架构调研
 title: "Title at Company"
 department: "Engineering | Product | ..."
 sources:

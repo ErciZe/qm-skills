@@ -3,9 +3,8 @@ name: image-prompt-guide
 displayName: 图像提示词指南
 description: >-
   AI 图像生成与编辑的提示词工程和工具路由。
-  适用于：创意生成、产品照片编辑、电商平台图片套图，以及专门场景（白底/透明底、水印或元素清理、高清放大、图片尺寸调整、场景替换、
-  模特展示、卖点图、Logo 设计、技术资料包、流程图等）。
-  不适用于：完整产品开发工作流（请使用 ai-product-designer），或裁剪/压缩/格式转换等非 AI 操作（请使用原生工具）。
+  适用于创意生成、产品照片编辑、电商平台图片套图、营销海报与横幅（促销、店铺横幅、展会、节日、社交媒体封面）、含嵌入文案的产品详情页（PDP）屏幕图与代码拼接长图，以及白底/透明底、水印或元素清理、高清放大、图片尺寸调整、场景替换、模特展示、卖点图、Logo 设计、技术资料包和流程图等专门场景。
+  不适用于完整产品开发工作流（使用 ai-product-designer），也不适用于裁剪、压缩、格式转换等非 AI 操作（使用原生工具）。
 ---
 
 # Image Generation Guide
@@ -15,7 +14,7 @@ description: >-
 | # | Rule | Description |
 |---|------|-------------|
 | 1 | **No Hallucination** | Do not fabricate product facts, selling points, certifications, dimensions, materials, brand assets, text, labels, hidden details, or unsupported claims. Visual execution choices such as lighting, composition, clean background, natural shadow, camera angle, whitespace, and style may be inferred when they do not change the product meaning or introduce new factual claims. After constructing a prompt, verify that all factual instructions trace back to the user request, visible image evidence, or confirmed platform requirements. |
-| 2 | **Clarify Before Guessing** | Ask for clarification whenever the editing intent is ambiguous, including safe default requests like "make it cleaner/professional", "fix this image", or "optimize this photo". Do not proceed with conservative visual cleanup without confirming what the user wants. **If the source image carries a logo or watermark that sits on the canvas rather than on the product body, and the user did not say what to do with it, you MUST ask whether to keep or remove it before editing, then follow the answer literally** — see Step 0 → **Overlay logo / watermark confirmation**. Never ask about anything printed on the product itself — an on-product brand name, wordmark, spec text, or label is part of the product and is preserved by default. |
+| 2 | **Clarify Before Guessing** | Ask for clarification when the request carries no actionable intent, or when a missing **fact** would change the product's meaning. Broad requests like "make it cleaner/professional", "fix this image", or "optimize this photo" are NOT questions — execute them under a stated interpretation (product cleanup) and say what you assumed; visual execution choices are inferred, never asked. **If the source image carries a logo or watermark that sits on the canvas rather than on the product body, and the user did not say what to do with it, you MUST ask whether to keep or remove it before editing, then follow the answer literally** — see Step 0 → **Overlay logo / watermark confirmation**. Never ask about anything printed on the product itself — an on-product brand name, wordmark, spec text, or label is part of the product and is preserved by default. |
 | 3 | **Preserve-First Editing** | When editing, stating what NOT to change is more important than what to change. Every edit prompt must include a preservation clause listing elements that must remain untouched. |
 | 4 | **Be Specific** | Define subject, environment, lighting, mood, and style explicitly. Replace vague terms ("beautiful", "professional") with concrete visual descriptors. Use natural sentences for describing intent; comma-separated keywords are acceptable for style/quality modifiers (e.g., "8K, hyperrealistic, sharp detail"). |
 | 5 | **Incremental Refinement** | When the user requests a follow-up change to a previous result, apply targeted edits rather than regenerating from scratch. Preserve what already works, fix only what the user calls out. |
@@ -40,7 +39,11 @@ Conditional references (load only when their condition is met):
 
 | Reference | Load when |
 |-----------|-----------|
-| `references/platform-product-guidelines.md` | The user has explicit platform/listing/image-set intent (names a platform, asks for "main images", "listing images", or a "product image set"). Do NOT load for generic single-image cleanup, background change, resize, or recolor. Also load its **Batch Generation** section when a batch is detected. |
+| `references/platform-product-guidelines.md` | The user has explicit platform/listing/image-set intent (names a platform, asks for "main images", "listing images", or a "product image set"). Do NOT load for generic single-image cleanup, background change, resize, or recolor. Also load its **Batch Generation** section when a batch is detected. This is the **framework layer** and holds no platform's hard specs — it must be paired with one spec file below. |
+| `references/platform-specs-overseas.md` | The named platform is Amazon, eBay, Walmart, Shopify, Etsy, AliExpress, TikTok Shop, Shopee, Lazada, or Alibaba.com (§1–10). Load **in addition to** `platform-product-guidelines.md`, never instead of it. |
+| `references/platform-specs-china.md` | The named platform is 1688, Taobao (淘宝), Tmall (天猫), Douyin E-Commerce (抖音电商), JD.com (京东), or Pinduoduo (拼多多) (§11–16). Load **in addition to** `platform-product-guidelines.md`, never instead of it. |
+| `references/pdp.md` | User requests detail-page images or a complete detail page (PDP) — "详情页", "商详图", "详情图", "详情页素材", "PDP", "PDP 素材", "detail page", "长图". Two modes: material mode (user-specified screen images only) and full PDP mode (platform story → screen plan → per-screen finished images with copy baked in → code-stitched long image / platform slices). Do NOT load for a single standalone image or a standard multi-image listing set (use platform-product-guidelines.md). |
+| `references/pdp-platform-specs.md` | The PDP flow is active AND a platform is named — for that platform's detail-page upload specs, content rules, and module ordering (§1–10 overseas, §11–17 China). Load **in addition to** `pdp.md`, never instead of it; read only the named platform's section. Do NOT load for the main-image/listing layer (use `platform-specs-overseas.md` / `platform-specs-china.md`). |
 | `references/resolution-routing.md` | The user specifies an output resolution (1K/2K/explicit pixels) — for upscaling an existing image or generating from scratch at a target resolution — **OR** the request enters the Priority 1 platform workflow, whose platform default AI-generation target is 2K (2048 px on the long edge; Etsy uses the short edge). In both cases load it for the pixel-translation and 16-multiple parameter rules. For from-scratch generation, take only the pixel-translation/parameter rules from it; scene routing still comes from the Scene Router. |
 | `references/style-guide.md` | No specialized scene matches, or a prompt needs richer atmosphere/composition/lighting/material vocabulary. |
 
@@ -76,7 +79,7 @@ Use this intake result to build preservation clauses and choose routing. Never i
 >
 > A keep decision is not optional decoration: it MUST be written into the prompt for **every** generated image in the batch/set (see **Final Prompt Assembly** blocks 10–11) and verified in **Result Check**. Silently dropping a confirmed-keep mark is a hard failure.
 >
-> **A confirmed keep OUTRANKS every platform and reference prohibition.** Once the user has said "keep it", the mark becomes a **user hard constraint** and the precedence for that mark is: **explicit user decision > platform requirement > reference default**. It therefore survives platform "prohibited elements" lists (watermarks / logos / overlays / borders), an `L0 only` hero slot, a `no graphic overlay` layer ban, and any reference's "no watermark" boilerplate — including `references/platform-product-guidelines.md` → **Layer permission by platform** and each per-platform Prohibited-elements section. Do not drop it from the hero, shrink it, fade it, or relocate it in order to satisfy a platform rule. Mention the listing-compliance risk to the user **once in text** and still keep the mark as confirmed; only a new user instruction can remove it.
+> **A confirmed keep OUTRANKS every platform and reference prohibition.** Once the user has said "keep it", the mark becomes a **user hard constraint** and the precedence for that mark is: **explicit user decision > platform requirement > reference default**. It therefore survives platform "prohibited elements" lists (watermarks / logos / overlays / borders), an `L0 only` hero slot, a `no graphic overlay` layer ban, and any reference's "no watermark" boilerplate — including `references/platform-product-guidelines.md` → **Layer permission by platform** and the per-platform **Prohibited elements** entries in `references/platform-specs-overseas.md` / `references/platform-specs-china.md`. Do not drop it from the hero, shrink it, fade it, or relocate it in order to satisfy a platform rule. Mention the listing-compliance risk to the user **once in text** and still keep the mark as confirmed; only a new user instruction can remove it.
 
 ### Step 0.5 — Image Edit Source Preflight
 
@@ -90,11 +93,11 @@ Before any `image_edit` call, prepare every reference image:
 4. **Fail closed**: if the image cannot be read, decoded, verified, or converted to an HTTPS URL, stop before `image_edit` and report the blocker. Do not guess-edit an unread image or pass `file://` / raw local paths to remote image-edit tools.
 5. **Preserve original dimensions (mandatory)**: keep the edited output at the source image's proportions. The parameter shape to use is defined once in **Execution Mode Resolution → parameter-shape table** — resolve the mode there, then:
    - The size/ratio values are **deterministic** — compute them once from the measured source pixels and pass them on the FIRST call. A wrong output ratio/size means the parameter was omitted or wrong; fix the parameter, do NOT retry with a different guessed ratio.
-   - When passing a concrete `size` (auto modes), the source-following `size` must satisfy the **Size area bounds** (655360–8294400 px²) defined under the parameter-shape table — clamp proportionally and re-round to 16 if out of range.
+   - When passing a concrete `size` (auto modes) and the dimensions were **derived by you** (source-following, no user or platform size given), the `size` must satisfy the **Long-edge minimum** (long edge ≥ 1024 px) and the **Size area bounds** (655360–8294400 px²) defined under the parameter-shape table — clamp proportionally and re-round to 16 if out of range. A **specified** size (user or platform) is passed as given and is NOT raised to 1024 — see **Long-edge minimum → Specified size wins**.
    - Never let the tool silently fall back to `1:1` or an arbitrary default when the source has a different shape — this prevents unwanted cropping, stretching, or padding.
    - **Override priority (highest first)**:
      1. **Explicit user request** — a user-specified ratio/size always wins.
-     2. **Platform product image set (HARD)** — for a platform image set, the platform's required ratio/size from `references/platform-product-guidelines.md` (e.g., Alibaba.com 1:1, 1000×1000) is MANDATORY. Do NOT apply the source-following rule; use the platform value regardless of the source shape.
+     2. **Platform product image set (HARD)** — for a platform image set, the platform's required ratio/size from its spec file (`references/platform-specs-overseas.md` or `references/platform-specs-china.md`, e.g. Alibaba.com 1:1, 1000×1000) is MANDATORY. Do NOT apply the source-following rule; use the platform value regardless of the source shape. If that platform's numeric specs are marked `not covered`, verify officially instead of guessing.
      3. **Resolution-changing tasks** — for HD upscale or an explicit target resolution (1K/2K), pass the target `size`/`resolution` instead of the source size (see `references/resolution-routing.md`); proportions still follow the source unless overridden above.
 
 When uploading local images, avoid exposing sensitive metadata: strip EXIF/GPS data unless the user explicitly needs it preserved, and do not log signed CDN URLs or private local paths.
@@ -107,11 +110,14 @@ Before choosing any `task_type`, identify the user's desired final outcome. This
 |--------|---------|
 | `platform_main_image` | Platform-ready hero/main product image |
 | `platform_image_set` | Multi-image set for a listing |
+| `pdp_long_image` | Multi-screen detail-page images / long image: per-screen generation with copy baked in, code-stitched (`references/pdp.md`) |
 | `product_cleanup` | Cleaner, more professional product photo |
 | `background_replacement` | Change or replace background |
 | `text_removal` | Remove specified text, ownership overlays, or visual clutter |
 | `text_replacement` | Replace or translate text in image |
 | `selling_point_image` | Marketing layout with copy/callouts |
+| `marketing_poster` | Campaign/brand-message poster, banner, or social cover — copy is part of the design |
+| `poster_edit` | Whole-canvas edit of an existing poster: re-layout, product swap, de-AI-ify |
 | `logo_design` | Create a new logo from scratch |
 | `logo_customization` | Apply existing logo to product/material |
 | `upscale_or_restore` | Improve clarity/resolution |
@@ -159,7 +165,7 @@ First classify the user's SKU intent before selecting tools.
 
 Rules:
 - Never invent SKU count, colors, materials, or variants unless the user explicitly requested them.
-- For batch SKU work, first identify the expected output count. If unclear or visual separation is ambiguous, ask for confirmation.
+- For batch SKU work, identify the expected output count from the image, state the detected count in the plan, and proceed. Ask only when the visual separation is genuinely unreadable.
 - For listing-ready SKU images, output one image per SKU. Do not satisfy a multi-SKU request with one combined image.
 - Preserve each SKU's exact color, pattern, shape, material, labels, accessories, and visible details.
 
@@ -168,16 +174,18 @@ Rules:
 | Ambiguity Signal | Action |
 |------------------|--------|
 | No actionable verb ("edit this", "process these") | Ask what specific changes are needed |
-| Safe default subjective requests ("make it cleaner / more professional / optimize / fix this image") | Ask the user what specific changes they want before editing |
+| Broad subjective request ("make it cleaner / more professional / optimize / fix this image") | Do NOT ask. Read the image, map it to the closest outcome intent (usually `product_cleanup`), execute the standard interpretation — clean background, corrected lighting, centered subject, natural contact shadow, product untouched — and state that interpretation in the reply. Ask only when the image type itself is unreadable (product photo? document? screenshot?) |
 | Context-only reply ("yes", "go ahead") with no prior clear instruction | Ask what the user would like done |
-| Folder/batch reference without per-image instructions | List files and ask what operation to apply |
+| Folder/batch reference without per-image instructions | List files and ask what operation to apply (same single ask as **Batch Operations** step 2 — not an extra round) |
 | Source image carries a canvas-overlay logo or watermark (corner badge, seller mark, URL, QR) and the user never mentioned it | Ask whether to keep or remove each detected overlay before editing, then follow the answer literally (Step 0 → **Overlay logo / watermark confirmation**). Anything printed on the product itself is never asked about |
 
-Do not apply safe visual defaults (cleaner background, balanced composition, softer lighting, etc.) without first confirming the user's intent. Do not add new claims, text, logos, certifications, dimensions, materials, or product features unless the user provides them.
+Do not add new claims, text, logos, certifications, dimensions, materials, or product features unless the user provides them. That prohibition covers **facts only** — safe visual defaults (cleaner background, balanced composition, softer lighting, restrained props, whitespace, typography treatment) are inferred and declared in the reply, not confirmed in advance.
 
-Ask with specific, selectable options when the host provides a prompt UI; otherwise ask a concise plain-language question (e.g., "What would you like to do: change background, remove watermark, adjust colors, add text, or something else?").
+**One ask, not a chain.** Merge every open item of the request — missing facts, inferred selling points, overlay-mark handling, in-image language, output count, ambiguous target region — into a **single** interaction, each item carrying a prefilled recommended value. Never resolve one item, generate, then come back for the next. Ask with specific, selectable options when the host provides a prompt UI; otherwise ask one concise plain-language question (e.g., "What would you like to do: change background, remove watermark, adjust colors, add text, or something else?").
 
-Once the user has confirmed the outcome and all factual inputs that could change product meaning, do not keep asking them to art-direct the image. Infer safe visual execution choices such as composition, camera, lighting, spacing, and typography treatment through the **Prompt Enhancer** below. Ask again only for missing product facts, claims, exact copy, platform/language decisions, or a genuine creative fork that would materially change the requested outcome.
+**Never re-ask** anything the user already supplied, confirmed, or adjusted in this session, or anything this skill already defines (platform ratio/size/format, platform default language, retry parameters). A user edit to the proposed plan IS the confirmation. Reuse one answer for every image in the same batch/set.
+
+Once the user has confirmed the outcome and all factual inputs that could change product meaning, do not keep asking them to art-direct the image. Infer safe visual execution choices such as composition, camera, lighting, spacing, and typography treatment through the **Prompt Enhancer** below. Ask again only for a **newly surfaced** missing fact, claim, or exact copy, or a genuine creative fork that would materially change the requested outcome.
 
 ### Step 4 — Scene Routing (match + load)
 
@@ -204,7 +212,7 @@ If the request contains **2 or more intents** (including mixed AI + non-AI), pla
 **Cost guard**:
 - Prefer one AI call per requested output image.
 - Do not multiply calls by the number of detected intents when they can be expressed in one prompt.
-- If a plan would require more AI calls than the requested output count, compress the plan first; ask or explain only when compression would reduce quality or violate safety/tool constraints.
+- If a plan would require more AI calls than the requested output count, compress the plan first; state the trade-off in the reply when compression would reduce quality, and ask only when compression would violate safety or a user hard constraint.
 - Platform image sets and SKU batches may require multiple calls because the user expects multiple output images, but each output should still use the fewest feasible calls.
 
 **Merge examples**:
@@ -230,13 +238,19 @@ Use `true_sequential` for cases such as isolating each SKU before standardizatio
 
 | Trigger | Reference | Mode | Disambiguation |
 |---------|-----------|------|----------------|
-| User names an e-commerce platform (Amazon, eBay, Walmart, Shopify, Etsy, AliExpress, TikTok Shop, Shopee, Lazada, Alibaba.com, 1688) AND requests main image / image set / listing images | `references/platform-product-guidelines.md` + each selected output scene | per sub-scene | No platform/listing/image-set intent → route to the single scene instead |
+| User names an e-commerce platform (Amazon, eBay, Walmart, Shopify, Etsy, AliExpress, TikTok Shop, Shopee, Lazada, Alibaba.com, 1688, Taobao/淘宝, Tmall/天猫, Douyin E-Commerce/抖音电商, JD.com/京东, Pinduoduo/拼多多) AND requests main image / image set / listing images | `references/platform-product-guidelines.md` (framework) **+ exactly one spec file** (`platform-specs-overseas.md` for §1–10, `platform-specs-china.md` for §11–16) + each selected output scene | per sub-scene | No platform/listing/image-set intent → route to the single scene instead |
+
+> **Two files are always required for a platform request**: the framework (`platform-product-guidelines.md`) plus the ONE spec file holding the named platform — see that file's **Platform Spec Files** index. The framework has no ratios, pixel sizes, or prohibited-element lists; a spec file has no slot model. Loading only one of the two is a routing failure. Within the spec file, read only the named platform's section and never take a numeric value from a neighbouring one.
+
+> **抖音电商 (Douyin, §14) ≠ TikTok Shop (§7).** Different platforms, in different spec files, with different in-image languages (zh-CN vs English) and different rules. Route to the one the user named.
+
+> **China-domestic platforms carry compliance rules but not numeric specs.** For Taobao, Tmall, Douyin, JD.com, and Pinduoduo the reference defines what may be depicted, not the pixel size / ratio / format / file-size cap (1688 is the exception — it has full specs). Never fill those in from memory — default AI generation to 2K on the long edge and tell the user the final delivery size still needs official confirmation.
 
 Platform Product Image is a composite workflow — it consults platform requirements first, then delegates to White Background, Scene Image, Model Showcase, etc. as sub-tasks. Each planned output is a **composite slot** that may stack several of those scenes (base visual + copy + graphics + model + accessories); plan by requested output image and merge all of a slot's layers into one call per Step 5.
 
 **Sub-task execution rules:**
 - When the user uploaded product images, ALL sub-tasks MUST use `image_edit`. Never use `image_generate` when reference images exist.
-- Sub-tasks needing user-supplied required inputs may trigger clarification first: **Selling Point** (selling points inferred), **Process Flowchart** (production stages inferred), **Logo Design** (brand name/context missing).
+- Sub-tasks that depend on user-supplied facts contribute their gaps to the **one** consolidated ask, never to a separate round: **Selling Point** (inferred selling points — present all candidates as ONE checklist), **Process Flowchart** (inferred production stages — one checklist), **Logo Design** (brand name/context missing).
 - All other sub-tasks execute directly unless safety or missing required inputs block execution.
 
 **Platform image set planner** — when the user requests multiple listing images, create a plan before generation. Each planned image is a **composite slot**, not a single scene: resolve its layer stack and archetype via `references/platform-product-guidelines.md` → **Composite Slot Model**, then load the reference for its base visual layer AND for every overlay layer it uses (copy, graphics/callouts/steps/cutaway, model, accessories, second subject). The list below names each slot's **base layer only**:
@@ -259,7 +273,24 @@ Platform Product Image is a composite workflow — it consults platform requirem
 
 Rules: generate/edit one final image per planned output (do not split one planned output into multiple AI calls unless Step 5 requires `true_sequential`); if the tool produces one image per call, run multiple calls or state the limitation; output count must match the requested count when feasible; for uploaded product images every planned image must preserve product identity and use `image_edit`.
 
-> **In-image language (for any planned image that will contain text)**: resolve the target language and write it explicitly into that image's prompt per `references/platform-product-guidelines.md` → **Default In-Image Language**. When the user did not specify a language, also run its **Source-Text Language Conflict Check** (compare the source image's non-brand text language to the platform default; on conflict, ask the user to keep the original language or translate to the platform default before generating).
+> **In-image language (for any planned image that will contain text)**: resolve the target language and write it explicitly into that image's prompt per `references/platform-product-guidelines.md` → **Default In-Image Language**. The platform default is defined by this skill — apply it without asking. When the user did not specify a language, also run its **Source-Text Language Conflict Check**; on conflict, carry the choice into the **single** consolidated ask with "translate to the platform default" prefilled as the recommendation, rather than raising it as its own round.
+
+### Priority 1.5 — PDP Detail Page (Composite)
+
+| Trigger | Reference | Mode | Disambiguation |
+|---------|-----------|------|----------------|
+| User requests detail-page images or a complete detail page (PDP): "详情页", "商详图", "详情图", "PDP long image", "detail page", "长图" | `references/pdp.md` + each selected screen scene | per screen scene | Single listing image / standard image set → Priority 1. Single standalone image → Priority 2/3. |
+
+PDP Detail Page is a composite workflow with two modes (resolved in `references/pdp.md` Step 0):
+
+- **Material mode** — user wants detail-page images only, to their own specification (count, size, copy): user specification takes priority and is delivered as asked; light continuity (one Style Lock) when 2+ screens; no separate confirmation round when the request is fully specified. The stitched long image is still delivered on top of the requested screens — it is not counted against the user's requested count.
+- **Full PDP mode** — user wants a complete detail page: platform + delivery-cadence gate (ONE `ask_user` card — platform is confirmed and never assumed, plus 交付节奏 `直接生成` / `先看规划再生成`, plus 产品参数 when a Must-ask spec has no source; PDP adapters currently cover Alibaba.com and Amazon) → staged input collection + asset inventory → product-image diagnosis & retouch → Conversion Driver Diagnosis → Buyer Reason Card (output with the plan, no stop point of its own) → screen plan, one screen card per screen (shot plan + identity source + exact baked copy) → per-screen generation with copy baked into the image → copy read-back verification → code-stitched long image (ALWAYS delivered alongside the single screens), with platform-formatted slices on request. The plan pauses for approval ONLY when the user chose `先看规划再生成`, and that approval is collected with `ask_user` — never by asking the user to type a confirmation back.
+
+**Tool boundary (HARD)**: the assembled long image is code-stitched (e.g. Python PIL vertical concatenation), NEVER passed to `image_generate` / `image_edit` — and never generated as one oversized AI image. Only the individual screens are AI-generated; in-image copy is baked per the confirmed screen cards and verified by read-back after generation (fix localized text errors via `references/text-editing.md`, not full-screen regeneration).
+
+**Compliance stance (HARD)**: No-Hallucination applies end-to-end — no fabricated claims, synthetic reviews, virtual endorsements, or invented proof data, even when the user asks for faster conversion results. Use clearly-marked placeholders instead (`references/pdp.md` Step 7). Every baked number, spec value, certification, model code, and origin claim must trace to a source — the user's request, text printed on an uploaded image, or a Step 0b answer; unsourced Must-ask specs are asked once in the Step 0b card, and reference links or competitor listings are visual references only, never fact sources. This deliberately differs from CVR-first tools that relax truthfulness by default.
+
+Rules: output count = confirmed screen count (one AI call per AI-generated screen); deliver the numbered single screens AND the code-stitched long image ALWAYS — in both modes, since stitching costs no image call (slices only on request); only PDP screens go into the long image, never main-image/listing outputs from the same run; run the `references/pdp.md` Step 8 gate before stitching. When the user names a platform AND wants a PDP (e.g. "Alibaba detail page"), also load `references/platform-product-guidelines.md` for the platform's in-image language and prohibited-element rules — the PDP's baked copy must respect them. When the request combines main images + PDP, run one diagnosis/retouch pass and one Style Lock for both layers.
 
 ### Priority 2 — Single-Operation Scenes
 
@@ -280,7 +311,7 @@ Exact single-operation requests. Resolve the execution mode via **Execution Mode
 
 | Scene | Trigger Keywords | Reference | Mode | Disambiguation |
 |-------|-----------------|-----------|------|----------------|
-| **Scene Image** | scene shot, change/swap background, place in environment, lifestyle shot | `references/scene-image.md` | standard | Pure white bg only → White Background; recolor only → SKU Color Change; text only → Text Editing |
+| **Scene Image** | scene shot, change/swap background, place in environment, lifestyle shot | `references/scene-image.md` | standard | Pure white bg only → White Background; recolor only → SKU Color Change; text only → Text Editing; **scene + any overlay copy (even one line/label) → also load Selling Point** for Step 5 Typography Design and emit block 9 |
 | **SKU Color Change** | recolor product, change product color, SKU color variant | `references/sku-color-change.md` | standard | Background color change → Scene Image |
 | **Logo Customization** | print logo on product, logo mockup, emboss/engrave/stamp logo | `references/logo-customization.md` | standard | Design a new logo from scratch → Logo Design |
 | **Model Showcase** | model photo, add model, model wearing/holding product | `references/model-showcase.md` | standard | Model + new lifestyle scene → also load Scene Image; + selling-point copy → also load Selling Point |
@@ -291,6 +322,7 @@ Exact single-operation requests. Resolve the execution mode via **Execution Mode
 | **Logo Design** | design a logo, create brand mark, logo from scratch | `references/logo-design.md` | dense-layout (generate); standard (edit existing) | Apply existing logo to product → Logo Customization |
 | **Tech Pack** | tech pack, dimension drawing, manufacturing spec, assembly diagram | `references/tech-pack.md` | dense-layout | Consumer selling-point infographic → Selling Point |
 | **Process Flowchart** | process flow, manufacturing flow, craft flow, how it's made, production process diagram | `references/process-flow.md` | dense-layout | OEM technical drawings → Tech Pack; text-only explanation → respond with text |
+| **Marketing Poster** | poster, banner, promo/sale poster (大促/采购节), shop banner (旺铺/店招), exhibition poster, holiday poster, brand/company promo, social cover; whole-canvas poster edits (re-layout, product swap, de-AI-ify) | `references/marketing-poster.md` | dense-layout | Product-fact feature image → Selling Point; listing set → Platform; PDP → Priority 1.5; single-region text fix on a poster → Text Editing; translate poster text → Image Translation; resize with content unchanged → Image Resize |
 
 > **Image Translation mandatory rule**: when the user requests an edited translated image, load `references/image-translation.md` and call `image_edit` after required inputs are available. Do not substitute a text-only translation for an image-edit request.
 
@@ -376,7 +408,7 @@ Before selecting any `task_type`, inspect the actual tool schema available in th
 
 **Standard scenes** (fall back to `simple`/`simple_generation`): white background, HD upscale, watermark/element removal, scene/background swap, SKU recolor, model showcase, image detail, logo customization, image translation, single-region text editing, image resize, and any product-fidelity edit.
 
-**Dense-layout scenes** (need `complex` fallback when `auto` is unavailable): selling-point images with multi-region layout / comparison grids, tech pack drawings, logo design generation from scratch, multi-region or difficult perspective/curved text editing, full creative posters / infographics.
+**Dense-layout scenes** (need `complex` fallback when `auto` is unavailable): selling-point images with multi-region layout / comparison grids, tech pack drawings, logo design generation from scratch, multi-region or difficult perspective/curved text editing, marketing posters / banners / covers and their whole-canvas edits, full creative posters / infographics.
 
 White background, HD upscale, and watermark/element removal are standard — express their intent through the prompt (e.g., "replace background with pure white #FFFFFF", "enhance resolution and sharpness without changing any content", "remove the authorized watermark/overlay only") and run them under the resolved mode.
 
@@ -404,6 +436,34 @@ The final pixel `size` must have a total area (W × H) within **655360 – 82944
 
 > `aspect_ratio` controls proportions only; `size`/`resolution` control output pixels. If the constructed parameters do not match the resolved mode, revisit Step A and correct the set before invoking the tool.
 
+#### Long-edge minimum (DEFAULT only — applies whenever a concrete `size` is passed, i.e. `auto` / `auto_generation`)
+
+This is a **default floor, not an override**. It fills in a sensible resolution when nobody stated one; it never overrules a size that was actually specified.
+
+**Size precedence (highest first)**:
+
+1. **Explicit user size / ratio** — use exactly what the user asked for.
+2. **Platform-mandated size / ratio** — the exact value from the platform spec file (`references/platform-specs-overseas.md` / `references/platform-specs-china.md`), used as-is.
+3. **Default long-edge minimum (≥ 1024 px)** — applies **only** when neither 1 nor 2 gives a size, i.e. the dimensions were derived by you (source-following, or a shape chosen for layout).
+4. **Size area bounds + multiple-of-16 shape** — tool-level hard limits; always checked last on whatever size survived steps 1–3.
+
+Algorithm for case 3 (derived size). Like the area clamp, this is a proportional size-only adjustment — do NOT crop, stretch, or change the aspect ratio. Apply it **before** the area bounds above so the two rules never fight.
+
+1. If `max(W, H) >= 1024` → no change.
+2. Otherwise scale both edges by `f = 1024 / max(W, H)`, set the long edge to exactly `1024`, and round the short edge to the nearest multiple of 16.
+3. Then run the **Size area bounds** check on the result. The area floor only scales up, so it can never pull the long edge back under 1024; the area ceiling only triggers far above 1024 on both edges.
+
+> Example: source `800×600` with no size specified → long edge 800 < 1024 → `f = 1.28` → **`1024×768`** (A = 786432, within the area bounds → done). Example: source `640×640` → **`1024×1024`** (A = 1048576, already above the area floor, so no further clamp).
+
+> **Specified size wins**: when the user asks for a concrete size (e.g. `900×900`) or a platform mandates an exact size (e.g. Alibaba.com `1000×1000`), **that** size is the deliverable and the 1024 floor does NOT raise it. Pass the specified size straight through as long as it clears the **Size area bounds** — `1000×1000` (A = 1,000,000) and `900×900` (A = 810,000) both do. Two exceptions, and only these two, force a two-step generate-then-resize:
+>
+> - the specified size falls outside the **Size area bounds** (the tool would reject the call, e.g. `400×300`);
+> - the specified edges are not multiples of 16 (e.g. `1000×1000`).
+>
+> In both cases generate at the nearest tool-legal size on the **same aspect ratio** (`400×300` → `1024×768`; `1000×1000` → `1008×1008`), then downscale/resize natively to the exact specified pixels at delivery and report both numbers. Never silently deliver something other than the specified size.
+
+> `simple`/`complex` modes pass `aspect_ratio`+`resolution` (no raw `size`) and are not affected — their lowest `resolution` step, `1K`, already means a 1024 px long edge. If a specified size is smaller than 1K, request `1K` on the closest ratio and downscale natively at delivery.
+
 ### Simple vs Complex (when auto is unavailable)
 
 `complex_generation` is higher-risk for product-fidelity tasks because many runtimes treat complex edits as broad redraws rather than localized edits. **Default to `simple_generation`** unless the task genuinely needs dense layout, annotations, comparison grids, or full-image design composition. A visually rich background or detailed scene is still a `simple_generation` task when the product is preserved. If using `complex_generation` with a product reference, always enable Strict Product Fidelity Mode.
@@ -428,10 +488,12 @@ The final pixel `size` must have a total area (W × H) within **655360 – 82944
 | User Request | Avoid | Prefer |
 |-------------|-------|--------|
 | "Make this an Amazon main image" | single-purpose white background only | Platform workflow + prompted edit |
-| "Make it cleaner / professional / optimize" | HD upscale or any single-purpose type | Clarify intent → product cleanup / platform intent |
+| "Make it cleaner / professional / optimize" | HD upscale or any single-purpose type | Execute `product_cleanup` (or the platform intent when a platform is named) under a stated interpretation — do not turn it into a question |
 | "Remove text and make white background" | watermark_removal only | Load Text Editing/Watermark + White Background → one merged edit call (standard) |
 | "Change background and improve lighting" | white background only | Load Scene Image → one merged edit call (standard) |
 | "Turn this into a listing image" | any single-purpose type | Platform or product image workflow |
+| "Make a poster for the September Procurement Festival" | selling-point single image | Marketing Poster (campaign message is the subject) |
+| "Change the price on this poster" | poster regeneration | Text Editing (single-region) — Poster Edit Mode only for whole-canvas changes |
 
 > `task_type` is an execution hint, not the user's intent. Always: (1) identify the final outcome, (2) list required visual changes, (3) check whether one mode satisfies them all, (4) otherwise use a merged or `true_sequential` plan per Step 5.
 
@@ -503,7 +565,7 @@ Before the existing **Prompt-Intent Validation Gate**, check five ambiguity clas
 4. **Design** — exact copy, hierarchy, placement, and graphic mapping are complete when text/graphics are present.
 5. **Boundary** — allowed changes, invariants, avoid items, and the 3–6 observable acceptance checks (recorded agent-side) do not contradict each other.
 
-If a missing item is a safe visual execution choice, infer it and complete the prompt. If it is a missing fact or unsupported claim, ask the user or omit it; never guess.
+If a missing item is a safe visual execution choice, infer it and complete the prompt. If it is a missing fact or unsupported claim, **omit it and record the omission as a constraint**; add it to the consolidated ask only when the image's direction depends on it. Never guess.
 
 ### Final Prompt Assembly (single source of truth for prompt FORMAT)
 
@@ -535,12 +597,12 @@ Only these 13 blocks may appear in the string sent to the tool. Every block must
 | 1 | `Asset type:` | all | the output image's role from Step 1 outcome intent / platform planner slot. **Genre/role prior only** — do NOT restate aspect ratio or pixel size (already carried by `size` / `aspect_ratio`) |
 | 2 | `Input images:` | **conditional** — required when 2 or more input images are passed; also allowed for a single input whose on-image text/labels must be preserved verbatim. Omit for a plain single-image edit (block 11 already asserts the source of truth) and for pure text-to-image | each input image's role + which image is the product source of truth |
 | 3 | `Primary request:` | all | the reference template / rewriter output — see Step C mapping |
-| 4 | `Canvas and composition:` | standard, dense | Enhancer **Canvas** + **Composition**. Relative spatial language first; percentages only where they remove real ambiguity — **except platform set slots, where the product's occupancy % + position zone and every secondary subject's occupancy %/position/action are required**. Do NOT restate ratio/pixel size. When the loaded reference requires composition preservation, this block must say "keep the source framing, subject scale, and position" instead of inventing new framing |
+| 4 | `Canvas and composition:` | standard, dense | Enhancer **Canvas** + **Composition**. Relative spatial language first; percentages only where they remove real ambiguity — **except platform set slots, where the product's occupancy % + position zone and every secondary subject's occupancy %/position/action are required**. **When the image carries copy, this block also reserves the text block's zone and footprint as negative space** (8–18% of the canvas for a corner / lower-third / side-column skeleton, 18–28% for a top band / split header / numeral-led one — per block 9), so the type lands in planned emptiness rather than on whatever area stayed quiet. Do NOT restate ratio/pixel size. When the loaded reference requires composition preservation, this block must say "keep the source framing, subject scale, and position" instead of inventing new framing |
 | 5 | `Camera:` | standard, dense (photographic work) | Enhancer **Camera**; may be folded into 4 as `Canvas and camera:`. Omit entirely when the reference forbids reframing |
 | 6 | `Scene/backdrop:` | standard, dense | Enhancer **Scene**. Name the place, the three depth planes, and the environment elements as a **positive closed list** with material + position, sized to the shot's role (**a platform lifestyle slot needs 6–9 named elements**: support surface, background architecture, one furniture anchor per side, 2–4 secondary props, one organic element), ending with "no other objects" — this is where prop control lives, not in block 13. A platform hero, cutaway, or flat-lay slot instead names the clean studio/fabric surface and backdrop only |
 | 7 | `Lighting and grounding:` | standard, dense | Enhancer **Lighting / physics** — key direction/softness, fill, contact shadow, ambient occlusion, reflection, single coherent light |
-| 8 | `Materials, color and style:` | standard, dense | Enhancer **Materials / color / style**, **environment side only**: palette, contrast, white balance, grade, a named art-direction register (e.g. "refined Scandinavian interiors editorial") with an anti-ad clause, and how the environment lights the product. The product's own material/finish belongs to block 11 — never state it twice |
-| 9 | `Typography:` | dense, **and any tier whose output contains added text** | confirmed exact copy only + the design decisions from `references/selling-point.md` → **Step 5: Typography Design** (the **type voice** matched to this image's art-direction register, stated as a **concrete font class** — `high-contrast Didone serif`, `transitional serif`, `humanist sans`, `condensed grotesk`, `engraved small caps`, `宋体/Song serif`, etc., **never "clean modern font" and never a heavy sans by default**; **when the source product carries its own type** — wordmark, packaging print, panel labels, screen UI — sample that letterform as the voice first, style only, while the product's existing text stays pixel-identical per block 11; the layout **skeleton** and its zone; relative type scale; weight/case/tracking; the **contrast direction** — dark-on-light, **light-on-dark in white / soft white / warm ivory**, or tone-on-tone — with the colour **sampled from the scene** rather than a frozen near-black+grey pair, plus the soft-edged low-opacity tinted scrim if light type needs it; alignment; margin; and the **2–3 devices** chosen for this slot) + `no other text`. In a multi-image set the family class stays constant while **skeleton, case, devices, contrast direction, and colour tone change per slot** — never emit the same bold-headline-plus-grey-subhead treatment in every image. Copy is customer-facing wording only — it must state a benefit, scenario, spec, or instruction; never a part name outside the single annotated slot, never briefing vocabulary ("front view", "visible components", occupancy numbers, slot names), and never a line that merely describes the photograph ("… Setting", "… Context", "Product shown in …") |
+| 8 | `Materials, color and style:` | standard, dense | Enhancer **Materials / color / style**, **environment side only**: palette, contrast, white balance, grade, a named art-direction register (e.g. "refined Scandinavian interiors editorial") with an anti-ad clause, and how the environment lights the product. **For a platform listing set, open this block with the platform style phrase** the image must conform to (`Amazon info-first listing style`, `Etsy handmade editorial style`, `淘宝高端编辑风` …) per `platform-product-guidelines.md` → **Platform Image Set Style Systems** rule 1, stated verbatim and identically in every slot of the set. The product's own material/finish belongs to block 11 — never state it twice |
+| 9 | `Typography:` | dense, **and any tier whose output contains added text** | confirmed exact copy only + the design decisions from `references/selling-point.md` → **Step 5: Typography Design** (the **type voice** matched to this image's art-direction register — and, in a platform listing set, to the **platform style phrase** named in block 8, so the type reads as that platform's look rather than a generic e-commerce one — stated as a **concrete font class** — `high-contrast Didone serif`, `transitional serif`, `humanist sans`, `condensed grotesk`, `engraved small caps`, `宋体/Song serif`, etc., **never "clean modern font" and never a heavy sans by default**; **when the source product carries its own type** — wordmark, packaging print, panel labels, screen UI — sample that letterform as the voice first, style only, while the product's existing text stays pixel-identical per block 11; the layout **skeleton** and its zone — **structurally distinct from the other slots', not the same block relocated to another corner** — plus the block's **target footprint** (8–18% of the canvas for a corner / lower-third / side-column skeleton, 18–28% for a top band / split header / numeral-led one), reserved as negative space in block 4 before the copy is placed; **at least two text levels** (H1+H2, or H1 + an H3 feature strip) whenever the image carries copy at all — a lone short headline is not a text block: give it a second level built from already-verified facts, or drop the copy entirely and deliver a photographic frame, but never stretch the headline past its word cap to fill the gap; relative type scale; weight/case/tracking; the **contrast direction** — dark-on-light, **light-on-dark in white / soft white / warm ivory**, or tone-on-tone — with the colour **sampled from the scene** rather than a frozen near-black+grey pair, plus the soft-edged low-opacity tinted scrim if light type needs it; alignment; margin; and the **2–3 devices** chosen for this slot) + `no other text`. In a multi-image set the family class stays constant — for a platform listing set, the **type-lock phrase** resolved once per set (`platform-product-guidelines.md` → **Set lock** → **Type system lock**: headline class + companion class + 简繁 variant) is restated **verbatim and identically in every slot**, exactly like the platform style phrase in block 8 — while **skeleton, case, devices, contrast direction, and colour tone change per slot**; never emit the same bold-headline-plus-grey-subhead treatment in every image, and never re-pick a different font class for a later slot. Copy is customer-facing wording only — it must state a benefit, scenario, spec, or instruction; never a part name outside the single annotated slot, never briefing vocabulary ("front view", "visible components", occupancy numbers, slot names), and never a line that merely describes the photograph ("… Setting", "… Context", "Product shown in …") |
 | 10 | `Graphics and callouts:` | dense (callouts, leader lines, grids, arrows, cards, icons); **and any tier that must preserve a confirmed-keep canvas-overlay logo/watermark** | exact count, geometry, position, anchors, crossing rules. **In a platform image set, leader-line/callout annotation is allowed in at most ONE slot** (`platform-product-guidelines.md` → **Expression-mode diversity**); other slots use column/panel/flat-lay geometry or screen cards, or omit this block entirely. **Confirmed-keep canvas-overlay mark (per Step 0 classification)**: state it as `exactly one <mark> in the <corner/zone>, about <N>% of canvas width, artwork and colours unchanged, flat overlay on the canvas` — same relative position and relative scale as the source. It is a layout layer, not a product part: it must appear **once per image regardless of how many product copies, columns, panels, or SKU repeats the layout contains**, must not be anchored to, tilted with, or lit/shadowed like the product, and must not be redrawn, restyled, recoloured, or re-typeset |
 | 11 | `Product invariants:` | all tasks with a product | **Identity Match Contract** + the reference's fixed constraint text. **Hard cap: ≤3 lines.** Do not enumerate 20+ protected items — it does not improve compliance and degrades execution. Only **on-product** marks (printed/embossed/label text and logos) belong here; a canvas-overlay logo/watermark does NOT — it lives in block 10, and stating it here is what makes the model clone it onto every product copy |
 | 12 | `Allowed changes:` | all | short **closed** allow list ending with `only`. Not a restatement of `Primary request:` |
@@ -570,7 +632,7 @@ Each reference declares an `Apply Method`. It no longer decides the final shape;
 1. Labels appear exactly as written in Step B, in ascending order, each on its own line/paragraph; no empty label.
 2. All tier-required blocks are present; no non-schema label was invented (in particular no `Use case:` and no `Acceptance checks:` inside the prompt).
 3. Every product task has `Product invariants:`. `Input images:` appears **only** when 2+ inputs are passed or a single input's on-image text must be preserved verbatim.
-4. Any output containing added text has `Typography:` with the exact copy in quotes plus an explicit "no other text" clause, a **named concrete font class**, a named skeleton, and a stated contrast direction. In a multi-image set, no two slots repeat the same skeleton + device combination, ≥4 distinct devices appear across a 4-image set (≥6 across 6+), and the contrast direction is not identical in every slot.
+4. Any output containing added text has `Typography:` with the exact copy in quotes plus an explicit "no other text" clause, a **named concrete font class**, a named skeleton **with its target footprint**, a stated contrast direction, and **at least two text levels** (H1+H2, or H1 + an H3 feature strip) carrying 2–3 named devices — a lone short headline with no second level and no device is a schema failure, and lengthening that headline is not the fix. **Every platform image-set supporting slot whose platform permits L1 must contain this non-empty `Typography:` block; omitting the block to produce a copy-free frame is also a schema failure.** Only an explicit platform text ban waives it. In a multi-image set, no two slots repeat the same skeleton + device combination (**relocating the same block to another corner does not count as a different skeleton**), ≥4 distinct devices appear across a 4-image set (≥6 across 6+), the contrast direction is not identical in every slot, and **the named font class — headline class, companion class, and 简繁 variant — is identical in every slot of the set** (a slot naming a different class is a set-consistency failure and is regenerated). When the in-image text is Chinese/Japanese/Korean, the named class comes from `references/selling-point.md` → Step 5 part 1 → **CJK type voices** (never a bare "黑体"/"sans" default), its Latin/numeral companion is named, and the block carries the **glyph-integrity clause** (每个汉字笔画完整、结构正确，无错字、缺笔、变形或生造字). Any **expressive type treatment** (outline / shadow / glow / emboss / gradient / chrome / arched / hard-edged block carrying copy) is named with its parameters and its single target level per Step 5 part 7 — at most one per image, register- and platform-permitted, never as a contrast fix, and ≤1–2 treated slots per set.
 5. Length caps hold: `Product invariants:` ≤ 3 lines; `Avoid:` ≤ 8 items; `Allowed changes:` is a closed list ending with `only`.
 6. `Avoid:` names no paintable object; prop control appears positively in `Scene/backdrop:`. For a **canvas-overlay logo/watermark** the user's Step 0 confirmation has been obtained and is reflected literally — keep → block 10 with **count "exactly one"**, position zone, and relative scale stated, and NOT in block 11; remove → stated in `Primary request:`. Every image of a batch/set carries this clause, not just the first. Anything printed on the product (brand name, wordmark, spec text, labels) needs no confirmation — it is covered by block 11 by default. Never assume either outcome without the confirmation.
 7. No requirement is stated in two blocks with different wording — product material/finish only in block 11, environment grade only in block 8.
@@ -667,7 +729,7 @@ Decision:
 
 - **Schema violation only** (checks 1–4 pass, check 5 fails) → do NOT call the tool and do NOT ask the user. Re-assemble the prompt per Final Prompt Assembly and re-run this gate. A formatting defect is fixed silently, never escalated.
 - **No conflict** → proceed with the tool call.
-- **Conflict or genuine ambiguity found** → do NOT call the tool. Ask the user to confirm/clarify (use a selectable-options prompt when the host supports it), state the specific conflict, then rebuild the prompt from the confirmed intent.
+- **Conflict or genuine ambiguity found** → do NOT call the tool. Ask the user to confirm/clarify (use a selectable-options prompt when the host supports it, and fold in any other open item so this stays one interaction), state the specific conflict, then rebuild the prompt from the confirmed intent. A conflict that is resolvable from the user's own earlier words is not an ambiguity — resolve it and proceed.
 - **Minor, safe divergence** (a purely visual execution choice that does not change the user's meaning or introduce a factual claim) → proceed, and note the assumption in the final summary.
 
 > Do not silently "fix" a conflict by guessing what the user meant. Surfacing the conflict once, up front, is cheaper than generating a wrong image and re-doing it. This gate complements the post-generation Result Check below: this one validates *intent → prompt*; Result Check validates *prompt → output*.
@@ -680,7 +742,7 @@ After receiving a generation or editing result, evaluate it against the 3–6 ac
 
 1. **Preservation audit**: compare the result against the preservation clause. If protected elements were altered (product shape distorted, text removed, colors shifted), retry with a stronger constraint — add a "CRITICAL:" prefix to `Product invariants:` and name the specific element that drifted, or reduce the edit scope. Stay within the ≤3-line cap; do not expand into a 20-item protected list.
 2. **Intent completeness**: verify all requested changes are present. If a sub-task from Step 5 was missed, execute the remaining sub-tasks on the current output.
-3. **Quality gate**: if the result is clearly unusable (heavy artifacts, wrong subject, garbled text), inform the user and offer to retry with adjusted parameters (e.g., when auto is unavailable, switch from the standard fallback to the dense-layout fallback per Execution Mode Resolution, or simplify the prompt).
+3. **Quality gate**: if the result is clearly unusable (heavy artifacts, wrong subject, garbled text), **retry once automatically** with adjusted parameters (e.g., when auto is unavailable, switch from the standard fallback to the dense-layout fallback per Execution Mode Resolution, or simplify the prompt) — do not ask permission for that retry. For a platform image-set supporting slot whose platform permits L1, **missing overlay copy, a missing second text level, or a lone headline is also unusable**: reject and retry with the required `Typography:` block strengthened, never accept the blank image as a photographic alternative. If the retry also fails, report the limitation and suggest alternatives.
 4. **Logo / watermark audit** (whenever the user confirmed keep in Step 0): for **every** output image check that the mark is (a) **present**, (b) **exactly one instance** — not one per product copy, column, panel, or SKU repeat, (c) at the **same relative position zone and relative scale** as the source, (d) artwork/colour/opacity unchanged, and (e) still a flat canvas overlay — not stuck onto, tilted with, or shadowed like the product. Fix by correcting the block placement, not by adding negations: if the mark was duplicated, it was almost certainly declared in `Product invariants:` (block 11) — move it to `Graphics and callouts:` (block 10) with `exactly one` + position + relative scale; if it went missing, re-emit block 10 with the mark as its first item and prefix it with `CRITICAL:`. Do not accept an output that drops or multiplies a confirmed-keep mark.
 
 Hard failure conditions (identity-match violations — see **Identity Match Contract**):
@@ -690,6 +752,7 @@ Hard failure conditions (identity-match violations — see **Identity Match Cont
 - White-background output changes the product or leaves damaged/blurred edges
 - Text editing/removal causes garbled text, misspellings, or modifies unspecified text
 - Platform hero image includes prohibited overlays, watermarks, contact information, or unsupported claims — **except a logo/watermark the user confirmed to keep**, which outranks the platform ban (Step 0 → **Logo / watermark confirmation**)
+- A platform image-set supporting slot is blank, missing its second text level, or contains only a lone headline when its platform permits L1; only an explicit platform text ban waives this failure
 - User requested "do not change the product" but the result redraws or reimagines the product
 - A confirmed-keep logo/watermark is missing, duplicated (one per product copy / column / panel), moved to a different position zone, rescaled, recoloured, redrawn, or welded onto the product surface
 
@@ -726,6 +789,8 @@ For image editing — Required: reference_images, prompt or task_type. Optional:
 
 If the runtime lacks a native resize/compress/format tool, use available local image-processing libraries when permitted; otherwise explain the limitation.
 
+> **PDP long image** — Required: per-screen AI generation (`image_generate` / `image_edit`, copy baked per the confirmed screen cards) + code stitching (e.g. Python PIL vertical concatenation) for the assembled image. Never route the assembled long image through `image_generate` / `image_edit`, and never generate it as one oversized AI image (see `references/pdp.md`).
+
 ### Canonical task_type values
 
 Selection is governed by **Execution Mode Resolution**: prefer `auto`/`auto_generation` when supported; otherwise `simple`/`simple_generation` (standard) or `complex`/`complex_generation` (dense-layout).
@@ -750,11 +815,12 @@ White background, HD upscale, and watermark/element removal are expressed via th
 Priority order: explicit user ratio → platform requirement (hard) → source-following → default. The parameter shape for each mode is defined in **Execution Mode Resolution → parameter-shape table**.
 
 1. **User specified a supported ratio** → use it directly.
-2. **User specified an unsupported ratio** (e.g., 5:3) → inform user and ask to choose from the supported list.
+2. **User specified an unsupported ratio** (e.g., 5:3) → snap to the closest supported ratio, generate, and state the substitution in the reply. Do not block on a question.
 3. **Platform product image set** (Priority 1 workflow) — **HARD**: the platform's required ratio/size from `references/platform-product-guidelines.md` (e.g., Alibaba.com 1:1, 1000×1000) is MANDATORY and does NOT follow source-following. Only an explicit user ratio can override it.
 4. **User did not specify (non-platform)**:
    - Scenes with an uploaded image → follow the source (auto → source `size` + closest `aspect_ratio`; non-auto → ONLY the closest `aspect_ratio` from the table below).
    - Scenes without an image → default `1:1`.
+   - Only in this no-size-specified case does the **Long-edge minimum** default (≥ 1024 px) raise the derived `size`; a size from case 1 or 3 is delivered as specified.
 
 ### Auto-Match Table (for uploaded images without user-specified ratio)
 
@@ -795,7 +861,7 @@ When the user's input is not in English:
 When the user references a folder or multiple images:
 
 1. List the images in the folder/selection.
-2. If the user has not specified what to do per image, ask for the operation before editing.
-3. If all images need the same operation → batch-execute the same scene (load the Batch Generation section of `references/platform-product-guidelines.md`).
+2. If no operation is stated anywhere in the request, ask for it **once** — this is the same single interaction as Step 3, combined with any other open item.
+3. If all images need the same operation → batch-execute the same scene (load the Batch Generation section of `references/platform-product-guidelines.md`). Per-image art direction is inferred, not asked.
 4. If different images need different operations → classify and route individually.
 5. **Never guess-edit** folder contents without explicit instructions.

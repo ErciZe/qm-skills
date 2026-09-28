@@ -5,7 +5,7 @@
 - **Load when**: user asks to translate visible image text into another language and expects the image itself to be updated.
 - **Do not load when**: user asks to replace only specific same-language text, fix a typo, update a price/date, or add new marketing copy.
 - **Merge notes**: translation is usually one `image_edit` call for the full image. Do not split by text region unless tool limitations require it.
-- **Hard stop**: if the target language is missing, ask for it before editing. Never answer with text translation only when the user requested an edited image.
+- **Hard stop**: never answer with text translation only when the user requested an edited image. When the target language is not stated, derive it in this order — the target platform's **Default In-Image Language** (`references/platform-product-guidelines.md`) → the target market named in the request → the language the user is writing in — and state the resolved language. Ask only when none of the three yields an answer.
 
 ## Scene Description
 

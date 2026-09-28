@@ -42,7 +42,7 @@ Before building the prompt, identify the two required inputs:
 - **`<product_image>`** — the product photo onto which the logo will be applied.
 - **`<logo_image>`** — the logo image to composite onto the product.
 
-If the user uploaded more than two images, ask which ones to use. If only one image is uploaded and it already contains both the product and the logo, treat that single image as `<product_image>` and ask for a separate logo file if the logo needs to be preserved at higher fidelity.
+If the user uploaded more than two images, determine each image's role visually (which is the product, which is the logo artwork) and state the assignment in the reply; ask only when the roles stay genuinely unreadable. If only one image is uploaded and it already contains both the product and the logo, treat that single image as `<product_image>` and ask for a separate logo file if the logo needs to be preserved at higher fidelity.
 
 ### Step 3: Build Complete Prompt
 

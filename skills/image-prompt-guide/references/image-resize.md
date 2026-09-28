@@ -23,7 +23,7 @@ Resize the source image to the requested pixel dimensions or aspect ratio using 
 | `height 1200px`, `make it 1200px tall` | Scale height, keep source aspect ratio |
 | `square`, `make it square` | Target ratio `1:1` |
 
-If the request is ambiguous or contains no usable numbers, ask for clarification before resizing.
+If the request contains no usable numbers, derive the target from the platform spec, the image-set slot, or a size already agreed earlier in the session. Ask only when none of those yields a number.
 
 ## Target Dimension Computation
 
@@ -37,6 +37,8 @@ Before calling `image_edit`, measure the source image and compute the final outp
 def round16(x):
     return max(16, round(x / 16) * 16)
 ```
+
+4. A **user-requested** size is the deliverable and is never rounded up to the 1024 long-edge default — that floor only applies to sizes the skill derives on its own (SKILL.md **Execution Mode Resolution → Long-edge minimum**). Only the tool's hard limits (**Size area bounds**, multiple-of-16 edges) can change what you request: when the user's target violates one of them, ask the AI tool for the nearest legal size on the same aspect ratio, then downscale to the requested pixels with a native resize and report both numbers.
 
 ### Explicit pixel dimensions (WxH)
 

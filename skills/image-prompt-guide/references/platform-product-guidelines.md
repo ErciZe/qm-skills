@@ -1,18 +1,20 @@
 # E-Commerce Platform Product Image Guidelines
-> **Updated**: 2026-05-11
+> **Updated**: 2026-08-31
 
 ## Routing Header
 
 - **Load when**: user names a covered e-commerce platform and asks for main images, hero images, listing images, product image sets, or listing-risk/compliance-oriented image guidance.
+- **Always pair with ONE platform spec file**: this file is the **framework layer only** — it contains no platform's hard specs. After matching, load exactly one of `platform-specs-overseas.md` / `platform-specs-china.md` per the **Platform Spec Files** index at the end of this file. Neither file is usable without this one, and this one cannot resolve a platform's specs without it.
 - **Do not load when**: user asks for generic cleanup, background change, logo application, or resize with no platform/listing intent.
 - **Merge notes**: use this file to select platform constraints, then load only the output scene references needed for each requested image. Each planned set image is a **composite slot** (one base visual layer + the overlay layers it needs) — resolve its layer stack via **Composite Slot Model** below and load every layer's reference, but still emit ONE AI call per slot. Do not split one platform hero into separate AI calls for background, centering, shadow, and coverage when one product-fidelity prompt can satisfy them.
 - **Hard stop**: if the user requests latest compliance, official verification, or policy-sensitive review, verify against official platform documentation before finalizing.
 
 ## Usage
 
-1. **Primary reference**: Use this document as the default built-in reference for platform product hero/set image requirements.
+1. **Primary reference**: Use this document as the default built-in **framework** for platform product hero/set image requirements: in-image language, cross-platform style systems, the Composite Slot Model, and the planning/QA contracts. Per-platform hard specs live in the two spec files indexed at the end.
 2. **Official verification**: If the user asks for latest compliance, official verification, listing-risk review, policy-sensitive checks, or requirements not covered here, consult official platform documentation before finalizing.
-3. **Platforms covered**: Amazon, eBay, Walmart, Shopify, Etsy, AliExpress, TikTok Shop, Shopee, Lazada, Alibaba.com, 1688.
+3. **Platforms covered**: 16 platforms across two spec files — see **Platform Spec Files** at the end of this document for the full index and which file to load.
+4. **Coverage depth differs by platform**: overseas platforms and 1688 carry full numeric upload specs (pixel size, ratio, format, file-size cap). Taobao, Tmall, Douyin, JD.com, and Pinduoduo currently carry **authenticity / AI-generation compliance rules only** — their numeric specs MUST be verified against official docs before delivery. Never fill a missing numeric spec from memory.
 
 ---
 
@@ -41,6 +43,11 @@ Any text/copy rendered inside a platform image (headlines, callouts, selling-poi
 | Lazada | English | SEA multi-country; same rule as Shopee |
 | Alibaba.com | English | B2B international; Chinese is strictly prohibited in-image (see platform spec) |
 | 1688 | Simplified Chinese (zh-CN) | Domestic China wholesale platform; buyers are Chinese |
+| Taobao (淘宝) | Simplified Chinese (zh-CN) | China-domestic marketplace |
+| Tmall (天猫) | Simplified Chinese (zh-CN) | China-domestic marketplace |
+| Douyin E-Commerce (抖音电商) | Simplified Chinese (zh-CN) | China-domestic platform — do NOT inherit TikTok Shop's English default |
+| JD.com (京东) | Simplified Chinese (zh-CN) | China-domestic marketplace |
+| Pinduoduo (拼多多) | Simplified Chinese (zh-CN) | China-domestic marketplace |
 
 > **Market-implied language**: if the user names a specific country/site without naming a language (e.g., "Amazon Japan", "Shopee Thailand", "Lazada Vietnam"), infer that market's primary language (Japanese, Thai, Vietnamese) — this counts as an explicit user signal under rule 1, overriding the English default.
 
@@ -52,9 +59,9 @@ Run this check **only when BOTH conditions hold**: (a) the user is requesting an
 2. **No such text** → no conflict; proceed with the platform default language.
 3. **Such text exists → compare its language to the platform default:**
    - **Same language** → no conflict; proceed.
-   - **Different language (conflict)** → do NOT silently pick one. **Ask the user to choose** (use a selectable-options prompt when the host supports it), presenting exactly two options:
+   - **Different language (conflict)** → do NOT silently pick one, and do NOT raise it as a standalone round. Carry it into the **single** plan confirmation (`SKILL.md` → Step 3 → **One ask, not a chain**) as a prefilled recommendation, presenting exactly two options:
      - **(A) Keep the original language** — reproduce the source text in its original language in the generated set.
-     - **(B) Use the platform default language** — translate the source text into the platform default (per the table above), then proceed with generation using the translated copy.
+     - **(B) Use the platform default language** — translate the source text into the platform default (per the table above), then proceed with generation using the translated copy. *(recommended default — prefill this)*
 4. **After the user chooses**, proceed with the rest of the image-set generation using the confirmed language. If the user picks (B), route the translation through the Image Translation scene (`references/image-translation.md`) — do not free-hand translate spec values or claims.
 
 > **Boundaries**: This check governs the language of text the source already contains; it never adds new claims and never alters brand/trademark strings. If a platform prohibits in-image marketing text entirely (e.g., Alibaba.com / 1688 hero image), the prohibition wins — remove the text per that platform's rule instead of translating it, and do not raise the conflict prompt for that specific image.
@@ -78,15 +85,16 @@ For any planned image in the set that will contain text, the resolved target lan
 
 When a user requests a multi-image listing set for a platform, keep the following cross-platform rules in mind:
 
-1. **One platform = one style system.** All images in the same set share the same background world, lighting language, and palette. Mixed-style sets read as disconnected and usually get rejected.
+1. **One platform = one style system — and the prompt says which one.** All images in the same set share the same background world, lighting language, and palette. Mixed-style sets read as disconnected and usually get rejected. Once the platform is fixed, write the **platform style phrase** into every slot's prompt (block 8, and block 9 for text slots) rather than leaving the platform implicit in the agent's head — e.g. `Amazon info-first listing style`, `Etsy handmade editorial style`, `淘宝高端编辑风`, `1688 B2B 批发参数风`. Derive the phrase from that platform's **Image Set Style Notes** and its style tokens in `platform-specs-overseas.md` / `platform-specs-china.md`, and keep the identical phrase verbatim across the set. An unnamed platform collapses into a generic e-commerce look.
+   - **The style system covers typography, not only photography.** A set whose background world, lighting, and palette match but whose slots are set in three different font classes still does not read as one set. Resolve the font system ONCE per set as a **type-lock phrase** and repeat it verbatim in every text-bearing slot's `Typography:` block, exactly as the platform style phrase is repeated in block 8 — see **Set lock** → **Type system lock**.
 2. **Same style system ≠ same composition.** A shared style system fixes the *treatment* (background world, lighting, palette, mood), NOT the *shot*. Composition is a per-image planning decision: choose each shot's camera angle, distance/景别, and subject position based on **what that slot needs to show** and the **product's physical characteristics and scene norms** — not by a rule that every shot must differ. A shot may reuse the original image's framing when that framing is the right one for the slot (e.g. a straight-on hero) and it conforms to the scene/platform requirements.
    - Let the set's role structure drive framing (e.g. hero = full product; detail = close-up/macro; scene = in-use/lifestyle; scale = top-down or with reference object). Different roles naturally produce different compositions; do not force artificial variety beyond what the roles call for. These roles name only each slot's **base visual layer** — every non-hero slot still stacks its enrichment layers per **Composite Slot Model**.
    - Plan the angle a real product photographer would use for each slot given the product's shape, orientation, and physical constraints; keep it physically plausible.
    - Keep the style tokens (background world, lighting, palette) constant across the set; let composition follow each slot's purpose.
-3. **Identity match, not a frozen shot.** The product's intrinsic identity never changes — same geometry, proportions, weave/texture, color family, prints, logo, and on-product text across every image (identity match per SKILL.md **Identity Match Contract**). Camera angle, pose, distance, and composition may differ per image (or match the original) as each slot requires, and are NOT identity changes. If the product line has messy colors, propose ONE tonal family and get user confirmation before generating the set.
+3. **Identity match, not a frozen shot.** The product's intrinsic identity never changes — same geometry, proportions, weave/texture, color family, prints, logo, and on-product text across every image (identity match per SKILL.md **Identity Match Contract**). Camera angle, pose, distance, and composition may differ per image (or match the original) as each slot requires, and are NOT identity changes. If the product line has messy colors, choose ONE tonal family, state that choice in the plan, and generate — a tonal family is an execution choice, not a fact to confirm.
 4. **Platform grammar is fixed; execution is category-flexible.** For example, TikTok always requires strong human presence, but the exact mood can shift between "flash-lit editorial sports" and "warm golden cozy" depending on the category.
-5. **Style tokens should be repeated verbatim** across shots in the same set to hold background/lighting/palette constant. Composition/framing tokens are chosen per slot (see rule 2) — they may repeat when a slot genuinely needs the same framing, and need not be artificially varied. Number shots ("shot N of 4") to help the model keep style continuity.
-6. **Before delivering, run a consistency gate:** check that no single shot leaks a different season, venue, or temperature into the set; verify in-image text spelling; flag any inferred multi-view angles or spec numbers that need user sanity-check. Also confirm each shot's composition suits its slot role and the scene; a shot repeating the original framing is fine when that is the right framing for the slot.
+5. **Style tokens should be repeated verbatim** across shots in the same set to hold background/lighting/palette constant — and the **type-lock phrase is one of those tokens**: the font system is copied verbatim into each slot, never re-chosen per slot. Composition/framing tokens are chosen per slot (see rule 2) — they may repeat when a slot genuinely needs the same framing, and need not be artificially varied. Number shots ("shot N of 4") to help the model keep style continuity.
+6. **Before delivering, run a consistency gate:** check that no single shot leaks a different season, venue, or temperature into the set — or a different font class into its copy; verify in-image text spelling; flag any inferred multi-view angles or spec numbers that need user sanity-check. Also confirm each shot's composition suits its slot role and the scene; a shot repeating the original framing is fine when that is the right framing for the slot.
 7. **AI generation resolution (excluding Batch Generation):** for AI-generated platform product images and sets, generate at **2K resolution (long edge 2048 px)** whenever possible. This applies to hero/main images, listing sets, and platform-specific lifestyle/detail shots; it does not override user-specified sizes or platform-mandated minimums, but should be the default production target.
 
 The sections below pair each platform's **hard specs** with an **optional image-set style notes** subsection. Use the specs for compliance; use the style notes as a starting point that should be adapted to the product's emotional register.
@@ -102,7 +110,7 @@ The sections below pair each platform's **hard specs** with an **optional image-
 | Layer | Role | Reference to load | Required |
 |---|---|---|---|
 | **L0 Base visual** | where the shot happens and how rich the environment is | exactly ONE of `scene-image.md` (**default for supporting slots** — a real, furnished environment) or `white-background.md` (clean studio/gradient — hero, cutaway, and contents slots only). **`image-detail.md` is NOT a set slot** — never plan a bare macro crop as a set image; shoot the close range inside a real scene instead | Always |
-| **L1 Copy** | headline + subhead + short labels carrying the slot's single message | copy sourcing/tiering per `selling-point.md` Steps 1–3; language per **Default In-Image Language** | **Enrichment layer** — the normal carrier of a slot's message; copy must be customer-facing benefit/scenario wording, never a part name or a planning term |
+| **L1 Copy** | headline + subhead + short labels carrying the slot's single message — **at least two text levels** (H1+H2, or H1 + an H3 feature strip); a lone short headline is not an L1 layer and does not count toward a slot's enrichment minimum | copy sourcing/tiering per `selling-point.md` Steps 1–3; typographic mass per Step 5 part 3 → **Text-block mass**; language per **Default In-Image Language** | **Enrichment layer** — the normal carrier of a slot's message; copy must be customer-facing benefit/scenario wording, never a part name or a planning term |
 | **L2 Graphics** | three distinct kinds: **L2-anno** (leader lines, dot anchors, arrows pointing at parts, cutaway), **L2-geo** (equal columns, two-panel split, step badges, grids, flat-lay arrangement), **L2-ui** (cards/rows inside a device screen) | layout template per `selling-point.md` Step 4 | **Optional, and L2-anno is capped at ONE slot per set** — see **Expression-mode diversity**. L2-geo and L2-ui are not annotation and are not capped |
 | **L3 Human / interaction** | model, hands, in-use gesture | `model-showcase.md` (+ `scene-image.md` for the setting) | **Planned per product** — see **Human interaction planning**: usually 1–2 slots per set, with the level chosen from the product's form and operation mode. Never stamped onto every slot |
 | **L4 Accessory / packaging** | what's-in-the-box line-up, accessory arrangement | no dedicated reference — plan as L0 composition; only items the user confirmed are included | **Enrichment layer** — counts toward the minimum |
@@ -121,16 +129,16 @@ Stacking rules:
 > **In every platform image set, only the first/hero slot may be a single-capability image. Every other slot MUST be a composite slot.**
 
 1. **Hero slot (image 1)**: base layer only whenever the platform mandates a white/solid background or bans in-image text and overlays (Amazon, eBay, Walmart, AliExpress, TikTok Shop, Shopee, Lazada, Alibaba.com, 1688). On platforms with no such ban (Shopify, Etsy), the hero may be composite (archetype A1).
-2. **Every supporting slot (images 2..N)**: MUST be `L0 + at least TWO enrichment layers` drawn from the platform-permitted set, and at least one of them MUST carry the slot's message — normally **L1 copy**. Annotation graphics (L2-anno) are NOT the default way to carry a message and are capped at one slot per set (see **Expression-mode diversity**). A supporting slot is planned as an archetype (A2–A10), never as a bare scene/detail/angle shot.
+2. **Every supporting slot (images 2..N)**: MUST be `L0 + at least TWO enrichment layers` drawn from the platform-permitted set. **L1 copy is mandatory on every supporting slot whose platform permits it**, and it must be a valid ≥2-level text block — never a blank frame and never a lone headline. The second enrichment layer comes from L2/L3/L4/L5. Annotation graphics (L2-anno) are NOT the default way to carry a message and are capped at one slot per set (see **Expression-mode diversity**). A supporting slot is planned as an archetype (A2–A10), never as a bare scene/detail/angle shot.
 3. **Explicitly forbidden as a supporting slot**:
    - an alternate-angle white-background shot with nothing added;
    - a macro/detail crop with no labels, no callouts, and no interaction;
    - a plain lifestyle photo with no copy, no graphics, no person, and no accessories;
    - a slot whose only difference from another slot is the camera angle.
    These may be delivered as **extra** images beyond the required composite set, never as one of the required slots.
-4. **When a platform bans text and graphics** (TikTok Shop set-wide; eBay; and any slot where L1/L2 are prohibited): the two-enrichment minimum must be met with the **non-text layers** — L3 human/hand interaction, L4 accessory/packaging line-up, L5 companion device, in-use action, or scale reference. Never satisfy the mandate by smuggling in text the platform forbids, and never fall back to a bare product shot.
+4. **Platform-ban exception only**: when a platform explicitly bans text (TikTok Shop set-wide; eBay; Lazada promotional copy; and any hero or slot where L1 is prohibited), that ban is the **only** reason a platform-set image may contain no overlay copy. Meet the two-enrichment minimum with non-text layers — L3 human/hand interaction, L4 accessory/packaging line-up, L5 companion device, in-use action, or scale reference. Never satisfy the mandate by smuggling in text the platform forbids, and never treat preference, sparse facts, or a photography-led mood as permission to omit copy.
 5. **Mode class**: a supporting slot carrying L1, L2, L4, or L5 is **dense-layout**. A supporting slot enriched only with L3 (e.g. a TikTok in-use shot) stays **standard**.
-6. **Message coverage**: because every supporting slot is information-bearing, each one must own a distinct message (use context, working principle, operation, maintenance, contents, benefit, dual state). If the user cannot supply enough verified messages for the requested count, ask which messages to use or reduce the count — do not pad the set with bare angle shots.
+6. **Message coverage**: because every supporting slot is information-bearing, each one must own a distinct message (use context, working principle, operation, maintenance, contents, benefit, dual state). If the user cannot supply enough verified messages for the requested count, **reduce the count to what the verified messages support** and say so in the plan — do not pad the set with bare angle shots. Ask only when the user pinned the count as a hard requirement.
 
 > **Reading the platform specs below**: where a platform section lists supporting-image *types* ("back, side, detail, scene, packaging", "multiple angles", "scale reference"), it is describing the content each platform **permits**, not a delivery plan. Every such image must still be produced as a composite slot under this mandate — e.g. "detail" becomes a labeled structure/cutaway or a close-range in-use shot inside a real scene, "packaging" becomes an accessory line-up with a contents caption. Never read those lists as permission to ship a bare view.
 
@@ -230,7 +238,7 @@ The most common failure is a set where every image is "product + two or three le
 3. **Never render planning vocabulary as on-image text.** Words used to brief the shot — "Front View", "Visible Components", "Floor Contact", "Retail Interior Context", "Salon Placement", "Front Assembly Detail", occupancy percentages, angle names, slot or archetype names — are instructions to the model, not copy. On-image text may only be the customer-facing strings the user approved.
 4. **Copy must speak to the buyer, not describe the photo.** Captions like "Client Service Context", "Salon & Spa Setting", "Product shown within a salon service setting", "Pedicure chair shown in a professional service environment" only narrate what is already visible. Apply the **copy voice test**: does the line state a benefit, a scenario, a verified spec, or an instruction the buyer needs? If it merely names or describes the picture, rewrite it.
 5. **Vary the copy shape too**: if one slot uses a centred headline + subhead, another should use a flush-left headline, another a feature strip, another per-column captions. Not every slot gets "headline + 3 short labels".
-6. **A slot may also be purely photographic** (headline only, or even copy-free where the platform prefers it) when the message is emotional, scale, or context — that still satisfies enrichment through scene richness plus a person/pet/accessory.
+6. **A platform-set supporting slot is never deliberately copy-free when its platform permits copy.** Emotional, scale, and context messages still use a ≥2-level text block at its footprint (`selling-point.md` → Step 5 part 3 → **Text-block mass**) plus the scene/person/pet/accessory enrichment. The only no-copy exception is an explicit platform text ban (Supporting-slot rule 4).
 
 ### Slot brief template (fill before writing any prompt)
 
@@ -244,8 +252,8 @@ A thin prompt comes from a thin brief. For every slot, fill all ten fields — t
 | 4. Staging | product occupancy % + position zone; each secondary subject's occupancy %, position, and action; whether this slot carries a person/hand at all, and if so the level (hands / partial body / full body) with persona, wardrobe, gaze |
 | 5. Camera | angle, height, shot scale, and what is sharp vs defocused |
 | 6. Light | named source, side, time of day, quality, shadow behaviour |
-| 7. Art direction | named editorial register + palette + anti-ad clause |
-| 8. Copy | exact strings per text level (H1 / H2 / tertiary strip or note), language, plus this slot's **type voice + named font class** (from `selling-point.md` → Step 5 part 1, matched to field 7's register), its **skeleton** and zone, its **contrast direction** (dark-on-light / light-on-dark / tone-on-tone) with the sampled colour, and the **2–3 devices** it uses — each must differ from the other slots' |
+| 7. Art direction | the **platform style phrase** this set conforms to (rule 1 of **Platform Image Set Style Systems**) + named editorial register + palette + anti-ad clause |
+| 8. Copy | exact strings per text level (H1 / H2 / tertiary strip or note) — **at least two levels whenever the slot carries copy at all** (H1+H2, or H1 + an H3 feature strip; a lone short headline is not a text block, see `selling-point.md` → Step 5 part 3 → **Text-block mass**), language, plus the set's **type-lock phrase copied verbatim** (headline class + companion class + 简繁 variant + the CJK glyph-integrity clause where applicable — resolved once per set in **Set lock** → **Type system lock**, matched to field 7's register, never re-chosen for this slot), its **skeleton** and zone with the block's **target footprint** (8–18% of the canvas for a corner block / lower third / side column, 18–28% for a top band / split header / numeral-led block — reserved as negative space in fields 4–5 before the copy is placed), its **contrast direction** (dark-on-light / light-on-dark / tone-on-tone) with the sampled colour, the **2–3 devices** it uses — each must differ from the other slots' — and either the **one expressive treatment** this slot carries with its parameters (Step 5 part 7) or an explicit "plain type, no effects" |
 | 9. Graphics | which L2 kind, if any: L2-anno (only in the set's single M4 slot), L2-geo (columns/panels/badges/flat lay), L2-ui (screen cards) — with exact count, geometry, anchors — or an explicit "no icons, arrows, cards, or badges" when the slot is photography-led |
 | 10. Guards | anatomy, gravity, grounding, dryness, and identity clauses relevant to this slot |
 
@@ -276,10 +284,14 @@ Then fill this matrix for the whole set **before** writing any prompt. Two slots
 
 L1 is a **designed type system**, not text pasted onto a photo. Build every text-bearing slot per `selling-point.md` → **Step 5: Typography Design**, and enforce **variety** within one voice:
 
-- one type-voice family class (chosen from the product's art-direction register) reused across the set;
-- a **different skeleton per slot** (top band / left column / lower third / eyebrow stack / corner block / numeral-led / baseline strip / split header) — no two slots use the same skeleton unless the set exceeds 8 skeletons;
+- **Every platform-set supporting slot carries a real text block whenever its platform permits copy**: ≥2 levels (H1+H2, or H1 + an H3 feature strip) with 2–3 devices, occupying **8–18%** of the canvas for a corner / lower-third / side-column skeleton or **18–28%** for a top band / split header / numeral-led one, with that zone reserved as negative space in the composition *before* the copy is placed. A blank supporting frame and a single four-character headline are both failures. When a slot has only one verified message, add the second level from the **same verified facts** (a 3–4 item feature strip, a footnote); **never lengthen the headline** to fill space. If verified copy is insufficient, obtain it in the one consolidated plan confirmation or reduce the set to the supported count — do not omit text;
+- **one locked font system for the whole set**, resolved once as the **type-lock phrase** (**Set lock** → **Type system lock**) and written verbatim into every text-bearing slot — same headline class, same companion class, same 简繁 variant in slot 1 and slot 6; the family class is never re-chosen per slot;
+- for a **Chinese-language set** (every zh-CN platform), the locked class is named from `selling-point.md` → Step 5 part 1 → **CJK type voices** — 宋体/明朝体、仿宋、楷体、魏碑、书法行书、隶书、黑体、圆体、方头黑/等线体、长体黑、美术字 — plus its Latin/numeral companion; a flat 黑体 headline in every slot is the failure this rule exists to stop, and every CJK text slot carries the glyph-integrity clause;
+- a **different skeleton per slot** (top band / left column / lower third / eyebrow stack / corner block / numeral-led / baseline strip / split header) — no two slots use the same skeleton unless the set exceeds 8 skeletons; **relocating the same block to another corner is not a different skeleton** — the block's *structure* must change (line count, compact vs edge-spanning, kicker- or numeral-led, band vs column), see `selling-point.md` → Step 5 part 2;
 - text colour derived from the scene (darkest neutral in the frame), not a fixed `#1A1A1A`/`#6B6B6B` in every image;
+- for CJK copy, per-slot variation comes from 字重档位、字号、skeleton、竖排 vs 横排、对比方向、全角分隔符 (there is no ALL-CAPS lever) — each zh slot must move at least two of them;
 - each slot picks 2–3 typographic devices from the device library, and at least 4 distinct devices appear across a 4-image set;
+- an **expressive treatment** (描边 / 投影 / 发光 / 浮雕压印 / 渐变填充 / 金属铬 / 膨胀弧形 / 硬边色块承载文字) is available per `selling-point.md` → Step 5 part 7 — **at most 1–2 slots per set**, one treatment per slot, register- and platform-gated, never on the hero / cutaway / spec slot, and never as a legibility fix;
 - copy always sits in **reserved negative space** planned in the composition — never over the product, never crossing a face or the product silhouette.
 
 ### Slot archetypes (reusable stacks)
@@ -307,12 +319,12 @@ Use these as the planning vocabulary. Pick 4–8 per set; each slot carries exac
 
 ### Composite planning of a set
 
-1. Lock the platform hard specs first (hero rule, slot count, ratio, prohibited elements) from the platform section below.
+1. Lock the platform hard specs first (hero rule, slot count, ratio, prohibited elements) from the platform section below, then resolve the set-wide locks in **Set lock** — including the **type-lock phrase** — before writing any slot prompt.
 2. Assign an archetype per slot so the set answers, in order: **what it is → where it is used → how it works → how it is operated → how it is maintained → what is included**. Add a lifestyle/benefit or dual-state slot when the count allows. Every slot after the hero must satisfy the **Supporting-slot enrichment mandate**.
 3. **Hero exception**: when the platform forbids in-image text or overlays on the hero, that slot is **L0 only** — strip L1/L2 entirely instead of shrinking the copy. This exception applies to the hero slot ONLY; it never justifies a bare supporting slot.
 4. Do not reuse one archetype twice in a set unless the platform requires multiple scene/detail slots — and even then, the two slots must carry different messages and different enrichment layers. Vary the archetype, never the style tokens.
 5. One AI call per slot; slot count must match the requested/platform count (≥4 for a complete set).
-6. If an archetype needs a fact the user has not supplied (UI strings, accessory list, internal structure), ask for that fact or swap in another enriched archetype — never substitute a generic single-scene or single-angle image silently.
+6. If an archetype needs a fact the user has not supplied (UI strings, accessory list, internal structure), **swap in another enriched archetype that the available facts support** and note the swap in the plan — add the missing fact to the single consolidated ask only when no alternative archetype fits. Never substitute a generic single-scene or single-angle image silently.
 
 ### Layer permission by platform
 
@@ -328,11 +340,16 @@ Use these as the planning vocabulary. Pick 4–8 per set; each slot carries exac
 | Shopee | L0 only, solid-color cover | L1 / L2 / L3 / L4 | L1 + one of L2/L3/L4 | no promo text/symbols, no collage |
 | Lazada | L0 only, pure white | L2 / L3 / L4 (informational labels only, no promo copy) | L2 + one of L3/L4 | no promotional text or decorative overlays on any slot |
 | Alibaba.com | L0 only, real photo, 75–80% | L1 (English only) / L2 / L3 / L4 / L5 | L1 + one of L2/L3/L4/L5 | Chinese text banned; marketing/discount wording banned |
-| 1688 | L0 only, pure white | L1 (zh-CN) / L2 / L3 / L4 / L5 | L1 + one of L2/L3/L4/L5 | no excessive text overlay, no other-platform watermark |
+| 1688 | L0 only, pure white | L1 (zh-CN) / L2 / L3 / L4 / L5 | L1 + one of L2/L3/L4/L5 | no excessive text overlay, no misleading promotional wording, no other-platform watermark |
+| Taobao (淘宝) | L0; hero background rule not defined in the sourced material — **verify officially** | L1 (zh-CN) / L2 / L3 / L4 / L5 (AI scene and model images explicitly permitted) | L1 + one of L2/L3/L4/L5 | fabricated accessories/gifts/functions/packaging/certifications/sales data; defect erasure on second-hand items; unlabeled pre-sale renders |
+| Tmall (天猫) | L0; same as Taobao — **verify officially** | L1 (zh-CN) / L2 / L3 / L4 / L5 | L1 + one of L2/L3/L4/L5 | concept render passed off as a finished product; fake brand/certification/award/sales data; unauthorized brand/IP/celebrity likeness; altered fabric, cut, or shoe shape on AI model shots |
+| Douyin E-Commerce (抖音电商) | L0 only for the 全球购 channel: front-facing real product, brand logo permitted, **no other text and no watermark** | L1 (zh-CN) / L2 / L3 / L4 / L5 | L1 + one of L2/L3/L4/L5 | heavy watermarks, 大字报/牛皮癣 oversized promo type, collage, compression distortion, over-retouching, click-bait; anything the buyer will not receive |
+| JD.com (京东) | L0, complete and clear product subject | L1 (zh-CN) / L2 / L3 / L4 / L5 | L1 + one of L2/L3/L4/L5 | unauthorized 京东物流/京东超市/官方认证 marks; other platforms' names, logos, contact info, URLs, QR codes; off-site traffic diversion |
+| Pinduoduo (拼多多) | L0, undistorted product appearance | L1 (zh-CN) / L2 / L3 / L4 / L5 | L1 + one of L2/L3/L4/L5 | deformed/distorted product; misleading directional comparison images; high-value image on a low-value SKU; AI-fabricated packaging, label, certification, or efficacy |
 
 > The platform ban always wins over the archetype. If an archetype's message cannot survive the ban (e.g. A4 leader labels in a TikTok set), move that message to a slot the platform allows or drop the archetype — never smuggle the text in at a smaller size.
 
-> **Exception — a user-confirmed logo/watermark outranks the platform ban.** When the user has confirmed "keep my logo/watermark" per SKILL.md → Step 0 **Logo / watermark confirmation**, that mark is a user hard constraint and is exempt from every ban in the table above and in each platform's **Prohibited elements** list. Keep it in **every** slot including an `L0 only` hero, at the source's relative position and relative scale, unshrunk and unfaded. Precedence: **explicit user decision > platform requirement > reference default**. It is an overlay layer, not part of L0/L1/L2 — it does not consume a slot's enrichment quota and does not count as the banned text/graphic overlay. Warn the user once about the listing-compliance risk, then generate as confirmed.
+> **Exception — a user-confirmed logo/watermark outranks the platform ban.** When the user has confirmed "keep my logo/watermark" per SKILL.md → Step 0 **Logo / watermark confirmation**, that mark is a user hard constraint and is exempt from every ban in the table above and from the platform's **Prohibited elements** list in its spec file (`platform-specs-overseas.md` / `platform-specs-china.md`). Keep it in **every** slot including an `L0 only` hero, at the source's relative position and relative scale, unshrunk and unfaded. Precedence: **explicit user decision > platform requirement > reference default**. It is an overlay layer, not part of L0/L1/L2 — it does not consume a slot's enrichment quota and does not count as the banned text/graphic overlay. Warn the user once about the listing-compliance risk, then generate as confirmed.
 
 ### Set lock — extended for composite slots
 
@@ -341,8 +358,17 @@ Beyond the style tokens (background world, lighting, palette), lock the followin
 - **Product structure lock** — every slot shows the same visible structure (same window, buttons, outlet, bowl, ports, seams). Multi-column and dual-unit slots must be internally identical as well.
 - **Persona lock** — when more than one slot shows a person, use one persona (age band, hair, wardrobe palette) across them; pose, interaction level, and framing change per slot.
 - **Scene world lock with room variety** — one coherent world (same home/workspace, same palette, same light temperature), but a different room area, vantage, or depth arrangement in every slot.
-- **Type system lock** — one type-voice family class across the set (`selling-point.md` → Step 5 part 1), named as a concrete font class (serif / Didone / humanist sans / condensed / small caps / script / mono — **not defaulting to a heavy sans**). **When the product itself carries type** (wordmark, packaging print, panel labels, screen UI), sample that letterform as the set's voice first — style only, never its wording, and never re-typeset the product's own text. What varies per slot is the skeleton, case, devices, **contrast direction (dark-on-light / light-on-dark white or ivory / tone-on-tone)**, and colour tone — always sampled from the scene, never a frozen hex value.
+- **Type system lock (one set = one font system)** — resolve the set's type system **once at plan time**, write it down as a fixed **type-lock phrase**, and copy that phrase **verbatim** into every text-bearing slot's `Typography:` block, exactly as the platform style phrase is repeated in block 8. The phrase names, in this order:
+  1. **Headline font class** — a concrete class from `selling-point.md` → Step 5 part 1 (serif / Didone / humanist sans / geometric sans / condensed grotesk / small caps / script / mono — **never "modern clean font", never a heavy sans by default**); for Chinese/Japanese/Korean copy, a concrete class from the **CJK type voices** table — **never a bare 黑体 default**.
+  2. **Companion class** — the family carrying the second level, and every Latin word/numeral inside CJK copy (two families per image maximum, per Step 5 part 1).
+  3. **Script variant** — one 简繁 choice for the whole set when the copy is Chinese.
+  4. **Glyph-integrity clause** — mandatory in every CJK text slot (笔画完整、无错字缺笔变形).
+
+  > Example (淘宝高端编辑风 set): `type lock: 中粗宋体标题 + 等线黑副文与数字 / 拉丁，全套简体，汉字笔画完整无变形`. Example (Etsy handmade set): `type lock: elegant handwritten script headline + old-style serif for all supporting levels`.
+
+  **Never re-resolve the voice per slot.** Choosing a different headline class, a different companion, or a different 简繁 variant in slot 3 than in slot 2 is a set-consistency failure — that slot is regenerated, not accepted, even if its own typography is individually well designed. **When the product itself carries type** (wordmark, packaging print, panel labels, screen UI), sample that letterform as the set's voice first — style only, never its wording, and never re-typeset the product's own text. What varies per slot is the skeleton, case (字重档位 for CJK), devices, **contrast direction (dark-on-light / light-on-dark white or ivory / tone-on-tone)**, and colour tone — always sampled from the scene, never a frozen hex value, and always **inside the locked families**. Role-swapping within the lock (a serif headline in the lifestyle slots, a sans-only treatment in the spec or contents slot) is variation, not a broken lock.
 - **Graphic language lock** — one leader-line weight/color, one arrow style, one badge shape/color for the entire set.
+- **Treatment budget** — at most 1–2 slots in the set carry an expressive type treatment (Step 5 part 7); when two do, they use the **same** treatment family so the set reads as one design, and every other slot is explicitly plain.
 - **Message uniqueness** — each slot owns one message; never restate another slot's headline.
 
 ### Composite slot check (agent-side)
@@ -363,12 +389,17 @@ Beyond the style tokens (background world, lighting, palette), lock the followin
 - **Copy shape varies across the set** — not every slot is "headline + a few short labels".
 - **Photography-led slots explicitly say no graphics are added**, so they are not decorated with stray icons or badges.
 - **The differentiation matrix is filled** and no two slots share more than two identical columns; shot scale, camera height, and product placement vary across the set.
-- **Typography varies** across the set: no two slots share the same skeleton; at least 4 different typographic devices appear in a 4-image set; a **concrete font class is named** (not "modern clean font", not a heavy sans by default); the **contrast direction changes between slots** — at least one slot uses white/ivory type on a dark, shadowed, or softly scrimmed area when the scenes allow it; text colour is sampled from the scene (not a frozen hex in every image); copy sits in reserved negative space and never overlaps the product or a face.
+- **The type-lock phrase is present and identical** in every text-bearing slot's `Typography:` block — same headline font class, same companion class, same 简繁 variant across the whole set; a slot that names a different font class (or leaves the class generic) breaks the set and is regenerated, not accepted. Only skeleton, weight/case, size, devices, contrast direction, and colour tone vary between slots, all inside the locked families.
+- **Typography varies** across the set: no two slots share the same skeleton (**and no skeleton is "varied" merely by moving the same block to a different corner** — the block's structure must change); **every supporting slot on a copy-permitted platform has a `Typography:` block with ≥2 text levels and 2–3 devices at the target footprint** (8–18% corner/lower-third/side-column, 18–28% top band/split header/numeral-led) — a missing block, blank image, or lone short headline is a hard failure, and no headline is stretched past its word cap to compensate; at least 4 different typographic devices appear in a 4-image set; a **concrete font class is named** (not "modern clean font", not a heavy sans by default); the **contrast direction changes between slots** — at least one slot uses white/ivory type on a dark, shadowed, or softly scrimmed area when the scenes allow it; text colour is sampled from the scene (not a frozen hex in every image); copy sits in reserved negative space and never overlaps the product or a face.
+- **Chinese-language sets additionally pass**: the named class comes from the **CJK type voices** table and matches the product's register (a default 黑体 across every slot is a failure); a Latin/numeral companion is named; one 简繁 variant holds set-wide; every CJK text slot carries the glyph-integrity clause (笔画完整、无错字缺笔变形); each zh slot moves ≥2 CJK variation levers from its neighbours; no 伪粗/伪斜, no mechanically stretched glyphs, no letter-spaced Chinese headline.
+- **Expressive treatments stay inside their budget**: ≤1–2 treated slots per set, one treatment per treated slot (never stacked), the register and the platform both permit it, no treatment on the hero / cutaway / spec slot, no treatment used to fix contrast, and 汉字 are never warped, inflated, arched, or relief-deformed.
+- **The platform style phrase is present and identical** in every slot's block 8 (and referenced by block 9 on text slots) — the set states which platform's look it conforms to instead of leaving it implicit.
 - The hero slot is the only single-capability image in the set, and it complies with the platform's layer ban.
 - Slot count matches the requested/platform count, with one AI call per slot.
 - Each L1 string is verbatim, appears exactly once, and is in the resolved target language.
 - Each L2 element has a stated count, position, and anchor; each L4 item is in the confirmed list.
 - Each supporting slot carries a distinct message; no two slots differ only by camera angle.
+- **Text-presence gate**: every supporting slot whose platform permits L1 has a non-empty `Typography:` block and visible ≥2-level copy in the output. A blank supporting image is rejected and regenerated; only an explicit platform text ban can waive this gate.
 - No layer introduces a fact absent from the user request or the source image.
 
 ---
@@ -405,7 +436,7 @@ Beyond the style tokens (background world, lighting, palette), lock the followin
    - Summarize back to the user: operation, target ratio, output count, and any assumptions.
    - Propose a **flexible style anchor** — a short phrase that captures the shared treatment (e.g., "clean studio lighting, soft shadow, neutral background") without prescribing a single literal scene.
    - Example: *"Batch plan: convert all 12 images to clean white-bg product hero, 1:1, 1600×1600, with consistent studio lighting and soft shadow. If a product clearly belongs in a different environment, we'll adapt the background while keeping the lighting quality uniform."*
-   - Ask for confirmation if the request is ambiguous or if outliers exist.
+   - Confirm the plan **once**, together with every other open item (`SKILL.md` → Step 3 → **One ask, not a chain**), and only when an operation is genuinely unstated or outliers exist. Do not confirm the ratio, size, or style anchor separately, and do not re-confirm per image.
 
 3. **Generate one image at a time with a shared template and per-image adaptation.**
    - Use a reusable prompt skeleton: `[Operation] + [Flexible style anchor] + [Per-image adaptation] + [Per-image preservation clause]`.
@@ -436,360 +467,32 @@ When the user uploads **multiple product images** and asks for a **platform imag
 1. **One platform set per input image** — treat each uploaded product image as the single reference for its own set. Do not mix products across sets.
 2. **Per-set style contract is primary; batch-wide anchor is secondary** — within one set, use the platform's style system (shared background world, lighting, palette). Across different sets, the style contract restarts for each new product. Do not force unrelated products into a single shared literal background just because they are processed in the same batch; keep treatment quality consistent, not the literal scene.
 3. **Output mapping** — aggregate results by input image so the user can clearly map each generated image back to its source product (e.g., "Product A — hero", "Product A — scene", "Product B — hero", ...).
-4. **Reference count** — load `references/platform-product-guidelines.md` once, then apply its rules independently to each product's set.
+4. **Reference count** — load this file plus the one matching spec file once for the whole batch (all products in a batch share the same platform), then apply their rules independently to each product's set.
 5. **Do not average products** — each set preserves only its own product's identity; never generate a "generic" set that blends features from multiple inputs.
 
 ### Common Pitfalls
 
 - **Over-locking the scene**: forcing a kitchen counter background onto every image when the batch contains outdoor gear will produce nonsensical results. Lock the treatment, not the literal environment.
 - **Drifting treatment adjectives**: replacing "soft natural shadow" with "gentle shadow" or "subtle drop shadow" across calls will break batch coherence. Pick one phrase for the shared anchor and stick to it.
-- **Source-ratio following by default**: when the user says "batch process these", they usually expect visual consistency more than pixel-perfect source preservation. Confirm the target ratio instead of silently mixing ratios.
+- **Source-ratio following by default**: when the user says "batch process these", they usually expect visual consistency more than pixel-perfect source preservation. Pick one target ratio, state it in the plan, and use it for the whole batch instead of silently mixing ratios.
 - **Outlier contamination**: one corrupted, miscategorized, or heavily watermarked image can make the whole batch look uneven if its output is included without flagging.
 - **Silent enhancement variance**: applying HD upscale to only the low-res images while leaving others untouched creates a visibly uneven batch.
 
 ---
 
-## Cross-Border B2C
+## Platform Spec Files
 
-### 1. Amazon
+> **This file holds no platform's hard specs.** Ratios, pixel sizes, file formats, size caps, coverage percentages, prohibited-element lists, and per-platform slot plans live in the two spec files below. Load **exactly one** — the one containing the platform the user named — in addition to this file.
 
-1. **Hero image count**: 1 hero required; recommended total ≥6 supporting images + 1 video.
-2. **White background**: ✅ Mandatory pure white (RGB 255, 255, 255).
-3. **Recommended size**: Longest side min 500 px, max 10,000 px; recommended ≥1600 px for best zoom. **AI generation target: 2K (2048 px on the longest edge)**.
-4. **Aspect ratio**: No strict enforcement; typically 1:1 or category-appropriate.
-5. **File format**: JPEG preferred; also TIFF, PNG, GIF (non-animated).
-6. **Max file size**: 10 MB.
-7. **Resolution/DPI**: 72 DPI recommended; longest side ≥1000 px enables Zoom.
-8. **Product coverage**: ≥85%.
-9. **Background**: Hero must be pure white; supporting images allow lifestyle scenes, text, infographics.
-10. **Prohibited elements**: Watermarks, borders, text, logos, URLs, prices, promotions (e.g., "Free Shipping"), non-included accessories, mannequins (except apparel), reviews/ratings, Amazon logos.
-11. **Supporting images**: Allow product details, scale references, lifestyle scenes, text overlays, infographics, models.
-12. **Video/3D**: 1 video recommended, MP4 or common formats.
-13. **Category-specific rules**:
-    - Footwear: single shoe facing left at 45°
-    - Adult apparel: hero must use model, standing
-    - Underwear/swimwear/infant clothing: must be flat lay, no model
-14. **Official docs**: [Image requirements](https://sellercentral.amazon.com/help/hub/reference/external/G1881) | [Style guide](https://sellercentral.amazon.com/help/hub/reference/external/G9FUUH87RBNXGKB7)
+| Platform named by the user | Load this spec file |
+|----------------------------|---------------------|
+| Amazon, eBay, Walmart, Shopify, Etsy, AliExpress, TikTok Shop, Shopee, Lazada, Alibaba.com | `references/platform-specs-overseas.md` (§1–10) |
+| 1688, Taobao (淘宝), Tmall (天猫), Douyin E-Commerce (抖音电商), JD.com (京东), Pinduoduo (拼多多) | `references/platform-specs-china.md` (§11–16) |
 
-### Amazon Image Set Style Notes
+Rules:
 
-Amazon is the **info-first** platform. The winning structure for a 4-image set is usually:
-
-1. **White-bg hero** — all colorways in a neat grid or a single clear product shot on pure white; communicates SKU value instantly.
-2. **Spec chart** — dimension callouts (diameter, thickness, length, stretch) in one clean infographic slot; merge dimensions rather than spreading them across multiple images.
-3. **Usage guide** — 2–4 configurations/positions with short headings and sub-lines showing how the product is used.
-4. **Benefit callout** — product arrangement + real hand or lifestyle detail + one benefit sentence; keep it inside the white-bg world.
-
-Style tokens: `clean white background, thin dark gray dimension arrows, small neat sans-serif labels, generous white space, soft neutral shadows`.
-
-> **Enrichment mandate for Amazon**: slot 1 is the hero (L0 only, pure white, ≥85%). Slots 2–4 are composite by construction — spec chart = L0 studio + L2 arrows/leader lines + L1 values; usage guide = L0 studio or scene columns + L2 step badges + L1 captions; benefit callout = L0 + L3 hand or lifestyle detail + L1 benefit line. Any additional supporting image (slots 5–7) must also carry ≥2 enrichment layers; a plain back/side/angle shot is an extra, not a required slot.
-
-> **Why this works**: Amazon buyers are in comparison mode; info density and clarity beat atmospheric lifestyle scenes. Lifestyle can still appear in slots 5–7 if the user wants them, but the core 4-image set should answer "what is it, what size, how do I use it, why is it better" first.
-
----
-
-### 2. eBay
-
-1. **Image count**: 1–24.
-2. **White background**: ⭕ Strongly recommended.
-3. **Recommended size**: Min 500×500 px; recommended 1600×1600 px for clearer display and zoom viewing. **AI generation target: 2K (2048 px on the longest edge)**.
-4. **Aspect ratio**: 1:1 or 16:9.
-5. **File format**: JPEG, PNG, GIF, TIFF, BMP, WEBP, HEIC, AVIF.
-6. **Max file size**: 12 MB.
-7. **Resolution**: High resolution (1600 px recommended) enables zoom.
-8. **Product coverage**: Not specified; must show full product without clutter.
-9. **Background**: Neutral or white recommended; avoid cluttered environments.
-10. **Prohibited elements**: Borders, text, logos, copyright notices, watermarks, promotional badges.
-11. **Supporting images**: Multiple angles, details, defects, size reference (e.g., coin), package contents.
-12. **Video**: Via Photos & Video panel.
-13. **Category-specific**: Used/vintage items must use actual photos (no stock images); PSA Graded Cards have a dedicated auto-fill flow.
-14. **Official docs**: [Picture requirements](https://www.ebay.com/help/selling/listings/adding-pictures-listings/picture-requirements?id=4148)
-
-### eBay Image Set Style Notes
-
-eBay is the **trust-first catalog** platform. The safest 4-image set is a consistent light-gray or white multi-view catalog:
-
-1. **3/4 hero** — angled front view on neutral background (L0 only; the set's single-capability image).
-2. **Condition / mechanism composite slot** — straight-on or profile base + hand demonstrating the mechanism, opening, or fit (L0 + L3 + a second interaction/context cue).
-3. **Scale composite slot** — detail or profile base + a scale reference held or placed beside the product (coin, hand, everyday object) + visible contact grounding.
-4. **Contents composite slot** — product with its included accessories/packaging laid out, or macro material shot with a hand presenting it (L0 + L4, or L0 + L3 + L4).
-
-Style tokens: `light gray seamless background, even soft shadow, consistent camera height and lighting across all views, no props that do not come with the product`.
-
-> **Enrichment mandate for eBay**: eBay bans in-image text and badges, so slots 2–4 must still be composite via non-text layers — e.g. hand-held scale reference, product in use, accessory/packaging line-up, or mechanism shown mid-action. A plain second/third camera angle does not count as a required slot (see **Supporting-slot enrichment mandate**).
-
-> **Why this works**: eBay buyers need to verify condition and authenticity; multi-view consistency is the trust signal. This set is a solid fallback when the user does not need a styled campaign, but it is usually lower priority than Amazon/TikTok/Etsy/Shopify sets.
-
----
-
-### 3. Walmart Marketplace
-
-1. **Image count**: ≥1; recommended ≥4.
-2. **White background**: ✅ Mandatory seamless pure white (RGB 255, 255, 255).
-3. **Recommended size**: US: 2200×2200 px; CA: 2000×2000 px @ 300 ppi. **AI generation target: 2K (2048 px on the longest edge)**, then scale to market final size.
-4. **Aspect ratio**: 1:1 (square).
-5. **File format**: JPEG, JPG, PNG, BMP (no animated GIF).
-6. **Color format**: RGB; bit depth: 8 bits per pixel.
-7. **Max file size**: US: 5 MB; CA: 1 MB.
-8. **Resolution**: Min 500×500 px (below = auto-delist); zoom requires 1500×1500 (US) / 2000×2000 (CA).
-9. **Image duplication**: Do not duplicate images on the same product detail page.
-10. **Product coverage**: Fill frame as closely as possible.
-11. **Background**: Hero must be seamless white; supporting images allow environment/detail shots.
-12. **Prohibited elements**: Watermarks, personal/company logos, text overlays, promotional language, price tags, borders, non-included accessories, other retailer logos.
-13. **Supporting images**: Back, side, detail, multi-angle, lifestyle; apparel allows "Pack Bugs". These are the platform-permitted content types, not a delivery plan — build each as a composite slot (`L0 + L1 labels + one of L2/L3/L4`) per **Supporting-slot enrichment mandate**; a bare back/side/angle shot is an extra image, never a required slot.
-14. **Video/3D**: Rich Media supported per Walmart media library standards.
-15. **Category-specific**: Large items (e.g., bedding) may include reasonable lifestyle environment.
-16. **Official docs**: [US guidelines](https://marketplacelearn.walmart.com/guides/Item%20setup/Item%20content,%20imagery,%20and%20media/Product-detail-page:-Image-guidelines-&-requirements) | [CA guidelines](https://marketplacelearn.walmart.com/ca/guides/Item%20setup/Item%20content,%20imagery,%20and%20media/item-image-guidelines)
-
----
-
-### 4. Shopify
-
-1. **Image count**: Min 1; max 250 media items per product (images + 3D + video).
-2. **White background**: Not required; theme-dependent.
-3. **Recommended size**: 2048×2048 px (square) for best display. **AI generation target: 2K (2048 px on the longest edge)**.
-4. **Aspect ratio**: 1:1 recommended; any ratio supported (auto-generates thumbnails).
-5. **File format**: PNG (preferred), JPEG, WebP, PSD, TIFF, BMP, GIF, SVG, HEIC. Animated GIF and WebP files are supported.
-6. **Max file size**: Image 20 MB; 3D model 500 MB; video 1 GB.
-7. **Resolution**: Max 5000×5000 px or 25 megapixels.
-8. **Product coverage**: Not specified; product should be clear.
-9. **Background**: Not specified; driven by merchant brand style.
-10. **Prohibited elements**: Embedded videos must not use private/restricted-access videos (must be public/unlisted).
-11. **Supporting images**: Encouraged multi-angle; system auto-generates size variants.
-12. **Video/3D**: Uploaded video ≤10 min, ≤1 GB, up to 4K (4096×2160 px), in .mp4, .mov, or .webm format; 3D models ≤500 MB, in .GLB or .USDZ format.
-13. **Category-specific**: None (customized via apps/theme code).
-14. **Official docs**: [Product media types](https://help.shopify.com/en/manual/products/product-media/product-media-types) | [Add media](https://help.shopify.com/en/manual/products/product-media/add-media)
-
-### Shopify Image Set Style Notes
-
-Shopify is the **brand-owned premium** platform. There is no platform-imposed style, so the image world should match the merchant's page theme. A proven 4-image luxury/professional set:
-
-1. **Product portrait** — negative-space hero under deliberate lighting (spotlight or rim light).
-2. **Detail macro** — material, weave, texture, or craft close-up.
-3. **Styled flat lay** — curated surface arrangement showing the product as object.
-4. **Gift box / packaging shot** — only when gifting is the selling angle; otherwise replace with another detail or lifestyle still.
-
-Style tokens: `dark moody premium, deliberate lighting design, controlled shadows, styled surfaces, editorial composition, subtle film grain`.
-
-> **Enrichment mandate for Shopify**: slots 2–4 must still be composite — pair the macro/flat-lay/packaging base with brand-voice copy plus one more layer (annotation, swatch cards, accessory line-up, or the single anonymous hand). A bare macro or bare flat lay does not satisfy a required slot.
-
-Hard boundary vs TikTok: **people are absent, or at most one anonymous styling hand**. The product-as-object is the selling point; it should feel like a brand lookbook, not a creator post.
-
-> **Why this works**: Shopify shoppers buy into a brand world. Coherence between the image set and the page theme (dark set → dark theme, serif wordmark, swatch dots) is the conversion driver. Adapt the palette to the product category (navy/teal for premium, warm earth for artisan, monochrome for minimalist).
-
----
-
-### 5. Etsy
-
-1. **Image count**: Max 20 photos.
-2. **White background**: Not required; stock images and placeholder renders prohibited.
-3. **Recommended size**: Width and height ≥2000 px; the first image should have both width and height ≥635 px to avoid appearing lower in search results. **AI generation target: 2048 px on the shortest side** (ensures both dimensions meet Etsy's ≥2000 px recommendation; note this differs from other platforms where 2K refers to the longest edge).
-4. **Aspect ratio**: 4:3 or 1:1 recommended (first image horizontal or square for thumbnail cropping).
-5. **File format**: .jpg, .gif, .png, .svg, .heic (no animated .gif, no transparent .png).
-6. **Max file size**: ≤1 MB recommended for stable upload.
-7. **Resolution**: 72 PPI recommended; sRGB color mode.
-8. **Product coverage**: Centered with adequate negative space (for cropping tolerance).
-9. **Background**: Clean with ample whitespace recommended.
-10. **Prohibited elements**: Hero must not contain placeholder mockups (e.g., "Your Text Here"); must use original photos.
-11. **Supporting images**: Subsequent images may use renders to show customization options.
-12. **Video**: 3–15 s, silent, ≤100 MB, MP4/MOV/FLV/AAC/AVI/3GP/MPEG, 1080p recommended.
-13. **Category-specific**: Children's products must meet safety policy; custom products require real sample as hero.
-14. **Official docs**: [Image help](https://help.etsy.com/hc/en-us/articles/115015663347) | [Image requirements](https://www.etsy.com/legal/policy/listing-image-requirements/253962679005)
-
-### Etsy Image Set Style Notes
-
-Etsy is the **handmade / warm / gifting** platform. The winning system is a handwritten scrapbook collage set, all in **4:3 landscape** with content kept in the central safe zone (desktop thumbnails crop 4:3, mobile crops 1:1).
-
-A proven 4-image structure:
-
-1. **Cover** — product cluster or wreath on one side, large handwritten script title + subline on the other; title must survive thumbnail crop.
-2. **Feature chart** — products or details annotated with handwritten color names and small icons.
-3. **Usage polaroids** — 1–2 taped photo frames showing the product in use, with warm annotation.
-4. **Gift box** — kraft box with tissue/twine, product peeking out; box itself stays text-free, annotation around it.
-
-Style tokens: `textured light gray paper background, beige washi tape, elegant handwritten script typography, hand-drawn hearts/arrows/sparkles, polaroid frames, soft natural shadows`.
-
-> **Enrichment mandate for Etsy**: the handwriting layer is what makes these slots composite — every non-cover slot needs handwritten L1 copy plus one more layer (L2 annotation/icons/polaroid frames, L3 hand, or L4 gift packaging). A clean unannotated product photo does not satisfy a required slot.
-
-> **Why this works**: The handwritten annotation layer carries the 手作感 and personality that plain photography cannot. Do not abandon it because a user complains the template feels repetitive — instead vary the collage dialect (torn-edge scraps, filmstrips, notebook margins, wax seals, pressed flowers) while keeping the handwriting voice.
-
----
-
-### 6. AliExpress
-
-1. **Image count**: 1–6 (some categories up to 8).
-2. **White background**: Mandatory for first hero image.
-3. **Recommended size**: ≥800×800 px. **AI generation target: 2K (2048 px on the longest edge)**, then downscale to final delivery size and ≤5 MB if needed.
-4. **Aspect ratio**: 1:1.
-5. **File format**: JPG, JPEG, PNG.
-6. **Max file size**: ≤2 MB or ≤5 MB (varies by category).
-7. **Resolution**: Not specified; must be clear and not blurry.
-8. **Product coverage**: 70%–85%.
-9. **Background**: First image pure white; subsequent allow solid color, scene, or lifestyle.
-10. **Prohibited elements**: Borders, watermarks, multi-image collages, oversized marketing text or color blocks.
-11. **Brand logo exception**: A brand logo may be placed in the upper-left corner, up to 220×80 px, with a 20 px margin, under the accessible regional guidelines.
-12. **Supporting images**: Recommended order: front, back, side, detail, scene, packaging — read as **content types the platform permits, not slots**. Deliver them as composite slots: hero = L0 only pure white; then a use-context slot (L0 scene + L1 + L3/L2), a structure or steps slot (L0 + L2 callouts/cutaway + L1 labels), and a contents slot (L0 + L4 accessory line-up + L1 caption). Keep marketing type restrained (no oversized text or color blocks) and never ship a bare front/back/side view as a required slot.
-13. **Video**: ≤30 s (max 2 min), ≤2 GB, AVI/3GP/MOV/MP4.
-14. **Category-specific**: Apparel recommends model photography.
-15. **Official docs**: [Seller portal](https://sell.aliexpress.com/) | [Seller learning](https://sellerlearning.aliexpress.com/)
-
----
-
-### 7. TikTok Shop
-
-1. **Image count**: 1–9 (≥5 recommended for "Good" quality rating).
-2. **White background**: Hero (first image) must be pure white.
-3. **Recommended size**: ≥600×600 px. **AI generation target: 2K (2048 px on the longest edge)**, then compress to ≤2 MB if needed.
-4. **Aspect ratio**: 1:1 (square).
-5. **File format**: JPG, JPEG, PNG.
-6. **Max file size**: Image not specified (≤2 MB recommended); video ≤5 MB.
-7. **Resolution**: >600×600 px.
-8. **Product coverage**: Not specified; must clearly show the subject.
-9. **Background**: Hero must be pure white; no mosaic or blur effects.
-10. **Prohibited elements**: Watermarks, text, borders, graphic overlays, marketing stickers (e.g., "Best Seller"), digital renders, black-and-white images.
-11. **Supporting images**: Show different angles, functional details, accessories; no duplicate angles.
-12. **Video specs**: Max 1 video per listing, **≤5 MB** (very strict limit).
-13. **Media Center video**: Product Media Center accepts MP4 videos ≤10 MB, under 60 seconds, with an aspect ratio from 9:16 to 16:9; however, the Product Listing Policy separately limits listing videos to ≤5 MB.
-14. **Category-specific**: Food must show packaging; children's swimwear/underwear must be flat lay on background — no live models or mannequins.
-15. **Official docs**: [Image guidelines](https://seller-us.tiktok.com/university/essay?knowledge_id=3196690250417921)
-
-### TikTok Shop Image Set Style Notes
-
-TikTok Shop is the **creator / UGC 种草** platform. The hard differentiator is **human presence**: at least 3 of the 4 shots must include a person or body part (hands, arms, lap, shoulder, POV grip) **interacting with the product**.
-
-Recommended 4-image structure:
-
-1. **Worn-as-accessory close-up** — hands, wrist stack, clasped pose, or how the product is worn/held.
-2. **Rear-head / hairstyle detail** — product in use with hard shadow on wall; faces out of frame.
-3. **Mid-motion freeze** — the core benefit shown in action (secure hold, stretch, grip, etc.).
-4. **Pre-activity ritual** — lacing shoes, gear bench, getting-ready moment; product in life, not on a pedestal.
-
-> **Enrichment mandate for TikTok Shop**: text and graphic layers are banned set-wide, so each supporting slot must stack **L3 + one more non-text layer** — a second body/interaction point, an accessory or packaging item in frame, a companion device, or a clear scale/context reference. Shot 1 is the hero (L0 only, pure white). A bare product-only angle never counts as a supporting slot.
-
-Style tokens (sports / active categories): `direct camera flash aesthetic, hard small shadows, slightly grainy editorial film look, cool tones, plain unbranded garments, faces out of frame`.
-
-Style tokens (cozy / home categories): `warm golden light, cream/beige home scenes, influencer phone-photo authenticity, lived-in mess, soft natural skin tones`.
-
-Hard rules:
-- **Ratio: 1:1 square ONLY** — never 3:4/4:5, even if official docs are silent on ratio. Use the platform minimum (≥600×600 px) as the floor; the style system targets 800×800+ for best thumbnail quality.
-- **No text overlays** on the editorial set; let the action do the selling.
-- **AI-original people only**, faces cropped or out of frame; plain unbranded garments; no crests/numbers/athlete likeness.
-
-Boundary vs Shopify: TikTok should feel like *"a creator I follow just posted this"*; Shopify should feel like *"a brand's lookbook page"*. If a generated TikTok set could pass as Shopify, regenerate with stronger human presence and phone-photo angles.
-
-> **Why this works**: TikTok shoppers convert on authentic "someone like me uses it" energy. The person USING the product is the selling point, not the product alone.
-
----
-
-### 8. Shopee
-
-1. **Image count**: 1–9 (including cover); Shopee Mall requires ≥3 different angles.
-2. **White background**: Cover image requires solid-color background (white preferred).
-3. **Recommended size**: Mall min 500×500 px; recommended 1024×1024 px. **AI generation target: 2K (2048 px on the longest edge)**, then downscale to final size.
-4. **Aspect ratio**: 1:1 mandatory; optional 3:4 upload for extra traffic.
-5. **File format**: JPG, JPEG, PNG.
-6. **Max file size**: ≤2 MB.
-7. **Resolution**: Must be clear, sharp, true-color.
-8. **Product coverage**: Cover ≥60%; non-cover ≥50%.
-9. **Background**: Cover must be solid color (white preferred); apparel/food/home non-cover may use environment backgrounds.
-10. **Prohibited elements**: Watermarks, collages, borders, promotional text/symbols; Mall seller logo limited to top-left corner at <10% area.
-11. **Supporting images**: Must show different angles, details, scale, usage, variations, packaging, and relevant specifications; avoid duplicate views. Each of these must be built as a composite slot (`L0 + L1 + one of L2/L3/L4`) per **Supporting-slot enrichment mandate** — "different angles" alone does not satisfy a slot; the angle must carry usage, scale, spec labels, or accessories.
-12. **Video**: Max 1, ≤30 MB, resolution ≤1280×1280, 10–60 s, MP4.
-13. **Category-specific**: Fashion/beauty cover allows models; adult products require special coverage guidelines.
-14. **Official docs**: [Image guide](https://seller.shopee.sg/edu/article/34)
-
----
-
-### 9. Lazada
-
-1. **Image count**: 3–8. Product images must not be duplicated within the same image set.
-2. **White background**: Hero (first image) must be pure white.
-3. **Recommended size**: Min 330×330 px; recommended 1000×1000 or 1600×1600 px. **AI generation target: 2K (2048 px on the longest edge)**, then downscale to final size.
-4. **Aspect ratio**: 1:1.
-5. **File format**: JPG, JPEG, PNG.
-6. **Max file size**: ≤3 MB.
-7. **Resolution**: ≥72 DPI.
-8. **Product coverage**: ~80% (e.g., 80–100 px margin on 1600 px canvas).
-9. **Background**: Hero must be pure white (RGB 255, 255, 255).
-10. **Prohibited elements**: Watermarks, promotional text, decorative borders, distracting graphic overlays, unrelated objects, competitor branding, and content that obscures or misrepresents the product.
-11. **Supporting images**: Must include side, back, detail views; lifestyle scenes or scale references recommended. Build each as a composite slot — because Lazada bans promotional text, use informational L2 labels/callouts plus L3 interaction or L4 accessories (`L2 + one of L3/L4`) rather than promo copy; a bare side/back/detail view is an extra image, never a required slot.
-12. **Video**: ≤100 MB, 10–60 s, MP4.
-13. **Category-specific**: Fashion supports AI model try-on generated images.
-14. **Official docs**: [Lazada University](https://university.lazada.sg/) | [Image requirements](https://redmart.lazada.sg/seller/support/image-requirements-12698.html)
-
----
-
-## B2B
-
-### 10. Alibaba.com (International)
-
-Use this spec when generating an Alibaba.com main image set (主图套图) so the output meets the platform's upload rules and risk-control requirements.
-
-**1. Set composition — 4 to 6 composite slots (flexible, ordered):** every Alibaba.com main image set MUST include the following slots in this order. The set may contain 4, 5, or 6 images depending on product category and user intent; do not fall below 4 images for a complete listing set. Only slot 1 is a single-capability image — every other slot is a composite slot (`L0 base + ≥2 enrichment layers`) per **Composite Slot Model** → **Supporting-slot enrichment mandate**.
-
-Required base (4 slots):
-- **Slot 1 — Hero (white background), L0 only ×1** (must be the first image): pure-white real-product shot, no copy, no callouts, no arrows.
-- **Slot 2 — Use-context composite slot ×1**: L0 furnished scene + English L1 headline/subhead + one of L2 (minimal icon/leader line) or L3 (person/hand in use). Archetype A2 or A7. The scene must satisfy **Scene layer richness** (place identity, three depth planes, closed 3–6 element list, named light, depth of field).
-- **Slot 3 — Structure / how-it-works composite slot ×1**: L0 clean studio/gradient surface + L2 (cutaway, flow arrows, or dot-anchored leader lines) + English L1 part labels. Archetype A4, or A5 staged in a real scene when the message is an ordered operation. A bare macro crop does NOT satisfy this slot — detail crops are not a slot type.
-- **Slot 4 — Feature / contents composite slot ×1**: L0 studio + English L1 headline + one of L2 (feature cards, step badges) / L4 (accessory & packaging line-up) / L5 (app or controller screen). Archetype A3, A6, or A8.
-
-Optional extensions (add in order to reach 5–6 slots):
-- **Slot 5 — Second use-context composite slot ×1** — add when the product benefits from showing multiple use contexts (e.g., indoor + outdoor, work + home). Must carry a different message and different enrichment layers than slot 2.
-- **Slot 6 — Model composite slot ×1** — add for apparel, accessories, lifestyle, or beauty products where a model adds value: L0 scene + L3 model + English L1 benefit copy. For categories where a model is inappropriate, unsafe, or prohibited (industrial equipment, food packaging, children's swimwear/underwear, sensitive medical devices), replace this slot with another structure/steps or contents composite slot instead.
-
-Do not skip the hero slot, reorder the required base, or omit a required slot's role. Optional slots may be substituted only with another composite scene, structure, or contents slot — never with a duplicate hero, a bare angle shot, or prohibited content.
-
-> Every non-hero slot MUST carry at least two enrichment layers (English copy + callouts/steps/model/accessories); a bare scene photo, an unlabeled close-up, or an alternate-angle white-background shot does not satisfy its slot. The hero slot stays **L0 only**. All L1 copy in this set must be English — Chinese is strictly prohibited.
-
-**2. Base image parameters:**
-- Recommended size: not smaller than 640×640; recommended 1000×1000 square. **AI generation target: 2K (2048×2048 square)**, then downscale to 1000×1000 for final delivery.
-- Aspect ratio: square (1:1), edge length within 1000×1000.
-- File format: JPG / JPEG / PNG.
-- File size: ≤5 MB per image.
-
-**3. Hero (white-background) requirements:**
-- Mandatory white-background real-product photo: the hero must be a pure-white-background real product shot (also applies to customized products); 3D renders are strictly prohibited.
-- Complete and clear subject: the product subject must not be missing or cropped; do not use detail/close-up/partial shots; the subject must be clear with visible details, not too small or blurry.
-
-**4. Composition:**
-- Subject coverage: product occupies 75%–80% of the frame, clear and centered.
-- No collage, no borders: image collages are not allowed; borders of any form are not allowed, including "white-border images" created by pasting the original onto a white canvas to force a ratio (judged as a border issue — use a ratio-adjustment tool instead).
-
-**5. Copy & language:**
-- Any text in the image must be in English.
-- Chinese text is strictly prohibited.
-
-**6. Prohibited elements — none of the following may appear:**
-- Contact info (including WeChat ID), URLs, QR codes.
-- Watermarks (including video watermarks, text watermarks, and watermarks of any form).
-- Marketing / discount / platform-benefit wording, including but not limited to: `Local stock`, `EU Local stock`, `Fast customization`, `Guaranteed`, `certified`, `MARCH`, `FREE shipping`, `US$20 off of shipping`, `50% off`, `30% off of new buyers`, `every ¥15 off 15`, `( )% tariff support`, `180-day lowest price`, `delivery`, `dispatch`, `delivery by`, `lower tariff`, `1-year-warranty`, `easy return / money back guarantee`, `GMV`, `1 popular in jewelry`.
-
-**7. Risk-control compliance:**
-- Must not contain pornographic, violent, political, terrorist, gory, prohibited-goods, vulgar, or sensitive content; violations will be rejected by the risk-control model after submission.
-
-**8. Official docs**: [Rules](https://rule.alibaba.com/rule/detail/11000682.htm) | [Knowledge base](https://service.alibaba.com/page/knowledge?pageId=128&category=1000000021)
-
----
-
-### 11. 1688
-
-1. **Image count**: **≥5** (1 hero + ≥4 supporting) — key indicator for product quality score. Only the hero is a single-capability image; every supporting slot is a composite slot (`L0 base + ≥2 enrichment layers`) per **Composite Slot Model** → **Supporting-slot enrichment mandate**. Recommended slot plan:
-   - **Slot 1 — Hero, L0 only**: pure-white real-product shot, no copy, no callouts.
-   - **Slot 2 — Use-context composite slot**: L0 furnished scene + zh-CN headline/subhead + person/hand or a minimal icon. Archetype A2 / A7; the scene must satisfy **Scene layer richness**.
-   - **Slot 3 — Structure / how-it-works composite slot**: L0 clean studio/gradient + cutaway or flow arrows + dot-anchored zh-CN part labels. Archetype A4.
-   - **Slot 4 — Operation or maintenance composite slot**: L0 furnished scene columns + numbered step badges + zh-CN step captions. Archetype A5 (or A3 when an app/controller drives operation).
-   - **Slot 5 — Contents / configuration composite slot**: L0 studio + accessory & packaging line-up or two identical units + zh-CN headline and contents caption. Archetype A6 / A8.
-   - Beyond slot 5, add further composite slots only when each carries a new verified message. A bare alternate angle or unlabeled close-up may be delivered as an extra, never as one of the ≥5 required slots. All in-image copy is Simplified Chinese.
-2. **White background**: Hero must be white-background real product photo (no 3D renders for customizable items).
-3. **Recommended size**: ≥800×800 px. **AI generation target: 2K (2048 px on the longest edge)**, then downscale to final size.
-4. **Aspect ratio**: Strict 1:1.
-5. **File format**: JPG / JPEG / PNG.
-6. **Max file size**: ≤5 MB per image.
-7. **Resolution**: Industrial/technical drawings ≥150 dpi; critical dimensions labeled in mm.
-8. **Product coverage**: 75%–80%, centered and clear.
-9. **Background**: Pure white (RGB 255, 255, 255), no shadow or very faint shadow.
-10. **Prohibited elements**: Watermarks (especially those from other platforms), messaging QR codes, external links, excessive text overlays.
-11. **Detail page images**: Width ≤752 px (max 790 px); include material, craft, size chart, factory capability modules.
-12. **Video**: MP4, ≤30 s, ≥720P, must showcase core selling points or production process.
-13. **Category-specific**: Apparel — hero must cover front/side/detail; hardware/electronics — hero should include technical parameters or drawings.
-14. **Official docs**: [Rules](https://rule.1688.com/) | [Wiki](https://wiki.1688.com/zh/WKfkh560fqu60w)
+1. **Load one spec file, read one platform's section.** Do not read a neighbouring platform's section, and never take a numeric value from it — the entries share an identical field structure, so cross-contamination is easy and produces rejected listings.
+2. **Both files are children of this one.** Section numbering (§1–§16) is continuous across them, so an existing `§N` cross-reference stays valid regardless of which file it lives in.
+3. **Multi-platform requests**: if the user genuinely asks for sets on platforms from both groups, load both spec files, but plan and generate each platform's set separately against its own section — never merge two platforms' specs into one set.
+4. **抖音电商 (Douyin, §14) ≠ TikTok Shop (§7).** Different platforms, different files, different in-image languages (zh-CN vs English), different rules. Route by the platform the user actually named.
+5. **Split boundary**: this file owns the platform-agnostic framework (in-image language, style systems, Composite Slot Model, slot briefs, differentiation contract, layer-permission table, batch generation). A spec file owns only its platforms' hard specs, style notes, and category rules. A spec file never redefines the slot model; this file never inlines a platform's numbers.

@@ -119,7 +119,6 @@ Agent-internal processing:
 ```yaml
 ---
 name: skill-name
-displayNameZh: 插件创建
 description: English description for LLM trigger matching
 ---
 ```

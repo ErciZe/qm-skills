@@ -23,6 +23,8 @@ When the user specifies an output resolution, translate the shorthand into concr
 
 > **Size area bounds**: the final `size` area (W × H) must stay within 655360–8294400 px². If a computed resolution target lands outside this range, clamp it proportionally and re-round to 16 per SKILL.md **Execution Mode Resolution → Size area bounds**. (2K on a normal aspect ratio is within range; this mainly guards extreme long/ultra-wide targets.)
 
+> **Long-edge minimum (default only)**: when no size is specified, the derived `size` long edge must be at least **1024 px** — so 1K is the default lowest target requested from the AI tool (per SKILL.md **Execution Mode Resolution → Long-edge minimum**). This is a **default, not an override**: a size the user asked for, or a size mandated by a platform spec (e.g. `1000×1000`), takes precedence and is delivered exactly as specified — generate at the nearest tool-legal size on the same aspect ratio and native-resize down to the specified pixels when the exact value is not directly requestable.
+
 ## How to express the target per mode
 
 The parameter shape (which fields each mode accepts, and which are forbidden) is defined once in `SKILL.md` **Execution Mode Resolution → parameter-shape table**. Resolve the mode there first, then express the resolution as follows:

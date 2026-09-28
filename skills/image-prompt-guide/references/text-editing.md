@@ -110,7 +110,9 @@ Tool:
 |---------|--------|
 | Only `<original_text>` missing (user gave location) | Agent visually identifies text at the specified location. If multiple text segments exist at that location → ask the user to choose. |
 | Only `<location>` missing (user gave original text) | Agent visually locates the text in the image. If the same text appears at ≥2 locations → enter "multiple-match" flow below. |
-| `<new_text>` missing | Ask the user: "What should the replacement text be?" Never infer. |
+| `<new_text>` missing | Ask the user for the replacement copy — never infer it. Ask it **in the same message** as any pending region choice, not as a follow-up round. |
+
+> **One ask, not a chain** (`SKILL.md` → Step 3): when both the target region and the replacement text are open, request them in a **single** interaction — list the detected regions as selectable options and ask for the new copy in the same message. Never resolve the region first and come back for the copy. Font, size, colour, weight, and alignment are always inferred from the source, never asked.
 
 ### Multiple-Match Flow
 
